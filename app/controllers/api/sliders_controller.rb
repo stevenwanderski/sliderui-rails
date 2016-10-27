@@ -13,6 +13,11 @@ class Api::SlidersController < ApiController
     end
   end
 
+  def slides
+    slider = Slider.find(params[:id])
+    render json: slider.slides
+  end
+
   private
 
   def slider_params
