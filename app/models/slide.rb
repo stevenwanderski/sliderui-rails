@@ -5,6 +5,7 @@
 #  id         :uuid             not null, primary key
 #  slider_id  :uuid             not null
 #  content    :text
+#  weight     :integer          default(0), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

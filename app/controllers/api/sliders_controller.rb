@@ -15,7 +15,7 @@ class Api::SlidersController < ApiController
 
   def slides
     slider = Slider.find(params[:id])
-    render json: slider.slides
+    render json: slider.slides.order(weight: :asc)
   end
 
   private

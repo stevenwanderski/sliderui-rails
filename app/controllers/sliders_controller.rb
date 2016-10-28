@@ -3,9 +3,9 @@ class SlidersController < ApplicationController
 
   def show
     @slider = Slider.find(params[:id])
-    
+
     @output = '<div class="slider">'
-    @slider.slides.each do |slide|
+    @slider.slides.order(weight: :asc).each do |slide|
       @output += '<div class="slide">' + slide.content + '</div>'
     end
     @output += '</div>'

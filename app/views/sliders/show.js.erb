@@ -1,4 +1,38 @@
-$(function() {
-  $('[data-slider-id="<%= @slider.id %>"]').html('<%= @output.html_safe %>');
-  $('.slider').bxSlider();
+function checkJquery(callback) {
+  if (typeof(jQuery) == 'undefined') {
+    const script = document.createElement('script');
+    script.src = 'http://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js';
+    document.querySelector('head').appendChild(script);
+    script.onload = function(){
+      callback();
+    }
+  } else {
+    callback();
+  }
+}
+
+function checkBxslider(callback) {
+  if (typeof($.bxSlider) == 'undefined') {
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.5/jquery.bxslider.min.js';
+    document.querySelector('head').appendChild(script);
+    script.onload = function(){
+      callback();
+    }
+  } else {
+    callback();
+  }
+}
+
+function sliderInit() {
+  $(function() {
+    $('[data-slider-id="<%= @slider.id %>"]').html('<%= @output.html_safe %>');
+    $('.slider').bxSlider();
+  });
+}
+
+checkJquery(function(){
+  checkBxslider(function(){
+    sliderInit();
+  });
 });

@@ -29,6 +29,6 @@ class Api::SlidesController < ApiController
   private
 
   def slide_params
-    params.require(:slide).permit(:content, :slider_id)
+    params.require(:slide).permit(:content, :weight, :slider_id)
   end
 end

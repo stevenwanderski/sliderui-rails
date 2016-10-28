@@ -24,10 +24,11 @@ ActiveRecord::Schema.define(version: 20161022233825) do
   end
 
   create_table "slides", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.uuid     "slider_id",  null: false
+    t.uuid     "slider_id",              null: false
     t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "weight",     default: 0, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
 end

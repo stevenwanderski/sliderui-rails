@@ -1,3 +1,3 @@
 class SlideSerializer < ActiveModel::Serializer
-  attributes :id, :content
+  attributes :id, :content, :weight
 end
