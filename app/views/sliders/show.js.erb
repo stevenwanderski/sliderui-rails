@@ -24,12 +24,23 @@ function checkBxslider(callback) {
   }
 }
 
+function loadBxsliderCss() {
+  const link  = document.createElement('link');
+  link.rel  = 'stylesheet';
+  link.type = 'text/css';
+  link.href = 'https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.5/jquery.bxslider.min.css'
+  link.media = 'all';
+  document.querySelector('head').appendChild(link);
+}
+
 function sliderInit() {
   $(function() {
     $('[data-slider-id="<%= @slider.id %>"]').html('<%= @output.html_safe %>');
     $('.slider').bxSlider();
   });
 }
+
+loadBxsliderCss();
 
 checkJquery(function(){
   checkBxslider(function(){
