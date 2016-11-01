@@ -4,6 +4,7 @@ class CreateSlides < ActiveRecord::Migration
       t.uuid :slider_id, null: false
       t.text :content
       t.integer :weight, default: 0, null: false
+      t.string :image
 
       t.timestamps null: false
     end

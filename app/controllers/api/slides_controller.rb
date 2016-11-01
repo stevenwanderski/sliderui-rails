@@ -26,9 +26,16 @@ class Api::SlidesController < ApiController
     end
   end
 
+  def update_collection
+    params[:slides].each do |slide|
+      Slide.where(id: slide['id']).update_all(weight: slide['weight'])
+    end
+    render nothing: true, status: 200
+  end
+
   private
 
   def slide_params
-    params.require(:slide).permit(:content, :weight, :slider_id)
+    params.require(:slide).permit(:content, :weight, :image, :slider_id)
   end
 end

@@ -10,6 +10,10 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :slides, only: [:create, :update, :destroy]
+    resources :slides, only: [:create, :update, :destroy] do
+      collection do
+        put '/collection', action: :update_collection
+      end
+    end
   end
 end

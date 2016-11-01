@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20161022233825) do
     t.uuid     "slider_id",              null: false
     t.text     "content"
     t.integer  "weight",     default: 0, null: false
+    t.string   "image"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end

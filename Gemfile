@@ -27,6 +27,12 @@ gem 'active_model_serializers', '~> 0.10.0'
 # CORS config
 gem 'rack-cors', require: 'rack/cors'
 
+# File uploads
+gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
+
+# S3 storage
+gem 'fog-aws'
+
 group :development, :test do
   gem 'quiet_assets'
   gem 'dotenv-rails'
