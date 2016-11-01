@@ -7,8 +7,6 @@ if Rails.env.production?
       aws_access_key_id:     ENV['S3_KEY'],
       aws_secret_access_key: ENV['S3_SECRET'],
     }
-
-    config.asset_host = ActionController::Base.asset_host
   end
 else
   CarrierWave.configure do |config|
