@@ -33,6 +33,12 @@ gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
 # S3 storage
 gem 'fog-aws'
 
+# Encryption
+gem 'attr_encrypted', '~> 3.0.0'
+
+# Test data
+gem 'factory_girl_rails'
+
 group :development, :test do
   gem 'quiet_assets'
   gem 'dotenv-rails'

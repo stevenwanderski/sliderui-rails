@@ -7,7 +7,7 @@ class SlidersController < ApplicationController
     @output = '<div class="slider">'
     @slider.slides.order(weight: :asc).each do |slide|
       if slide.image.present?
-        @output += '<div class="slide"><img src="' + slide.image.url + '" /></div>'
+        @output += '<div><img src="' + slide.image.url + '" /></div>'
       end
     end
     @output += '</div>'

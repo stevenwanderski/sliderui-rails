@@ -1,20 +1,20 @@
 class Api::SlidersController < ApiController
   def show
-    slider = Slider.find(params[:id])
+    slider = @current_user.sliders.find_by(id: params[:id])
     render json: slider
   end
 
   def create
-    slider = Slider.new(slider_params)
+    slider = @current_user.sliders.build(slider_params)
     if slider.save
-      render json: slider
+      render json: { id: slider.id }
     else
       render json: { errors: slider.errors }, status: 422
     end
   end
 
   def slides
-    slider = Slider.find(params[:id])
+    slider = @current_user.sliders.find_by(id: params[:id])
     render json: slider.slides.order(weight: :asc)
   end
 
