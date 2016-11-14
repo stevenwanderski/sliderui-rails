@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :sliders, only: [:show]
 
   namespace :api do
-    resources :sliders, only: [:show, :create] do
+    resources :sliders, only: [:show, :create, :update] do
       member do
         get '/slides', action: 'slides'
         put '/:temp_user_id/claim', action: 'claim'

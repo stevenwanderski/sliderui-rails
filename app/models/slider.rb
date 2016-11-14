@@ -6,6 +6,7 @@
 #  title        :string
 #  user_id      :uuid
 #  temp_user_id :uuid
+#  settings     :jsonb
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #

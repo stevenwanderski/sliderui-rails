@@ -1,3 +1,3 @@
 class SliderSerializer < ActiveModel::Serializer
-  attributes :id, :title
+  attributes :id, :title, :settings
 end

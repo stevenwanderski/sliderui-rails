@@ -13,6 +13,16 @@ class Api::SlidersController < ApiController
     end
   end
 
+  def update
+    slider = @current_user.sliders.find_by(id: params[:id])
+    slider.settings = params[:slider].delete(:settings)
+    if slider.save
+      render json: slider
+    else
+      render json: { errors: slider.errors }, status: 422
+    end
+  end
+
   def slides
     slider = @current_user.sliders.find_by(id: params[:id])
     render json: slider.slides.order(weight: :asc)
@@ -21,6 +31,6 @@ class Api::SlidersController < ApiController
   private
 
   def slider_params
-    params.require(:slider).permit(:title)
+    params.require(:slider).permit(:title, :settings)
   end
 end

@@ -21,8 +21,9 @@ ActiveRecord::Schema.define(version: 20161106191432) do
     t.string   "title"
     t.uuid     "user_id"
     t.uuid     "temp_user_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.jsonb    "settings",     default: {}
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "slides", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|

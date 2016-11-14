@@ -4,6 +4,7 @@ class CreateSliders < ActiveRecord::Migration
       t.string :title
       t.uuid :user_id
       t.uuid :temp_user_id
+      t.jsonb :settings, default: '{}'
 
       t.timestamps null: false
     end
