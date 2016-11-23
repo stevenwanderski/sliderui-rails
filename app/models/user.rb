@@ -7,6 +7,7 @@
 #  encrypted_password    :string
 #  encrypted_password_iv :string
 #  token                 :string
+#  confirmed             :boolean          default(FALSE)
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #
@@ -17,6 +18,8 @@ class User < ActiveRecord::Base
   before_create :set_token
 
   has_many :sliders
+
+  validates :email, uniqueness: { allow_blank: true }
 
   private
 

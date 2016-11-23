@@ -40,8 +40,9 @@ ActiveRecord::Schema.define(version: 20161106191432) do
     t.string   "encrypted_password"
     t.string   "encrypted_password_iv"
     t.string   "token"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.boolean  "confirmed",             default: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
 end

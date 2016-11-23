@@ -4,7 +4,7 @@ class Api::SlidesController < ApiController
     if slide.save
       render json: slide
     else
-      render json: { errors: slide.errors }, status: 422
+      render json: { errors: slide.errors.full_messages.first }, status: 422
     end
   end
 
@@ -13,7 +13,7 @@ class Api::SlidesController < ApiController
     if slide.update(slide_params)
       render json: slide
     else
-      render json: { errors: slide.errors }, status: 422
+      render json: { errors: slide.errors.full_messages.first }, status: 422
     end
   end
 
@@ -22,7 +22,7 @@ class Api::SlidesController < ApiController
     if slide.destroy
       render json: slide
     else
-      render json: { errors: slide.errors }, status: 422
+      render json: { errors: slide.errors.full_messages.first }, status: 422
     end
   end
 

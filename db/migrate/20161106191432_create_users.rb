@@ -5,6 +5,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :encrypted_password
       t.string :encrypted_password_iv
       t.string :token
+      t.boolean :confirmed, default: false
 
       t.timestamps null: false
     end

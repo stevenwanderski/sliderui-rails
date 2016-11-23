@@ -2,24 +2,20 @@ class Api::RegistrationsController < ApiController
   skip_before_action :authenticate_user!
 
   def create
-    if User.exists?(email: registration_params[:email])
-      return render json: { errors: 'Email already exists.' }, status: 422
-    end
-
     user = User.new(registration_params)
     if user.save
-      render json: { id: user.id, token: user.token }
+      render json: user
     else
-      render json: { errors: user.errors }
+      render json: { errors: user.errors.full_messages.first }
     end
   end
 
   def create_temp
     user = User.new
     if user.save
-      render json: { id: user.id, token: user.token }
+      render json: user
     else
-      render json: { errors: user.errors }
+      render json: { errors: user.errors.full_messages.first }
     end
   end
 

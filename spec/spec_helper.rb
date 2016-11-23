@@ -10,8 +10,16 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 ActiveRecord::Migration.maintain_test_schema!
 
-Capybara.javascript_driver = :webkit
+# Capybara.javascript_driver = :webkit
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :chrome)
+end
+
 Capybara.app_host = 'http://localhost:8081'
+
+# Capybara::Webkit.configure do |config|
+#   config.debug = false
+# end
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods

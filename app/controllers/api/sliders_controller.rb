@@ -9,7 +9,7 @@ class Api::SlidersController < ApiController
     if slider.save
       render json: { id: slider.id }
     else
-      render json: { errors: slider.errors }, status: 422
+      render json: { errors: slider.errors.full_messages.first }, status: 422
     end
   end
 
@@ -19,7 +19,7 @@ class Api::SlidersController < ApiController
     if slider.save
       render json: slider
     else
-      render json: { errors: slider.errors }, status: 422
+      render json: { errors: slider.errors.full_messages.first }, status: 422
     end
   end
 
