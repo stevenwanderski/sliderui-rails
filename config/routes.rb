@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
     get '/user', to: 'user#show'
     put '/user', to: 'user#update'
-    put '/confirm', to: 'user#confirm'
+    post '/user/confirm', to: 'user#confirm'
 
     post '/registrations', to: 'registrations#create'
     post '/registrations/temp', to: 'registrations#create_temp'
