@@ -2,20 +2,18 @@
 #
 # Table name: users
 #
-#  id                    :uuid             not null, primary key
-#  email                 :string
-#  encrypted_password    :string
-#  encrypted_password_iv :string
-#  token                 :string
-#  confirmed             :boolean          default(FALSE)
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
+#  id         :uuid             not null, primary key
+#  email      :string
+#  password   :string
+#  token      :string
+#  confirmed  :boolean          default(FALSE)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 
 class User < ActiveRecord::Base
-  attr_encrypted :password, key: 'b304ce596d11cb573492b75dc382fef4997bc76bdca4e0d3'
-
   before_create :set_token
+  before_save :set_hashed_password, if: :password_changed?
 
   has_many :sliders
 
@@ -26,5 +24,9 @@ class User < ActiveRecord::Base
   def set_token
     return if token.present?
     self.token = SecureRandom.uuid.gsub(/\-/,'')
+  end
+
+  def set_hashed_password
+    self.password = Digest::SHA2.new(512).hexdigest(self.password)
   end
 end

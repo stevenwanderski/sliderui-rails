@@ -37,12 +37,11 @@ ActiveRecord::Schema.define(version: 20161106191432) do
 
   create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "email"
-    t.string   "encrypted_password"
-    t.string   "encrypted_password_iv"
+    t.string   "password"
     t.string   "token"
-    t.boolean  "confirmed",             default: false
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.boolean  "confirmed",  default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
 end
