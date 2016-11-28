@@ -1,12 +1,14 @@
 class CreateSliders < ActiveRecord::Migration
   def change
     create_table :sliders, id: :uuid do |t|
-      t.string :title
       t.uuid :user_id
-      t.uuid :temp_user_id
+      t.string :title
+      t.string :short_code
       t.jsonb :settings, default: '{}'
 
       t.timestamps null: false
     end
+
+    add_index :sliders, :short_code, unique: true
   end
 end

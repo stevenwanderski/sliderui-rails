@@ -18,13 +18,15 @@ ActiveRecord::Schema.define(version: 20161106191432) do
   enable_extension "uuid-ossp"
 
   create_table "sliders", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string   "title"
     t.uuid     "user_id"
-    t.uuid     "temp_user_id"
-    t.jsonb    "settings",     default: {}
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "title"
+    t.string   "short_code"
+    t.jsonb    "settings",   default: {}
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
+
+  add_index "sliders", ["short_code"], name: "index_sliders_on_short_code", unique: true, using: :btree
 
   create_table "slides", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.uuid     "slider_id",              null: false
