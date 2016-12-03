@@ -5,6 +5,7 @@ class Api::SlidersController < ApiController
   end
 
   def create
+    ap @current_user
     slider = @current_user.sliders.build(slider_params)
     if slider.save
       render json: { id: slider.id }
