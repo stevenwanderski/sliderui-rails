@@ -36,6 +36,9 @@ gem 'fog-aws'
 # Test data
 gem 'factory_girl_rails'
 
+# Error reporting
+gem 'sentry-raven'
+
 group :development, :test do
   gem 'quiet_assets'
   gem 'dotenv-rails'
