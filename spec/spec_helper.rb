@@ -10,16 +10,13 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 ActiveRecord::Migration.maintain_test_schema!
 
-# Capybara.javascript_driver = :webkit
 Capybara.register_driver :selenium do |app|
   Capybara::Selenium::Driver.new(app, :browser => :chrome)
 end
 
+Capybara.server_port = 3001
+Capybara.server_host = 'localhost'
 Capybara.app_host = 'http://localhost:8081'
-
-# Capybara::Webkit.configure do |config|
-#   config.debug = false
-# end
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
@@ -32,7 +29,7 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :transaction
   end
 
-  config.before(:each, :js => true) do
+  config.before(:each, js: true) do
     DatabaseCleaner.strategy = :truncation
   end
 
@@ -42,6 +39,7 @@ RSpec.configure do |config|
 
   config.after(:each) do
     DatabaseCleaner.clean
+    Capybara.execute_script 'localStorage.clear()'
   end
 
   config.expect_with :rspec do |expectations|
