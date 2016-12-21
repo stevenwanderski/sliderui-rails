@@ -8,11 +8,10 @@ describe 'Temp Slider Flow', js: true do
 
   describe 'Embed code page' do
     it 'provides the embed code' do
-
-    end
-
-    it 'saves the user email and password and sets user as confirmed' do
-
+      slider = Slider.first
+      click_button 'No, thanks.'
+      click_link 'Get Code'
+      expect(page).to have_content(slider.short_code)
     end
   end
 end

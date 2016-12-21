@@ -3,9 +3,24 @@ if Rails.env.test?
     config.storage = :file
     config.enable_processing = false
   end
+
+  SlideImageUploader
+
+  CarrierWave::Uploader::Base.descendants.each do |klass|
+    next if klass.anonymous?
+    klass.class_eval do
+      def cache_dir
+        "#{Rails.root}/spec/support/uploads/tmp"
+      end
+
+      def store_dir
+        "#{Rails.root}/spec/support/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+      end
+    end
+  end
+
 else
   CarrierWave.configure do |config|
-    config.storage = 'fog'
     config.fog_provider = 'fog/aws'
     config.fog_directory = ENV['S3_BUCKET']
     config.fog_credentials = {
@@ -14,5 +29,6 @@ else
       aws_secret_access_key: ENV['S3_SECRET'],
       region: ENV['S3_REGION']
     }
+    config.storage = :fog
   end
 end
