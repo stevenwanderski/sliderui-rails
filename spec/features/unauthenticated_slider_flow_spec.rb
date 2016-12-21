@@ -1,8 +1,8 @@
 require 'spec_helper'
-include TempSliderHelper
+include UnauthenticatedSliderHelper
 include ImageHelper
 
-describe 'Temp Slider Flow', js: true do
+describe 'Unauthenticated Slider Flow', js: true do
   it 'saves a slider, shows the tour, saves slides and settings, and provides the embed code' do
     # New slider page: creates the new slider
     visit '/temp/slider/new'
@@ -39,10 +39,10 @@ describe 'Temp Slider Flow', js: true do
     click_link 'Preview'
     expect(page).to have_css('.slider-preview')
 
-    # # Settings page: does not show tour again
-    # click_link 'Settings'
-    # expect(page).to have_content('Add Slide')
-    # expect(page).to_not have_css('.modal__content')
+    # Settings page: does not show tour again
+    click_link 'Settings'
+    expect(page).to have_content('Add Slide')
+    expect(page).to_not have_css('.modal__content')
 
     # Embed code page: displays embed code
     click_link 'Get Code'

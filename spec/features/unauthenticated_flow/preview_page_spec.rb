@@ -1,7 +1,7 @@
 require 'spec_helper'
-include TempSliderHelper
+include UnauthenticatedSliderHelper
 
-describe 'Temp Slider Flow', js: true do
+describe 'Unauthenticated Slider Flow', js: true do
   before :each do
     create_temp_slider
   end

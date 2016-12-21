@@ -1,4 +1,4 @@
-module TempSliderHelper
+module UnauthenticatedSliderHelper
   def create_temp_slider
     visit '/temp/slider/new'
     find('[name="title"]').set('Puff Tentacle')
