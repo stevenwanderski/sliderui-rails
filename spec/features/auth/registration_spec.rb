@@ -1,16 +1,16 @@
 require 'spec_helper'
 
-context 'Auth', js: true do
-  describe 'Successful login' do
+context 'Registration', js: true do
+  describe 'Successful registration' do
     it 'logs in the user and redirects to sliders page' do
-      user = create(:user, email: 'frank@zappa.com', password: 'test', confirmed: true)
-
       visit '/auth'
+      find('input[type="radio"][value="new"]').set(true)
       find('input[name="email"]').set('frank@zappa.com')
-      find('input[name="password"]').set('test')
+      find('input[name="password"]').set('testtest')
       find('button').click
 
       expect(page).to have_content('frank@zappa.com')
+      expect(page).to have_content('Click here to add a slider!')
     end
   end
 end
