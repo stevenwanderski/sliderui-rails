@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'home#index'
 
-  resources :sliders, only: [:show]
+  get '/sliders/:short_code', to: 'sliders#show'
 
   namespace :api do
     resources :sliders, only: [:show, :create, :update] do

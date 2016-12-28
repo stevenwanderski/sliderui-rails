@@ -1,6 +1,6 @@
 function checkJquery(callback) {
   if (typeof(jQuery) == 'undefined') {
-    const script = document.createElement('script');
+    var script = document.createElement('script');
     script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js';
     document.querySelector('head').appendChild(script);
     script.onload = function(){
@@ -13,7 +13,7 @@ function checkJquery(callback) {
 
 function checkBxslider(callback) {
   if (typeof($.bxSlider) == 'undefined') {
-    const script = document.createElement('script');
+    var script = document.createElement('script');
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.5/jquery.bxslider.min.js';
     document.querySelector('head').appendChild(script);
     script.onload = function(){
@@ -25,8 +25,8 @@ function checkBxslider(callback) {
 }
 
 function loadBxsliderCss() {
-  const link  = document.createElement('link');
-  link.rel  = 'stylesheet';
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
   link.type = 'text/css';
   link.href = 'https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.5/jquery.bxslider.min.css'
   link.media = 'all';
@@ -35,7 +35,7 @@ function loadBxsliderCss() {
 
 function sliderInit() {
   $(function() {
-    $('[data-slider-id="<%= @slider.id %>"]').html('<%= @output.html_safe %>');
+    $('[data-slider-id="<%= @slider.short_code %>"]').html('<%= @output.html_safe %>');
     $('.slider').bxSlider(<%= raw @slider.settings.to_json %>);
   });
 }
@@ -47,65 +47,3 @@ checkJquery(function(){
     sliderInit();
   });
 });
-
-
-
-// function checkJquery(callback) {
-//   if (typeof(jQuery) == 'undefined') {
-//     const script = document.createElement('script');
-//     script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js';
-//     document.querySelector('head').appendChild(script);
-//     script.onload = function(){
-//       callback();
-//     }
-//   } else {
-//     callback();
-//   }
-// }
-//
-// function checkBxslider(callback) {
-//   if (typeof($.slick) == 'undefined') {
-//     const script = document.createElement('script');
-//     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js';
-//     document.querySelector('head').appendChild(script);
-//     script.onload = function(){
-//       callback();
-//     }
-//   } else {
-//     callback();
-//   }
-// }
-//
-// function loadBxsliderCss() {
-//   const link1 = document.createElement('link');
-//   link1.rel = 'stylesheet';
-//   link1.type = 'text/css';
-//   link1.href = 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css'
-//   link1.media = 'all';
-//   document.querySelector('head').appendChild(link1);
-//
-//   const link2 = document.createElement('link');
-//   link2.rel = 'stylesheet';
-//   link2.type = 'text/css';
-//   link2.href = 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
-//   link2.media = 'all';
-//   document.querySelector('head').appendChild(link2);
-// }
-//
-// function sliderInit() {
-//   $(function() {
-//     $('[data-slider-id="<%= @slider.id %>"]').html('<%= @output.html_safe %>');
-//     $('.slider').slick({
-//       adaptiveHeight: true,
-//       dots: true
-//     });
-//   });
-// }
-//
-// loadBxsliderCss();
-//
-// checkJquery(function(){
-//   checkBxslider(function(){
-//     sliderInit();
-//   });
-// });

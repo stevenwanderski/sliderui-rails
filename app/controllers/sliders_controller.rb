@@ -2,7 +2,8 @@ class SlidersController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def show
-    @slider = Slider.find(params[:id])
+    @slider = Slider.find_by(short_code: params[:short_code])
+    return render 'unconfirmed.js.erb' if !@slider.confirmed?
 
     @output = '<div class="slider">'
     @slider.slides.order(weight: :asc).each do |slide|

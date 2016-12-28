@@ -39,8 +39,11 @@ RSpec.configure do |config|
 
   config.after(:each) do
     DatabaseCleaner.clean
-    Capybara.execute_script 'localStorage.clear()'
     FileUtils.rm_rf(Dir["#{Rails.root}/spec/support/uploads"])
+  end
+
+  config.after(:each, js: true) do
+    Capybara.execute_script 'localStorage.clear()'
   end
 
   config.expect_with :rspec do |expectations|
