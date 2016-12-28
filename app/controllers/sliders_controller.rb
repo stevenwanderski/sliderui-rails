@@ -3,7 +3,6 @@ class SlidersController < ApplicationController
 
   def show
     @slider = Slider.find_by(short_code: params[:short_code])
-    return render 'unconfirmed.js.erb' if !@slider.confirmed?
 
     @output = '<div class="slider">'
     @slider.slides.order(weight: :asc).each do |slide|

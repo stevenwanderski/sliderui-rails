@@ -23,11 +23,6 @@ class Slider < ActiveRecord::Base
 
   validates :title, presence: true
 
-  def confirmed?
-    return true if created_at > 24.hours.ago
-    user.confirmed?
-  end
-
   private
 
   def set_short_code
