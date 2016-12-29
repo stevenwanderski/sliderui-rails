@@ -2,7 +2,7 @@ function checkJquery(callback) {
   if (typeof(jQuery) == 'undefined') {
     var script = document.createElement('script');
     script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js';
-    document.querySelector('head').appendChild(script);
+    document.head.appendChild(script);
     script.onload = function(){
       callback();
     }
@@ -15,7 +15,7 @@ function checkBxslider(callback) {
   if (typeof($.bxSlider) == 'undefined') {
     var script = document.createElement('script');
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.5/jquery.bxslider.min.js';
-    document.querySelector('head').appendChild(script);
+    document.head.appendChild(script);
     script.onload = function(){
       callback();
     }
@@ -30,7 +30,7 @@ function loadBxsliderCss() {
   link.type = 'text/css';
   link.href = 'https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.5/jquery.bxslider.min.css'
   link.media = 'all';
-  document.querySelector('head').appendChild(link);
+  document.head.appendChild(link);
 }
 
 function sliderInit() {
