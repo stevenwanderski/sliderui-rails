@@ -5,6 +5,9 @@ gem 'rails', '4.2.6'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
 
+# Web server
+gem 'puma'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 
@@ -50,7 +53,6 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'capybara'
-  # gem 'capybara-webkit'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
 end
