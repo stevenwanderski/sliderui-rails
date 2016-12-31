@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   before_create :set_token
   before_save :set_hashed_password, if: :password_changed?
 
-  has_many :sliders
+  has_many :sliders, dependent: :destroy
 
   validates :email, uniqueness: { allow_blank: true }
 
