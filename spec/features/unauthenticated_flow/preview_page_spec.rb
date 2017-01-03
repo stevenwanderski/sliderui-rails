@@ -12,7 +12,7 @@ describe 'Unauthenticated Slider Flow', js: true do
         slider = Slider.first
         slide = create(:slide, slider: slider)
         click_button 'No, thanks.'
-        click_link 'Preview'
+        click_link 'Settings & Preview'
         expect(page).to have_css('.slider-preview')
       end
     end
@@ -20,7 +20,7 @@ describe 'Unauthenticated Slider Flow', js: true do
     context 'when slides do not exist' do
       it 'shows the empty preview' do
         click_button 'No, thanks.'
-        click_link 'Preview'
+        click_link 'Settings & Preview'
         expect(page).to have_content('Slider will appear after adding a slide')
       end
     end

@@ -8,24 +8,29 @@ describe 'Authenticated Slider Flow', js: true do
     login('frank@zappa.com', 'testtest')
 
     click_link @slider.title
-    expect(page).to have_content('Save Settings')
+    expect(page).to have_content('Add Slide')
   end
 
   describe 'Slider settings page' do
     it 'correctly saves and displays checkbox settings' do
+      click_link 'Settings & Preview'
       click_button 'Save Settings'
-      expect(page).to have_content('Successfully saved')
+      # The button displays "Loading..." while saving
+      # so wait for it to return to "Save Settings".
+      expect(page).to have_content('Save Settings')
       expect(@slider.reload.settings['pager']).to eq(true)
 
       find('input[name="pager"]').set(false)
       click_button 'Save Settings'
-      expect(page).to have_content('Successfully saved')
+      # The button displays "Loading..." while saving
+      # so wait for it to return to "Save Settings".
+      expect(page).to have_content('Save Settings')
       expect(@slider.reload.settings['pager']).to eq(false)
 
-      click_link 'Preview'
-      expect(page).to have_content('Slider will appear')
+      click_link 'Slides'
+      expect(page).to have_content('Add Slide')
 
-      click_link 'Settings'
+      click_link 'Settings & Preview'
       expect(page).to have_content('Save Settings')
       expect(find('input[name="pager"]')).to_not be_checked
     end

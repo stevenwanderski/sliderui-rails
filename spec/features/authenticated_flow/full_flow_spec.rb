@@ -22,7 +22,7 @@ describe 'Authenticated Slider Flow', js: true do
     click_button 'Create Slider and Add Slides'
     expect(page).to have_content('Add Slide')
 
-    # Settings page: does not display tour
+    # Slides page: does not display tour
     expect(page).to_not have_css('.modal__content')
 
     # Settings page: adds slides
@@ -35,14 +35,16 @@ describe 'Authenticated Slider Flow', js: true do
     expect(page).to have_selector('.slide-item__control--edit')
     expect(slide.reload.image.url).to be_present
 
+    # Settings page: shows slider preview
+    click_link 'Settings & Preview'
+    expect(page).to have_css('.slider-preview')
+
     # Settings page: saves settings
     find('input[name="speed"]').set(175)
     click_button 'Save Settings'
-    expect(page).to have_content('Successfully saved')
-
-    # Preview page: shows slider preview
-    click_link 'Preview'
-    expect(page).to have_css('.slider-preview')
+    # The button displays "Loading..." while saving
+    # so wait for it to return to "Save Settings".
+    expect(page).to have_content('Save Settings')
 
     # Embed code page: displays embed code
     click_link 'Embed Code'
