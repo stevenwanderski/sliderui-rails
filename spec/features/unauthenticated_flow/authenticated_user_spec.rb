@@ -17,7 +17,7 @@ describe 'Unauthenticated Slider Flow', js: true do
         user = create(:user, email: 'frank@zappa.com', password: 'testtest')
         slider = create(:slider, user: user)
         login('frank@zappa.com', 'testtest')
-        visit "/temp/slider/#{slider.id}/settings"
+        visit "/temp/slider/#{slider.id}/edit"
         expect(page).to have_content('My Sliders')
       end
     end

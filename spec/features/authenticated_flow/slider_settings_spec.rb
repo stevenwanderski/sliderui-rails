@@ -13,7 +13,7 @@ describe 'Authenticated Slider Flow', js: true do
 
   describe 'Slider settings page' do
     it 'correctly saves and displays checkbox settings' do
-      click_link 'Settings & Preview'
+      click_link 'Settings'
       click_button 'Save Settings'
       # The button displays "Loading..." while saving
       # so wait for it to return to "Save Settings".
@@ -30,7 +30,7 @@ describe 'Authenticated Slider Flow', js: true do
       click_link 'Slides'
       expect(page).to have_content('Add Slide')
 
-      click_link 'Settings & Preview'
+      click_link 'Settings'
       expect(page).to have_content('Save Settings')
       expect(find('input[name="pager"]')).to_not be_checked
     end

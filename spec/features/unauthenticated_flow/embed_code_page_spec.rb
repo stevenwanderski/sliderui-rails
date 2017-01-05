@@ -10,7 +10,7 @@ describe 'Unauthenticated Slider Flow', js: true do
     it 'provides the embed code' do
       slider = Slider.first
       click_button 'No, thanks.'
-      click_link 'Get Code'
+      click_link 'Embed Slider'
       expect(page).to have_content(slider.short_code)
     end
   end

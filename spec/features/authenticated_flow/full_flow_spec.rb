@@ -36,8 +36,8 @@ describe 'Authenticated Slider Flow', js: true do
     expect(slide.reload.image.url).to be_present
 
     # Settings page: shows slider preview
-    click_link 'Settings & Preview'
-    expect(page).to have_css('.slider-preview')
+    click_link 'Settings'
+    expect(page).to have_content('Save Settings')
 
     # Settings page: saves settings
     find('input[name="speed"]').set(175)
@@ -47,7 +47,7 @@ describe 'Authenticated Slider Flow', js: true do
     expect(page).to have_content('Save Settings')
 
     # Embed code page: displays embed code
-    click_link 'Embed Code'
-    expect(page).to have_content('Embed Code')
+    click_link 'Embed Slider'
+    expect(page).to have_content('Embed Slider')
   end
 end

@@ -8,7 +8,7 @@ describe 'Authenticated Slider Flow', js: true do
     login('frank@zappa.com', 'testtest')
 
     click_link @slider.title
-    click_link 'Embed Code'
+    click_link 'Embed Slider'
   end
 
   describe 'Embed code page' do
