@@ -11,14 +11,14 @@ describe 'Unauthenticated Slider Flow', js: true do
     expect(page).to have_content('Welcome to the slider page')
     expect(Slider.count).to eq(1)
 
-    # Slides page: displays tour
+    # Edit page: displays tour
     click_button 'Start Tour!'
     expect(page).to have_content('1. Add slides')
     find('.react-user-tour-next-button').click
     find('.react-user-tour-next-button').click
     find('.react-user-tour-done-button').click
 
-    # Slides page: adds slides
+    # Slides tab: adds slides
     click_button 'Add Slide'
     expect(page).to have_content('Select Image')
     expect(Slide.count).to eq(1)
@@ -29,27 +29,25 @@ describe 'Unauthenticated Slider Flow', js: true do
     expect(page).to have_selector('.slide-item__control--edit')
     expect(slide.reload.image.url).to be_present
 
-    # Settings page: shows slider preview
+    # Settings tab: saves settings
     click_link 'Settings'
-    expect(page).to have_content('Save Settings')
-
-    # Settings page: saves settings
     find('input[name="speed"]').set(175)
     click_button 'Save Settings'
     # The button displays "Loading..." while saving
     # so wait for it to return to "Save Settings".
     expect(page).to have_content('Save Settings')
 
-    # Settings page: does not show tour again
-    click_link 'Slides'
-    expect(page).to have_content('Add Slide')
-    expect(page).to_not have_css('.modal__content')
-
     # Embed code page: displays embed code
     click_link 'Embed Slider'
     expect(page).to have_content('Embed Slider')
 
+    # Edit page: does not show tour again
+    click_link 'Edit'
+    expect(page).to have_content('Add Slide')
+    expect(page).to_not have_css('.modal__content')
+
     # Embed code page: saves email / password and redirects to sliders page
+    click_link 'Embed Slider'
     find('input[name="email"]').set('frank@zappa.com')
     find('input[name="password"]').set('testtest')
     click_button 'Submit'
