@@ -10,6 +10,7 @@
 <body>
 
   <div class="container">
+    <%= link_to('Logout', destroy_admin_session_path, method: :delete) if admin_signed_in? %>
     <%= yield %>
   </div>
 

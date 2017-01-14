@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :admins
   root 'home#index'
 
   get '/sliders/:short_code', to: 'sliders#show'
