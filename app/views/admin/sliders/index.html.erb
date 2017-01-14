@@ -5,6 +5,7 @@
     <tr>
       <th>Date</th>
       <th>Title</th>
+      <th>Slides</th>
       <th>User</th>
     </tr>
   </thead>
@@ -14,6 +15,7 @@
       <tr>
         <td><%= l(slider.created_at) %></td>
         <td><%= link_to slider.title, admin_slider_slides_path(slider_id: slider.id) %></td>
+        <td><%= slider.slides.count %></td>
         <td><%= slider.user.email %></td>
       </tr>
     <% end %>
