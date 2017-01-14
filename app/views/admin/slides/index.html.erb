@@ -1,0 +1,8 @@
+<h1>Slider: <%= @slider.title %></h1>
+<hr>
+
+<% if @slides.empty? %>
+  This slider has zero slides.
+<% else %>
+  <%= render 'slides', slides: @slides %>
+<% end %>

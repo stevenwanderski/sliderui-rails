@@ -1,0 +1,13 @@
+<table class="table table-striped">
+  <tbody>
+    <% slides.each do |slide| %>
+      <tr>
+        <td>
+          <%= image_tag(slide.image.url) %>
+        </td>
+      </tr>
+    <% end %>
+  </thead>
+</table>
+
+<%= paginate slides, theme: 'twitter-bootstrap-4' %>

@@ -45,6 +45,10 @@ gem 'sentry-raven'
 # Authentication
 gem 'devise'
 
+# Pagination
+gem 'kaminari'
+gem 'bootstrap4-kaminari-views'
+
 group :development, :test do
   gem 'quiet_assets'
   gem 'dotenv-rails'

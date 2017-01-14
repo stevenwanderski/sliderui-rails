@@ -57,6 +57,9 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap4-kaminari-views (1.0.0)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     builder (3.2.2)
     byebug (5.0.0)
       columnize (= 0.9.0)
@@ -137,6 +140,9 @@ GEM
       jsonapi-renderer (= 0.1.1.beta1)
     jsonapi-parser (0.1.1.beta3)
     jsonapi-renderer (0.1.1.beta1)
+    kaminari (0.16.3)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     loofah (2.0.3)
@@ -266,6 +272,7 @@ DEPENDENCIES
   awesome_print
   better_errors
   binding_of_caller
+  bootstrap4-kaminari-views
   capybara
   carrierwave (>= 1.0.0.rc, < 2.0)
   chromedriver-helper
@@ -276,6 +283,7 @@ DEPENDENCIES
   fog-aws
   http_logger
   jquery-rails
+  kaminari
   launchy
   pg (~> 0.15)
   pry-byebug
