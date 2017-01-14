@@ -1,5 +1,6 @@
 require 'spec_helper'
 include AuthHelper
+include ImageHelper
 
 describe 'Authenticated Slider Flow', js: true do
   before :each do
@@ -33,6 +34,35 @@ describe 'Authenticated Slider Flow', js: true do
       click_link 'Settings'
       expect(page).to have_content('Save Settings')
       expect(find('input[name="pager"]')).to_not be_checked
+    end
+
+    it 'refreshes the preview after updating the image on a slide' do
+      click_button 'Add Slide'
+      expect(page).to have_content('Select Image')
+      slide = Slide.order(created_at: :desc).first
+
+      # Select an image
+      Capybara.ignore_hidden_elements = false
+      attach_file("slide-image-#{slide.id}", test_image_path)
+      Capybara.ignore_hidden_elements = true
+
+      expect(page).to have_content('Updating preview...')
+    end
+
+    it 'refreshes the preview after deleting a slide' do
+      click_button 'Add Slide'
+      expect(page).to have_content('Select Image')
+      slide = Slide.order(created_at: :desc).first
+
+      # Select an image
+      Capybara.ignore_hidden_elements = false
+      attach_file("slide-image-#{slide.id}", test_image_path)
+      Capybara.ignore_hidden_elements = true
+      expect(page).to have_css('.slider-preview')
+
+      first('.slide-item__control--edit').click
+      click_link 'Delete'
+      expect(page).to have_content('Updating preview...')
     end
   end
 end
