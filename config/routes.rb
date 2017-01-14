@@ -30,6 +30,6 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :sliders
+    resources :sliders, only: [:index, :show]
   end
 end
