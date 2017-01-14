@@ -28,4 +28,8 @@ Rails.application.routes.draw do
     post '/sessions', to: 'sessions#create'
     put '/sessions', to: 'sessions#update'
   end
+
+  namespace :admin do
+    resources :sliders
+  end
 end

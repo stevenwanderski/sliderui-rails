@@ -42,6 +42,9 @@ gem 'factory_girl_rails'
 # Error reporting
 gem 'sentry-raven'
 
+# Authentication
+gem 'devise'
+
 group :development, :test do
   gem 'quiet_assets'
   gem 'dotenv-rails'
