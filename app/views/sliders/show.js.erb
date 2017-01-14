@@ -1,7 +1,7 @@
 function checkJquery(callback) {
   if (typeof(jQuery) == 'undefined') {
     var script = document.createElement('script');
-    script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js';
+    script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js';
     document.getElementsByTagName('head')[0].appendChild(script);
     script.onload = function(){
       callback();
