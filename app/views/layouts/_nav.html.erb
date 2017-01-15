@@ -1,0 +1,21 @@
+<nav class="navbar navbar-light bg-faded rounded navbar-toggleable-md">
+  <div class="container">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#containerNavbar" aria-controls="containerNavbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-brand">
+    <%= image_tag 'icon-star.png', width: '30', height: '30', class: "d-inline-block align-top" %> SliderUI
+  </div>
+
+  <div class="collapse navbar-collapse" id="containerNavbar">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <%= link_to 'Sliders', admin_sliders_path, class: 'nav-link' %>
+      </li>
+    </ul>
+    <div class="my-2 my-md-0">
+      <%= link_to('Logout', destroy_admin_session_path, method: :delete, class: 'btn') %>
+    </div>
+  </div>
+  </div>
+</nav>

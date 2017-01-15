@@ -3,7 +3,7 @@
     <% slides.each do |slide| %>
       <tr>
         <td>
-          <%= image_tag(slide.image.url) %>
+          <%= image_tag(slide.image.url, class: 'slide__image') %>
         </td>
       </tr>
     <% end %>
