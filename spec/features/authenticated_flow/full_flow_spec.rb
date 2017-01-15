@@ -26,14 +26,11 @@ describe 'Authenticated Slider Flow', js: true do
     expect(page).to_not have_css('.modal__content')
 
     # Settings page: adds slides
-    click_button 'Add Slide'
-    expect(page).to have_content('Select Image')
-    slide = Slide.order(created_at: :desc).first
+    expect(page).to have_content('Add Slide')
     Capybara.ignore_hidden_elements = false
-    attach_file("slide-image-#{slide.id}", test_image_path)
+    attach_file("slide-image-new", test_image_path)
     Capybara.ignore_hidden_elements = true
     expect(page).to have_selector('.slide-item__control--edit')
-    expect(slide.reload.image.url).to be_present
 
     # Settings page: shows slider preview
     click_link 'Settings'
@@ -45,6 +42,17 @@ describe 'Authenticated Slider Flow', js: true do
     # The button displays "Loading..." while saving
     # so wait for it to return to "Save Settings".
     expect(page).to have_content('Save Settings')
+
+    # Edit a slide
+    click_link 'Slides'
+    expect(page).to have_content('Add Slide')
+    slide = Slide.first
+    first('.slide-item__control--edit').click
+    expect(page).to have_content('Edit')
+    Capybara.ignore_hidden_elements = false
+    attach_file("slide-image-#{slide.id}", test_image_path)
+    Capybara.ignore_hidden_elements = true
+    expect(page).to have_selector('.slide-item__control--edit')
 
     # Embed code page: displays embed code
     click_link 'Embed Slider'

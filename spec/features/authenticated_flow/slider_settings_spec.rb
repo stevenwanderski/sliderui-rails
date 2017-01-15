@@ -7,13 +7,13 @@ describe 'Authenticated Slider Flow', js: true do
     @user = create(:user, email: 'frank@zappa.com', password: 'testtest')
     @slider = create(:slider, user: @user)
     login('frank@zappa.com', 'testtest')
-
-    click_link @slider.title
-    expect(page).to have_content('Add Slide')
   end
 
   describe 'Slider settings page' do
     it 'correctly saves and displays checkbox settings' do
+      click_link @slider.title
+      expect(page).to have_content('Add Slide')
+
       click_link 'Settings'
       click_button 'Save Settings'
       # The button displays "Loading..." while saving
@@ -36,10 +36,23 @@ describe 'Authenticated Slider Flow', js: true do
       expect(find('input[name="pager"]')).to_not be_checked
     end
 
-    it 'refreshes the preview after updating the image on a slide' do
-      click_button 'Add Slide'
-      expect(page).to have_content('Select Image')
-      slide = Slide.order(created_at: :desc).first
+    it 'refreshes the preview after adding a slide' do
+      click_link @slider.title
+      expect(page).to have_content('Add Slide')
+
+      # Select an image
+      Capybara.ignore_hidden_elements = false
+      attach_file("slide-image-new", test_image_path)
+      Capybara.ignore_hidden_elements = true
+
+      expect(page).to have_content('Updating preview...')
+    end
+
+    it 'refreshes the preview after updating a slide' do
+      slide = create(:slide, slider: @slider)
+      click_link @slider.title
+      expect(page).to have_content('Add Slide')
+      first('.slide-item__control--edit').click
 
       # Select an image
       Capybara.ignore_hidden_elements = false
@@ -50,17 +63,11 @@ describe 'Authenticated Slider Flow', js: true do
     end
 
     it 'refreshes the preview after deleting a slide' do
-      click_button 'Add Slide'
-      expect(page).to have_content('Select Image')
-      slide = Slide.order(created_at: :desc).first
-
-      # Select an image
-      Capybara.ignore_hidden_elements = false
-      attach_file("slide-image-#{slide.id}", test_image_path)
-      Capybara.ignore_hidden_elements = true
-      expect(page).to have_css('.slider-preview')
-
+      slide = create(:slide, slider: @slider)
+      click_link @slider.title
+      expect(page).to have_content('Add Slide')
       first('.slide-item__control--edit').click
+
       click_link 'Delete'
       expect(page).to have_content('Updating preview...')
     end
