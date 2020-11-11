@@ -1,12 +1,14 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.6'
+ruby '2.4.7'
+
+gem 'rails', '4.2.8'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
 
 # Web server
-gem 'puma'
+gem 'puma', '3.7'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
