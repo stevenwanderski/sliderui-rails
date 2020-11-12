@@ -1,0 +1,27 @@
+<div class="container__header container__header--app">
+  <div class="user-toolbar">
+    <div class="brand">
+      <div class="brand__logo"></div>
+      <div class="brand__name">SliderUI</div>
+    </div>
+
+    <div class="user-toolbar__account">
+      <div class="user-toolbar__row user-toolbar__email">
+        <img alt="Gravatar for wandoledzep@gmail.com" src="//www.gravatar.com/avatar/3d1d30e1bf0021b39313f22b635ce5e7?d=retro&amp;r=g&amp;s=30" srcset="//www.gravatar.com/avatar/3d1d30e1bf0021b39313f22b635ce5e7?d=retro&amp;r=g&amp;s=60 2x" height="30" width="30" class="react-gravatar user-toolbar__avatar">
+        <div>wandoledzep@gmail.com</div>
+      </div>
+
+      <div class="user-toolbar__row">
+        <%= link_to 'My Sliders', dashboard_sliders_path %>
+      </div>
+
+      <div class="user-toolbar__row">
+        <%= link_to 'Account', edit_dashboard_account_path %>
+      </div>
+
+      <div class="user-toolbar__row">
+        <a href="">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>

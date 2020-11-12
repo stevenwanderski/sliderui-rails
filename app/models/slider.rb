@@ -23,6 +23,12 @@ class Slider < ActiveRecord::Base
 
   validates :title, presence: true
 
+  def display_image_url
+    return nil if slides.empty?
+
+    slides.order(weight: :asc).first.image.url
+  end
+
   private
 
   def set_short_code

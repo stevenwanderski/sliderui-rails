@@ -1,3 +1,22 @@
-<% @sliders.each do |slider| %>
-  <p><%= slider.title %></p>
-<% end %>
+<div class="section">
+  <div class="slider-list">
+    <div class="slider-list__header">
+      <h1>My Sliders</h1>
+
+      <div class="slider-list__button">
+        <a class="button button--primary" href="/app/slider/new">+ Add New Slider</a>
+      </div>
+    </div>
+  </div>
+
+  <% @sliders.each do |slider| %>
+    <div class="slider-list__slide">
+      <div
+        class="slider-list__slide-image"
+        style="background-image: url('<%= slider.display_image_url %>')">
+      </div>
+
+      <%= link_to slider.title, edit_dashboard_slider_path(slider) %>
+    </div>
+  <% end %>
+</div>

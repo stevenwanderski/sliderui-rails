@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SliderUI</title>
+  <%= stylesheet_link_tag 'dashboard', media: 'all' %>
+  <%= javascript_include_tag 'dashboard' %>
+  <%= favicon_link_tag 'icon-star.png' %>
+</head>
+<body>
+  <%= render 'layouts/dashboard/header' %>
+
+  <div class="container__body">
+    <%= yield %>      
+  </div>
+
+</body>
+</html>

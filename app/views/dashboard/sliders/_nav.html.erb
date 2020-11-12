@@ -1,0 +1,4 @@
+<nav>
+  <%= active_link_to 'Edit', edit_dashboard_slider_path(slider), class: 'slider-layout__tab-link' %>
+  <%= active_link_to 'Embed Slider', dashboard_slider_embed_path(slider_id: slider.id), class: 'slider-layout__tab-link' %>
+</nav>

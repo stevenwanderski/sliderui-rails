@@ -39,6 +39,10 @@ Rails.application.routes.draw do
   end
 
   namespace :dashboard do
-    resources :sliders
+    resources :sliders do
+      get '/embed', action: :embed
+    end
+
+    resource :account, only: [:edit, :put], controller: 'account'
   end
 end
