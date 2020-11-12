@@ -6,7 +6,7 @@ class Api::SessionsController < ApiController
   def create
     user = User.find_by(email: params[:email])
     password = Digest::SHA2.new(512).hexdigest(params[:password])
-    if user && user.password == password
+    if user && user.password_hash == password
       render json: user
     else
       render json: { errors: 'Incorrect login.' }, status: 401
