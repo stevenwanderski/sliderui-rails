@@ -1,4 +1,19 @@
 <div class="section">
   <h1>Account Settings</h1>
 
+  <%= form_for(current_user, url: dashboard_account_path) do |f| %>
+    <div class="form-row">
+      <%= f.label :password, class: 'label' %>
+      <%= f.password_field :password, class: 'input--text' %>
+    </div>
+
+    <div class="form-row">
+      <%= f.label :password_confirmation, class: 'label' %>
+      <%= f.password_field :password_confirmation, class: 'input--text' %>
+    </div>
+
+    <div class="form-row">
+      <%= f.submit 'Save', class: 'button button--primary' %>
+    </div>
+  <% end %>
 </div>

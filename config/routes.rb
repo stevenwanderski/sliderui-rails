@@ -43,6 +43,6 @@ Rails.application.routes.draw do
       get '/embed', action: :embed
     end
 
-    resource :account, only: [:edit, :put], controller: 'account'
+    resource :account, only: [:edit, :update], controller: 'account'
   end
 end

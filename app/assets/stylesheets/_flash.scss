@@ -8,3 +8,27 @@
     padding-left: 26px;
   }
 }
+
+.flash-message {
+  position: fixed;
+  z-index: 99;
+  top: 30px;
+  text-align: center;
+  font-size: 18px;
+  padding: 10px;
+  width: 400px;
+  left: 50%;
+  margin-left: -200px;
+  background: #fff;
+  border: solid #999 2px;
+
+  &--error {
+    color: red;
+    border-color: red;
+  }
+
+  &--success {
+    color: green;
+    border-color: green;
+  }
+}
