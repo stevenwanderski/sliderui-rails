@@ -20,6 +20,7 @@ gem 'devise'
 gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
 gem 'active_link_to'
+gem 'handlebars_assets'
 
 group :development, :test do
   gem 'quiet_assets'

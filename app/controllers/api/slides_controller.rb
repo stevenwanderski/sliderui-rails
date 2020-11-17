@@ -29,15 +29,15 @@ class Api::SlidesController < ApiController
   def destroy
     slide = Slide.find(params[:id])
 
-    if !owns_slide?(slide)
-      return render json: { errors: 'Forbidden' }, status: 401
-    end
-
-    if slide.destroy
+    # if !owns_slide?(slide)
+    #   return render json: { errors: 'Forbidden' }, status: 401
+    # end
+    #
+    # if slide.destroy
       render json: slide
-    else
-      render json: { errors: slide.errors.full_messages.first }, status: 422
-    end
+    # else
+    #   render json: { errors: slide.errors.full_messages.first }, status: 422
+    # end
   end
 
   def update_collection
@@ -55,10 +55,10 @@ class Api::SlidesController < ApiController
 
   def owns_slider?(slider_id)
     slider = Slider.find(slider_id)
-    @current_user.id == slider.user_id
+    current_user.id == slider.user_id
   end
 
   def owns_slide?(slide)
-    @current_user.id == slide.slider.user_id
+    current_user.id == slide.slider.user_id
   end
 end

@@ -1,0 +1,24 @@
+<div class="slide-item slide-item--editing">
+  <div class="slide-item__child slide-item__edit-image">
+    <div class="slide-item__preview" style="background-image: url('{{imageUrl}}');"></div>
+    <div class="image-uploader">
+      <input type="file" id="{{id}}" accept="image/jpeg, image/png, image/gif" class="image-uploader__file">
+      <label for="slide-image-{{id}}" class="image-uploader__label undefined">Edit</label>
+    </div>
+  </div>
+
+  <div class="slide-item__child slide-item__controls">
+    <button
+      class="slide-item__control slide-item__control--delete"
+      data-delete="{{id}}"
+      data-delete-url="{{destroyUrl}}">
+      Delete
+    </button>
+
+    <button
+      class="slide-item__control slide-item__control--cancel"
+      data-menu-close="{{id}}">
+      Cancel
+    </button>
+  </div>
+</div>

@@ -19,7 +19,7 @@
   &__control--edit {
     width: 18px;
     height: 18px;
-    background: url('../svg/icon-gear.svg') no-repeat;
+    background: asset-url('icon-gear.svg') no-repeat;
     background-size: contain;
     display: block;
     margin-right: 10px;
@@ -28,7 +28,7 @@
   &__control--move {
     width: 18px;
     height: 18px;
-    background: url('../svg/icon-drag.svg') no-repeat;
+    background: asset-url('icon-drag.svg') no-repeat;
     background-size: contain;
     display: block;
   }

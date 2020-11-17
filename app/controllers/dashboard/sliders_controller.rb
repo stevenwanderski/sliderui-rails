@@ -5,6 +5,9 @@ class Dashboard::SlidersController < DashboardController
 
   def edit
     @slider = current_user.sliders.find(params[:id])
+
+    serializable_resource = ActiveModelSerializers::SerializableResource.new(@slider.slides)
+    @slides = serializable_resource.as_json
   end
 
   def embed

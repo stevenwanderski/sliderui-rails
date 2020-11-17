@@ -1,0 +1,7 @@
+{{#each slides}}
+  {{#if isEditing}}
+    {{> 'slides/_edit' }}
+  {{else}}
+    {{> 'slides/_show' }}
+  {{/if}}
+{{/each}}

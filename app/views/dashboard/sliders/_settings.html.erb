@@ -1,99 +1,101 @@
-<%= form_tag(api_slider_path(slider), class: 'form--slider-settings') do %>
-  <div class="scrollable">
-    <div class="scrollable__header">
-      <button class="button button--secondary button--full-width">Save Settings</button>
+<div data-section="settings" class="scrollable" style="display: none;">
+  <%= form_tag(api_slider_path(slider), class: 'form--slider-settings') do %>
+    <div class="scrollable">
+      <div class="scrollable__header">
+        <button class="button button--secondary button--full-width">Save Settings</button>
+      </div>
+
+      <div class="scrollable__body scrollable__body--button">
+        <div class="setting-group">
+          <div class="setting-group__title">General</div>
+          <div class="setting-group__body">
+
+            <div class="setting-group__row">
+              <label for="">Mode</label>
+              <%= select_tag 'mode',
+                  options_for_select([ ['Horizontal', 'horizontal'], ['Vertical', 'vertical'] ], slider.settings['mode'])
+              %>
+            </div>
+
+            <div class="setting-group__row">
+              <label for="">Speed</label>
+              <%= text_field_tag 'speed', slider.settings['speed'], class: 'input--text' %>
+            </div>
+
+            <div class="setting-group__row">
+              <label for="">Slide Margin</label>
+              <%= text_field_tag 'slideMargin', slider.settings['slideMargin'], class: 'input--text' %>
+            </div>
+
+            <div class="setting-group__row">
+              <label for="">Start Slide</label>
+              <%= text_field_tag 'startSlide', slider.settings['startSlide'], class: 'input--text' %>
+            </div>
+
+            <div class="setting-group__row">
+              <label class="label--checkbox">
+                <%= hidden_field_tag 'randomStart', false %>
+                <%= check_box_tag 'randomStart', true, slider.settings['randomStart'], class: 'input--checkbox' %>
+                <div>Random Start</div>
+              </label>
+            </div>
+
+            <div class="setting-group__row">
+              <label class="label--checkbox">
+                <%= hidden_field_tag 'auto', false %>
+                <%= check_box_tag 'auto', true, slider.settings['auto'], class: 'input--checkbox' %>
+                <div>Auto Start</div>
+              </label>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-group__title">Pager</div>
+          <div class="setting-group__body">
+
+            <div class="setting-group__row">
+              <label class="label--checkbox">
+                <%= hidden_field_tag 'pager', false %>
+                <%= check_box_tag 'pager', true, slider.settings['pager'], class: 'input--checkbox' %>
+                <div>Pager</div>
+              </label>
+            </div>
+
+            <div class="setting-group__row">
+              <label for="">Pager Type</label>
+              <%= select_tag 'pagerType',
+                  options_for_select([ ['Full', 'full'], ['Short', 'short'] ], slider.settings['pagerType'])
+              %>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-group__title">Controls</div>
+          <div class="setting-group__body">
+
+            <div class="setting-group__row">
+              <label class="label--checkbox">
+                <%= hidden_field_tag 'controls', false %>
+                <%= check_box_tag 'controls', true, slider.settings['controls'], class: 'input--checkbox' %>
+                <div>Controls Enabled</div>
+              </label>
+            </div>
+
+            <div class="setting-group__row">
+              <label class="label--checkbox">
+                <%= hidden_field_tag 'autoControls', false %>
+                <%= check_box_tag 'autoControls', true, slider.settings['autoControls'], class: 'input--checkbox' %>
+                <div>Start / Stop Controls Enabled</div>
+              </label>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div class="scrollable__body scrollable__body--button">
-      <div class="setting-group">
-        <div class="setting-group__title">General</div>
-        <div class="setting-group__body">
-
-          <div class="setting-group__row">
-            <label for="">Mode</label>
-            <%= select_tag 'mode',
-                options_for_select([ ['Horizontal', 'horizontal'], ['Vertical', 'vertical'] ], slider.settings['mode'])
-            %>
-          </div>
-
-          <div class="setting-group__row">
-            <label for="">Speed</label>
-            <%= text_field_tag 'speed', slider.settings['speed'], class: 'input--text' %>
-          </div>
-
-          <div class="setting-group__row">
-            <label for="">Slide Margin</label>
-            <%= text_field_tag 'slideMargin', slider.settings['slideMargin'], class: 'input--text' %>
-          </div>
-
-          <div class="setting-group__row">
-            <label for="">Start Slide</label>
-            <%= text_field_tag 'startSlide', slider.settings['startSlide'], class: 'input--text' %>
-          </div>
-
-          <div class="setting-group__row">
-            <label class="label--checkbox">
-              <%= hidden_field_tag 'randomStart', false %>
-              <%= check_box_tag 'randomStart', true, slider.settings['randomStart'], class: 'input--checkbox' %>
-              <div>Random Start</div>
-            </label>
-          </div>
-
-          <div class="setting-group__row">
-            <label class="label--checkbox">
-              <%= hidden_field_tag 'auto', false %>
-              <%= check_box_tag 'auto', true, slider.settings['auto'], class: 'input--checkbox' %>
-              <div>Auto Start</div>
-            </label>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="setting-group">
-        <div class="setting-group__title">Pager</div>
-        <div class="setting-group__body">
-
-          <div class="setting-group__row">
-            <label class="label--checkbox">
-              <%= hidden_field_tag 'pager', false %>
-              <%= check_box_tag 'pager', true, slider.settings['pager'], class: 'input--checkbox' %>
-              <div>Pager</div>
-            </label>
-          </div>
-
-          <div class="setting-group__row">
-            <label for="">Pager Type</label>
-            <%= select_tag 'pagerType',
-                options_for_select([ ['Full', 'full'], ['Short', 'short'] ], slider.settings['pagerType'])
-            %>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="setting-group">
-        <div class="setting-group__title">Controls</div>
-        <div class="setting-group__body">
-
-          <div class="setting-group__row">
-            <label class="label--checkbox">
-              <%= hidden_field_tag 'controls', false %>
-              <%= check_box_tag 'controls', true, slider.settings['controls'], class: 'input--checkbox' %>
-              <div>Controls Enabled</div>
-            </label>
-          </div>
-
-          <div class="setting-group__row">
-            <label class="label--checkbox">
-              <%= hidden_field_tag 'autoControls', false %>
-              <%= check_box_tag 'autoControls', true, slider.settings['autoControls'], class: 'input--checkbox' %>
-              <div>Start / Stop Controls Enabled</div>
-            </label>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

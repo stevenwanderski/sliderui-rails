@@ -1,4 +1,4 @@
-const DashboardSlider = {
+const SliderSettings = {
   init(args) {
     this.shortCode = args.shortCode;
 
@@ -13,7 +13,7 @@ const DashboardSlider = {
       const { name, value } = item;
 
       if (skipKeys.includes(name)) { return; }
-      
+
       if (value === '') { return; }
 
       settings[name] = this.formatValue(value);
@@ -38,15 +38,6 @@ const DashboardSlider = {
     $('.loader').hide();
   },
 
-  refreshSlider() {
-    $('[data-slider-id]').html('');
-    $('#script-container').html('');
-
-    const script = $('<script>');
-    script.attr('src', `http://localhost:3000/sliders/${this.shortCode}.js`);
-    $('#script-container').html(script);
-  },
-
   setupFormHandler() {
     $('form').on('submit', (event) => {
       event.preventDefault();
@@ -67,7 +58,7 @@ const DashboardSlider = {
       })
       .done(() => {
         this.hideLoading();
-        this.refreshSlider();
+        SliderPage.refreshSlider();
       });
     });
   },
