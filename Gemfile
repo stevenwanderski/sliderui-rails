@@ -22,6 +22,9 @@ gem 'bootstrap4-kaminari-views'
 gem 'active_link_to'
 gem 'handlebars_assets'
 
+gem 'webpacker'
+gem 'react-rails'
+
 group :development, :test do
   gem 'quiet_assets'
   gem 'dotenv-rails'

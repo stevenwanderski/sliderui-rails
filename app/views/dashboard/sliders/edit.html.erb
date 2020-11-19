@@ -5,23 +5,7 @@
 
   <div class="slider-layout__body">
     <div class="slider-settings">
-      <div class="section slider-settings__slides">
-        <div class="scrollable">
-          <div class="scrollable__header">
-            <nav>
-              <a href="" class="section__tab-link active" data-nav="slides">Slides</a>
-              <a href="" class="section__tab-link" data-nav="settings">Settings</a>
-            </nav>
-          </div>
-
-          <div class="scrollable__body">
-            <%= render 'slides', slider: @slider %>
-            <%= render 'settings', slider: @slider %>
-          </div>
-        </div>
-      </div>
-
-      <%= render 'preview', short_code: @slider.short_code %>
+      <%= react_component('hello') %>
     </div>
   </div>
 </div>
@@ -29,17 +13,3 @@
 <div class="loader" style="display: none;">
   Loading...
 </div>
-
-<script>
-  SliderSettings.init({
-    shortCode: '<%= @slider.short_code %>'
-  });
-
-  SliderSlides.init({
-    slides: <%= raw @slides.to_json %>
-  });
-
-  SliderPage.init({
-    shortCode: '<%= @slider.short_code %>'
-  });
-</script>

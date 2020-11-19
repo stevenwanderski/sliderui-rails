@@ -1,6 +1,6 @@
 class Api::SlidersController < ApiController
   def show
-    slider = @current_user.sliders.find_by(id: params[:id])
+    slider = current_user.sliders.find_by(id: params[:id])
     render json: slider
   end
 
