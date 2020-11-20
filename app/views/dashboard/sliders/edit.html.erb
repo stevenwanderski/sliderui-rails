@@ -3,7 +3,9 @@
     <%= render 'nav', slider: @slider %>
   </div>
 
-  <%= react_component('slider-container', {}, class: 'slider-layout__body') %>
+  <div id="root" class="slider-layout__body">
+    <slider-app slider-id="<%= @slider.id %>"></slider-app>
+  </div>
 </div>
 
 <div class="loader" style="display: none;">
