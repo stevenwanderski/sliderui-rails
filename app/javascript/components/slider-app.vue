@@ -12,6 +12,9 @@
 
         <div class="scrollable__body">
           <section-slides
+            v-bind:onAddSlide="addSlide"
+            v-bind:onDeleteSlide="deleteSlide"
+            v-bind:slider-id="sliderId"
             v-bind:slides="slides"
             v-if="isSlides">
           </section-slides>
@@ -26,6 +29,8 @@
     <div class="section flex-child--full-width">
       <h3>Preview</h3>
     </div>
+
+    <loading v-if="isLoading"></loading>
   </div>
 </template>
 
@@ -67,10 +72,46 @@
     },
 
     methods: {
+      addSlide(file) {
+        this.isLoading = true;
+
+        const formData = new FormData();
+        formData.append('slide[slider_id]', this.sliderId);
+        formData.append('slide[weight]', this.slides.length);
+        formData.append('slide[image]', file);
+
+        return axios.post(`/api/slides`, formData)
+          .then((response) => {
+            const slideResponse = response.data;
+
+            const slide = {
+              id: slideResponse.id,
+              imageUrl: slideResponse.image_url,
+              isEditing: false,
+              destroyUrl: slideResponse.destroy_url
+            };
+
+            this.slides.push(slide);
+
+            this.isLoading = false;
+          });
+      },
+
       clickNav(key, event) {
         event.preventDefault();
 
         this.visibleSection = key;
+      },
+
+      deleteSlide(slideId) {
+        this.isLoading = true;
+
+        return axios.delete(`/api/slides/${slideId}`)
+          .then((response) => {
+            this.isLoading = false;
+
+            this.slides = this.slides.filter((slide) => slide.id != slideId);
+          });
       },
 
       fetchData() {

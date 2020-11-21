@@ -8,6 +8,7 @@
   <slide-item-edit
     v-bind:slide="slide"
     v-bind:onClickCancel="clickCancel"
+    v-bind:onDelete="onDelete"
     v-else-if="isEditing"
   ></slide-item-edit>
 </template>
@@ -42,6 +43,9 @@
       }
     },
 
-    props: ['slide']
+    props: [
+      'onDelete',
+      'slide'
+    ]
   }
 </script>

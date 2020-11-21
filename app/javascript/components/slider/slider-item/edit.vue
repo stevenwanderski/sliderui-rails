@@ -15,9 +15,9 @@
     </div>
 
     <div class="slide-item__child slide-item__controls">
-      <a href="" class="slide-item__control slide-item__control--delete">
+      <button v-on:click="clickDelete" class="slide-item__control slide-item__control--delete">
         Delete
-      </a>
+      </button>
 
       <button v-on:click="onClickCancel" class="slide-item__control slide-item__control--cancel">
         Cancel
@@ -29,8 +29,15 @@
 
 <script>
   export default {
+    methods: {
+      clickDelete() {
+        this.onDelete(this.slide.id);
+      }
+    },
+
     props: [
       'onClickCancel',
+      'onDelete',
       'slide'
     ]
   }
