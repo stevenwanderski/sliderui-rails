@@ -7,7 +7,7 @@
 
   <slide-item-edit
     v-bind:slide="slide"
-    v-bind:onClickCancel="clickCancel"
+    v-bind:onCancel="clickCancel"
     v-bind:onDelete="onDelete"
     v-else-if="isEditing"
   ></slide-item-edit>
@@ -24,22 +24,24 @@
     },
 
     computed: {
-      isEditing() {
-        return this.slide.isEditing === true;
-      },
-
       isViewing() {
-        return this.slide.isEditing === false;
+        return this.isEditing === false;
+      }
+    },
+
+    data() {
+      return {
+        isEditing: false
       }
     },
 
     methods: {
       clickCancel() {
-        this.slide.isEditing = false;
+        this.isEditing = false;
       },
 
       clickEdit() {
-        this.slide.isEditing = true;
+        this.isEditing = true;
       }
     },
 
