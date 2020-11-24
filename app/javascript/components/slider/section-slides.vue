@@ -11,7 +11,12 @@
       </div>
 
       <div class="scrollable__body scrollable__body--button">
+        <div v-if="noSlides" class="slides__empty">
+          Add at least one slide to make a proper slider 🎈
+        </div>
+
         <slide-item
+          v-else
           v-for="slide in slides"
           v-bind:key="slide.id"
           v-bind:onDelete="onDeleteSlide"
@@ -34,6 +39,7 @@
     },
 
     props: [
+      'noSlides',
       'onAddSlide',
       'onDeleteSlide',
       'sliderId',
