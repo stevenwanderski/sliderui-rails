@@ -23,6 +23,8 @@
 
           <section-settings
             v-if="isSettings"
+            :onSubmit="saveSettings"
+            :settings="settings"
           ></section-settings>
         </div>
       </div>
@@ -88,6 +90,7 @@
       return {
         isLoading: true,
         resettingPreview: false,
+        settings: {},
         slides: [],
         visibleSection: null
       }
@@ -132,6 +135,7 @@
       fetchData: async function() {
         const response = await axios.get(`/api/sliders/${this.sliderId}`);
 
+        this.settings = response.data.settings;
         this.slides = response.data.slides.map((slide) => {
           return {
             id: slide.id,
@@ -142,7 +146,7 @@
         });
 
         this.isLoading = false;
-        this.visibleSection = 'slides';
+        this.visibleSection = 'settings';
       },
 
       moveSlide: async function(event) {
@@ -158,6 +162,17 @@
         });
 
         this.isLoading = false;
+        this.updatePreview();
+      },
+
+      saveSettings: async function(values) {
+        this.isLoading = true;
+
+        const data = { slider: { settings: values } };
+        await axios.put(`/api/sliders/${this.sliderId}`, data);
+
+        this.isLoading = false;
+        this.settings = values;
         this.updatePreview();
       },
 
