@@ -15,13 +15,18 @@
           Add at least one slide to make a proper slider 🎈
         </div>
 
-        <slide-item
+        <draggable
           v-else
-          v-for="slide in slides"
-          v-bind:key="slide.id"
-          v-bind:onDelete="onDeleteSlide"
-          v-bind:slide="slide">
-        </slide-item>
+          :list="slides"
+          handle=".slide-item__handle"
+          @change="onMoveSlide">
+          <slide-item
+            v-for="slide in slides"
+            v-bind:key="slide.id"
+            v-bind:onDelete="onDeleteSlide"
+            v-bind:slide="slide">
+          </slide-item>
+        </draggable>
       </div>
     </div>
   </div>
@@ -29,11 +34,13 @@
 
 <script>
   import axios from 'axios';
+  import draggable from 'vuedraggable';
   import SlideItem from './slide-item';
   import ImageUploader from './image-uploader';
 
   export default {
     components: {
+      draggable,
       ImageUploader,
       SlideItem
     },
@@ -42,6 +49,7 @@
       'noSlides',
       'onAddSlide',
       'onDeleteSlide',
+      'onMoveSlide',
       'sliderId',
       'slides'
     ]

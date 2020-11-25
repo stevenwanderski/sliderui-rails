@@ -15,6 +15,7 @@
             v-bind:noSlides="noSlides"
             v-bind:onAddSlide="addSlide"
             v-bind:onDeleteSlide="deleteSlide"
+            v-bind:onMoveSlide="moveSlide"
             v-bind:slider-id="sliderId"
             v-bind:slides="slides"
             v-if="isSlides"
@@ -135,12 +136,29 @@
           return {
             id: slide.id,
             imageUrl: slide.image_url,
-            destroyUrl: slide.destroy_url
+            destroyUrl: slide.destroy_url,
+            weight: slide.weight
           }
         });
 
         this.isLoading = false;
         this.visibleSection = 'slides';
+      },
+
+      moveSlide: async function(event) {
+        this.isLoading = true;
+
+        this.slides = this.slides.map((slide, index) => {
+          slide.weight = index;
+          return slide;
+        });
+
+        await axios.put('/api/slides/collection', {
+          slides: this.slides
+        });
+
+        this.isLoading = false;
+        this.updatePreview();
       },
 
       updatePreview() {

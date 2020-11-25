@@ -16,7 +16,7 @@
 #
 
 class Slider < ActiveRecord::Base
-  has_many :slides, dependent: :destroy
+  has_many :slides, -> { order(weight: :asc) }, dependent: :destroy
   belongs_to :user
 
   before_create :set_short_code
