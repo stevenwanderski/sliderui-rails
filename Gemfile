@@ -20,10 +20,9 @@ gem 'devise'
 gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
 gem 'active_link_to'
-gem 'handlebars_assets'
+gem 'gravatar_image_tag'
 
 gem 'webpacker'
-gem 'react-rails'
 
 group :development, :test do
   gem 'quiet_assets'
