@@ -2,7 +2,7 @@
   <div class="slide-item slide-item--editing">
     <div class="slide-item__child slide-item__edit-image">
       <div
-        v-bind:style="{ backgroundImage: `url(${slide.imageUrl})`}"
+        v-bind:style="{ backgroundImage: `url(${slide.thumbUrl})`}"
         class="slide-item__preview"
       ></div>
     </div>

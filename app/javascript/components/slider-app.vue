@@ -111,7 +111,8 @@
         this.slides.push({
           id: response.data.id,
           imageUrl: response.data.image_url,
-          destroyUrl: response.data.destroy_url
+          destroyUrl: response.data.destroy_url,
+          thumbUrl: response.data.thumb_url
         });
 
         this.isLoading = false;
