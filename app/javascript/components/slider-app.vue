@@ -147,7 +147,7 @@
         });
 
         this.isLoading = false;
-        this.visibleSection = 'settings';
+        this.visibleSection = 'slides';
       },
 
       moveSlide: async function(event) {
