@@ -43,7 +43,8 @@
 
       <slider-preview
         v-else
-        :shortCode="shortCode"
+        :app-host="appHost"
+        :short-code="shortCode"
       ></slider-preview>
     </div>
 
@@ -186,6 +187,7 @@
     },
 
     props: [
+      'appHost',
       'shortCode',
       'sliderId'
     ]

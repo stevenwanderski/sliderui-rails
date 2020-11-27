@@ -12,11 +12,12 @@
       document.querySelector('#script-container').innerHTML = '';
 
       const script = document.createElement('script');
-      script.src = `http://localhost:3000/sliders/${this.shortCode}.js`;
+      script.src = `${this.appHost}/sliders/${this.shortCode}.js`;
       document.querySelector('#script-container').appendChild(script);
     },
 
     props: [
+      'appHost',
       'shortCode'
     ]
   }

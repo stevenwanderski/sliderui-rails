@@ -21,7 +21,7 @@
 
         <div class="code">
 <pre>&lt;div data-slider-id="<%= @slider.short_code %>"&gt;&lt;/div&gt;
-&lt;script type="text/javascript" src="https://app.sliderui.com/sliders/<%= @slider.short_code %>.js"&gt;&lt;/script&gt;</pre>
+&lt;script type="text/javascript" src="<%= ENV['APP_HOST'] %>/sliders/<%= @slider.short_code %>.js"&gt;&lt;/script&gt;</pre>
         </div>
       </div>
     </div>
