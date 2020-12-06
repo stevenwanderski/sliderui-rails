@@ -16,12 +16,18 @@
 #
 
 class Slider < ActiveRecord::Base
-  has_many :slides, dependent: :destroy
+  has_many :slides, -> { order(weight: :asc) }, dependent: :destroy
   belongs_to :user
 
   before_create :set_short_code
 
   validates :title, presence: true
+
+  def display_image_url
+    return nil if slides.empty?
+
+    slides.order(weight: :asc).first.image.url
+  end
 
   private
 

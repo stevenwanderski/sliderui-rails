@@ -55,10 +55,10 @@ class Api::SlidesController < ApiController
 
   def owns_slider?(slider_id)
     slider = Slider.find(slider_id)
-    @current_user.id == slider.user_id
+    current_user.id == slider.user_id
   end
 
   def owns_slide?(slide)
-    @current_user.id == slide.slider.user_id
+    current_user.id == slide.slider.user_id
   end
 end

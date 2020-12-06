@@ -1,0 +1,87 @@
+.button {
+  padding: 10px 16px;
+  cursor: pointer;
+  border-radius: 2px;
+  border-style: solid;
+  border-width: $primary-border-width;
+  font-size: 14px;
+  display: inline-block;
+  text-align: center;
+
+  &[disabled] {
+    border-color: $gray-light;
+    color: $gray-light;
+    background: $white;
+    cursor: auto;
+  }
+
+  &.loading {
+    cursor: wait;
+    border-color: $gray-light;
+    color: $gray-light;
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &--primary {
+    background: $primary;
+    border-color: $primary;
+    color: $white;
+
+    &:not([disabled]):hover {
+      background: darken($primary, 5%);
+    }
+  }
+
+  &--secondary {
+    background: lighten($primary, 27%);
+    border-color: lighten($primary, 20%);
+    color: $primary;
+
+    &:not([disabled]):hover {
+      background: lighten($primary, 24%);
+    }
+  }
+
+  &--inline {
+    margin-right: 20px;
+  }
+
+  &--round {
+    border-radius: 40px;
+    background: none;
+    color: $white;
+    border: solid $white 2px;
+    padding: 12px 24px;
+    text-transform: uppercase;
+    transition: all 200ms;
+
+    &:hover {
+      background: $white;
+      color: $primary;
+    }
+  }
+
+  &--large {
+    font-size: 16px;
+  }
+
+  &--small {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  &--gray {
+    background: $gray-dark;
+  }
+
+  &--purple {
+    background: $purple;
+  }
+
+  &--full-width {
+    width: 100%;
+  }
+}

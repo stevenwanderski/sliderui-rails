@@ -1,0 +1,29 @@
+.form-row {
+  margin-bottom: 30px;
+
+  .error {
+    margin-top: 5px;
+  }
+}
+
+.form-actions {
+  .button {
+    margin-right: 12px;
+  }
+}
+
+.form--auth {
+  width: 100%;
+  max-width: 500px;
+}
+
+.form--slider-settings {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.field_with_errors {
+  input {
+    border: solid 1px red;
+  }
+}

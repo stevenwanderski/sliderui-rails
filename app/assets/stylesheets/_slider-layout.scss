@@ -1,0 +1,37 @@
+.slider-layout {
+  position: relative;
+  height: 100%;
+
+  &__title {
+    font-size: 14px;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__body {
+    position: absolute;
+    top: $sub-header-height;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-top: 20px;
+  }
+
+  &__tab-link {
+    padding-bottom: 5px;
+
+    &:hover {
+      box-shadow: 0 2px 0 lighten($primary, 20%);
+      text-decoration: none;
+    }
+
+    &.active {
+      box-shadow: 0 2px 0 lighten($primary, 20%);
+    }
+  }
+}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SliderUI</title>
+  <%= favicon_link_tag 'icon-star.png' %>
+  <%= stylesheet_link_tag 'dashboard', media: 'all' %>
+  <%= javascript_pack_tag 'slider_vue' %>
+  <%= javascript_include_tag 'application' %>
+</head>
+<body>
+  <%= render 'layouts/dashboard/header' %>
+
+  <div class="container__body">
+    <%= render 'layouts/dashboard/flash_messages' %>
+    
+    <%= yield %>
+  </div>
+
+</body>
+</html>

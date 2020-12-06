@@ -1,6 +1,6 @@
 class Api::SlidersController < ApiController
   def show
-    slider = @current_user.sliders.find_by(id: params[:id])
+    slider = current_user.sliders.find_by(id: params[:id])
     render json: slider
   end
 
@@ -14,7 +14,7 @@ class Api::SlidersController < ApiController
   end
 
   def update
-    slider = @current_user.sliders.find_by(id: params[:id])
+    slider = current_user.sliders.find_by(id: params[:id])
     slider.settings = params[:slider].delete(:settings)
     if slider.save
       render json: slider

@@ -1,0 +1,17 @@
+<div class="slider-layout">
+  <div class="slider-layout__header">
+    <%= render 'nav', slider: @slider %>
+  </div>
+
+  <div id="root" class="slider-layout__body">
+    <slider-app
+      app-host="<%= ENV['APP_HOST'] %>"
+      slider-id="<%= @slider.id %>"
+      short-code="<%= @slider.short_code %>"
+    ></slider-app>
+  </div>
+</div>
+
+<div class="loader" style="display: none;">
+  Loading...
+</div>

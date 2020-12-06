@@ -1,0 +1,27 @@
+<div class="container__header container__header--app">
+  <div class="user-toolbar">
+    <div class="brand">
+      <div class="brand__logo"></div>
+      <div class="brand__name">SliderUI</div>
+    </div>
+
+    <div class="user-toolbar__account">
+      <div class="user-toolbar__row user-toolbar__email">
+        <%= gravatar_image_tag(current_user.email, class: "user-toolbar__avatar") %>
+        <div><%= current_user.email %></div>
+      </div>
+
+      <div class="user-toolbar__row">
+        <%= link_to 'My Sliders', dashboard_sliders_path %>
+      </div>
+
+      <div class="user-toolbar__row">
+        <%= link_to 'Account', edit_dashboard_account_path %>
+      </div>
+
+      <div class="user-toolbar__row">
+        <%= link_to 'Logout', destroy_user_session_path %>
+      </div>
+    </div>
+  </div>
+</div>

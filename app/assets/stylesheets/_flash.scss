@@ -1,0 +1,33 @@
+.flash {
+  color: $secondary;
+
+  &--inline {
+    margin-left: 10px;
+    background: asset-url('icon-check.svg') left center no-repeat;
+    background-size: 20px;
+    padding-left: 26px;
+  }
+}
+
+.flash-message {
+  text-align: center;
+  font-size: 18px;
+  padding: 10px;
+  width: 600px;
+  background: #fff;
+  border: solid #999 2px;
+  border-radius: 10px;
+  margin: 0 auto 20px;
+
+  &--error {
+    color: $white;
+    border-color: #c58687;
+    background: rgba(#c58687, 0.65);
+  }
+
+  &--success {
+    color: $white;
+    border-color: #86C5A4;
+    background: rgba(#86C5A4, 0.65);
+  }
+}

@@ -1,8 +1,20 @@
 Rails.application.routes.draw do
   devise_for :admins
+  devise_for :users
+
   root 'home#index'
 
   get '/sliders/:short_code', to: 'sliders#show'
+
+  constraints subdomain: 'app' do
+    get '/sliders/:short_code', to: 'sliders#show'
+  end
+
+  namespace :admin do
+    resources :sliders, only: [:index] do
+      resources :slides, only: [:index]
+    end
+  end
 
   namespace :api do
     resources :sliders, only: [:show, :create, :update] do
@@ -30,9 +42,11 @@ Rails.application.routes.draw do
     put '/sessions', to: 'sessions#update'
   end
 
-  namespace :admin do
-    resources :sliders, only: [:index] do
-      resources :slides, only: [:index]
+  namespace :dashboard do
+    resources :sliders do
+      get '/embed', action: :embed
     end
+
+    resource :account, only: [:edit, :update], controller: 'account'
   end
 end
