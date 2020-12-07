@@ -2,9 +2,17 @@ class SlidersController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def show
-    ap "REFERER: #{request.referrer}"
-
     @slider = Slider.find_by(short_code: params[:short_code])
+
+    begin
+      RequestLog.create!(
+        slider: @slider,
+        user: @slider.user,
+        referrer: request.referrer
+      )
+    rescue => e
+      # Oops.
+    end
 
     @output = '<div class="slider">'
     @slider.slides.order(weight: :asc).each do |slide|

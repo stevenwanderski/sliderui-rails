@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201112023751) do
+ActiveRecord::Schema.define(version: 20201207130514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,14 @@ ActiveRecord::Schema.define(version: 20201112023751) do
   end
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
+
+  create_table "request_logs", force: :cascade do |t|
+    t.uuid     "slider_id"
+    t.uuid     "user_id"
+    t.text     "referrer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "sliders", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.uuid     "user_id"

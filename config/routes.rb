@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     resources :sliders, only: [:index] do
       resources :slides, only: [:index]
     end
+
+    resources :request_logs, only: [:index]
   end
 
   namespace :api do
