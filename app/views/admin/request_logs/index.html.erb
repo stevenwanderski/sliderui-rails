@@ -13,7 +13,11 @@
     <% @request_logs.each do |request_log| %>
       <tr>
         <td><%= l(request_log.created_at) %></td>
-        <td><%= request_log.referrer %></td>
+        <td>
+          <% if request_log.referrer.present? %>
+            <%= link_to request_log.referrer, request_log.referrer, target: '_blank' %>
+          <% end %>
+        </td>
         <td><%= request_log.user.email %></td>
       </tr>
     <% end %>
