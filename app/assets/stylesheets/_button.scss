@@ -84,4 +84,14 @@
   &--full-width {
     width: 100%;
   }
+
+  &--hero {
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    background: $primary;
+    border-radius: 10px;
+    color: #fff;
+    padding: 20px 40px;
+  }
 }

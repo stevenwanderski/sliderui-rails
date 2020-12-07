@@ -7,6 +7,11 @@
     margin-right: auto;
   }
 
+  &--home {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
   &__header {
     background: $white;
     width: 100%;
@@ -34,12 +39,6 @@
       padding: 20px 40px;
       border-bottom: solid $gray-light 1px;
       margin-bottom: 20px;
-    }
-
-    &--home {
-      padding: 20px 40px;
-      display: flex;
-      justify-content: space-between;;
     }
   }
 
