@@ -34,4 +34,12 @@
       box-shadow: 0 2px 0 lighten($primary, 20%);
     }
   }
+
+  &__controls {
+    display: flex;
+  }
+
+  &__meta {
+    margin-right: 20px;
+  }
 }
