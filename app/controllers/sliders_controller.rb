@@ -2,6 +2,8 @@ class SlidersController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def show
+    ap "REFERER: #{request.referrer}"
+
     @slider = Slider.find_by(short_code: params[:short_code])
 
     @output = '<div class="slider">'
