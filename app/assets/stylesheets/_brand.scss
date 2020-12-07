@@ -14,5 +14,11 @@
     font-weight: bold;
     font-family: 'Rubik';
     letter-spacing: -1px;
+
+    a {
+      color: inherit;
+      font-family: inherit;
+      font-weight: bold;
+    }
   }
 }
