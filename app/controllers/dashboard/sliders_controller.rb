@@ -24,6 +24,12 @@ class Dashboard::SlidersController < DashboardController
     @slider = current_user.sliders.build
   end
 
+  def destroy
+    @slider = current_user.sliders.find(params[:id])
+    @slider.destroy!
+    redirect_to dashboard_sliders_path, notice: "Slider \"#{@slider.title}\" was deleted."
+  end
+
   def embed
     @slider = current_user.sliders.find(params[:slider_id])
   end

@@ -6,13 +6,14 @@
   <%= stylesheet_link_tag 'dashboard', media: 'all' %>
   <%= javascript_pack_tag 'slider_vue' %>
   <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
 </head>
 <body>
   <%= render 'layouts/dashboard/header' %>
 
   <div class="container__body">
     <%= render 'layouts/dashboard/flash_messages' %>
-    
+
     <%= yield %>
   </div>
 

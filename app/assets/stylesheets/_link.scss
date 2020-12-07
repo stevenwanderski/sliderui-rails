@@ -5,4 +5,8 @@
   &:hover {
     text-decoration: underline;
   }
+
+  &--danger {
+    color: $red;
+  }
 }

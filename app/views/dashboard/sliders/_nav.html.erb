@@ -2,3 +2,12 @@
   <%= active_link_to 'Edit', edit_dashboard_slider_path(slider), class: 'slider-layout__tab-link' %>
   <%= active_link_to 'Embed Slider', dashboard_slider_embed_path(slider_id: slider.id), class: 'slider-layout__tab-link' %>
 </nav>
+
+<div class="slider-layout__controls">
+  <%= link_to 'Delete',
+      dashboard_slider_path,
+      class: 'link--danger',
+      data: { confirm: 'Are you sure?' },
+      method: :delete
+  %>
+</div>
