@@ -1,9 +1,15 @@
 .home {
   background: #fff;
-  padding: 0 20px;
 
   * {
     font-family: 'Rubik';
+  }
+
+  h2 {
+    font-size: 40px;
+    font-weight: bold;
+    letter-spacing: -2px;
+    margin-bottom: 40px;
   }
 
   .brand__logo {
@@ -16,7 +22,7 @@
   }
 
   header {
-    padding: 20px 0;
+    padding: 20px;
     max-width: 1200px;
     margin: 0 auto 100px;
     display: flex;
@@ -40,34 +46,5 @@
         display: inline-block;
       }
     }
-  }
-}
-
-.hero {
-  padding-bottom: 70px;
-
-  &__title {
-    font-size: 52px;
-    line-height: 52px;
-    font-weight: bold;
-    letter-spacing: -3px;
-    color: $black;
-    max-width: 800px;
-    margin-bottom: 20px;
-
-    @media screen and (min-width: 800px) {
-      font-size: 72px;
-      line-height: 72px;
-    }
-  }
-
-  &__description {
-    font-size: 24px;
-    font-weight: 300;
-    line-height: 30px;
-    color: #8d8d8d;
-    max-width: 620px;
-    letter-spacing: 0;
-    margin-bottom: 70px;
   }
 }
