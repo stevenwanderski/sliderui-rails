@@ -1,6 +1,10 @@
 <div class="section">
   <h1>Account Settings</h1>
 
+  <p>
+    <%= link_to 'Subscription Plan', edit_dashboard_subscription_path %>
+  </p>
+
   <%= form_for(current_user, url: dashboard_account_path) do |f| %>
     <div class="form-row">
       <%= f.label :password, class: 'label' %>

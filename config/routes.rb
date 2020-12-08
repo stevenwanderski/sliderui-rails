@@ -50,5 +50,6 @@ Rails.application.routes.draw do
     end
 
     resource :account, only: [:edit, :update], controller: 'account'
+    resource :subscription, only: [:edit, :update], controller: 'subscription'
   end
 end
