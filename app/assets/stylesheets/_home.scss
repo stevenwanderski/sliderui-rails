@@ -23,11 +23,13 @@
 
   header {
     padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    margin-bottom: 100px;
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
     a {
       font-size: 18px;
@@ -46,9 +48,6 @@
 
   @media screen and (min-width: 800px) {
     header {
-      padding-left: 0;
-      padding-right: 0;
-
       .button {
         display: inline-block;
       }
