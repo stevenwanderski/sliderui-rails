@@ -1,4 +1,5 @@
 class Api::SlidesController < ApiController
+  # KEEP
   def create
     if !owns_slider?(slide_params[:slider_id])
       return render json: { errors: 'Forbidden' }, status: 401
@@ -12,20 +13,7 @@ class Api::SlidesController < ApiController
     end
   end
 
-  def update
-    slide = Slide.find(params[:id])
-
-    if !owns_slide?(slide)
-      return render json: { errors: 'Forbidden' }, status: 401
-    end
-
-    if slide.update(slide_params)
-      render json: slide
-    else
-      render json: { errors: slide.errors.full_messages.first }, status: 422
-    end
-  end
-
+  # KEEP
   def destroy
     slide = Slide.find(params[:id])
 
@@ -40,6 +28,7 @@ class Api::SlidesController < ApiController
     end
   end
 
+  # KEEP
   def update_collection
     params[:slides].each do |slide|
       Slide.where(id: slide['id']).update_all(weight: slide['weight'])
