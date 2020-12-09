@@ -26,6 +26,8 @@ Rails.application.routes.draw do
         put '/collection', action: :update_collection
       end
     end
+
+    resource :checkout, only: [:create], controller: :checkout
   end
 
   namespace :dashboard do

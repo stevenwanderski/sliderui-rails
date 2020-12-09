@@ -22,8 +22,8 @@ gem 'bootstrap4-kaminari-views'
 gem 'active_link_to'
 gem 'gravatar_image_tag'
 gem 'premailer-rails'
-
 gem 'webpacker'
+gem 'stripe'
 
 group :development, :test do
   gem 'quiet_assets'

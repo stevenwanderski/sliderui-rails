@@ -1,9 +1,41 @@
+<script src="https://js.stripe.com/v3/"></script>
+
 <div class="section">
   <h1>Subscription Settings</h1>
 
   <p>Current plan: <strong><%= current_user.subscription_type %></strong></p>
 
   <p>
-    <a href="#">Upgrade Plan</a>
+    <button id="checkout">Upgrade Plan</button>
   </p>
 </div>
+
+<script type="text/javascript">
+  var stripe = Stripe('<%= ENV['STRIPE_PUBLIC_KEY'] %>');
+
+  var createCheckoutSession = function(priceId) {
+    return fetch("/api/checkout", {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        priceId: priceId
+      })
+    }).then(function(result) {
+      return result.json();
+    });
+  };
+
+  $('#checkout').on('click', function(event) {
+    var priceId = '<%= ENV['STRIPE_PRICE_ID'] %>';
+
+    createCheckoutSession(priceId).then(function(data) {
+      stripe.redirectToCheckout({
+        sessionId: data.sessionId
+      });
+    });
+  });
+</script>
