@@ -1,18 +1,11 @@
 class Api::SlidersController < ApiController
+  # KEEP
   def show
     slider = current_user.sliders.find_by(id: params[:id])
     render json: slider
   end
 
-  def create
-    slider = @current_user.sliders.build(slider_params)
-    if slider.save
-      render json: { id: slider.id }
-    else
-      render json: { errors: slider.errors.full_messages.first }, status: 422
-    end
-  end
-
+  # KEEP
   def update
     slider = current_user.sliders.find_by(id: params[:id])
     slider.settings = params[:slider].delete(:settings)
@@ -21,11 +14,6 @@ class Api::SlidersController < ApiController
     else
       render json: { errors: slider.errors.full_messages.first }, status: 422
     end
-  end
-
-  def slides
-    slider = @current_user.sliders.find_by(id: params[:id])
-    render json: slider.slides.order(weight: :asc)
   end
 
   private
