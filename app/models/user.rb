@@ -19,6 +19,8 @@
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
 #  subscription_type      :string           default("free")
+#  stripe_customer_id     :string
+#  subscription_status    :string
 #
 # Indexes
 #
