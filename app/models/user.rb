@@ -20,7 +20,7 @@
 #  last_sign_in_ip        :inet
 #  subscription_type      :string           default("free")
 #  stripe_customer_id     :string
-#  subscription_status    :string
+#  subscription_status    :string           default("active")
 #
 # Indexes
 #
