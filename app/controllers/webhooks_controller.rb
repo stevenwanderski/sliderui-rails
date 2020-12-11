@@ -46,7 +46,7 @@ class WebhooksController < ApplicationController
       return if !user
 
       user.update!(
-        subscription_plan: 'paid',
+        subscription_type: 'paid',
         subscription_status: 'active',
         stripe_customer_id: customer_id
       )
