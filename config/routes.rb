@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get '/sliders/:short_code', to: 'sliders#show'
 
+  post '/webhooks/stripe', to: 'webhooks#stripe'
+
   constraints subdomain: 'app' do
     get '/sliders/:short_code', to: 'sliders#show'
   end
