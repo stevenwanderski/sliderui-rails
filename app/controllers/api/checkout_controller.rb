@@ -8,6 +8,7 @@ class Api::CheckoutController < ApiController
     # the actual Session ID is returned in the query parameter when your customer
     # is redirected to the success page.
     session = Stripe::Checkout::Session.create(
+      customer_email: current_user.email,
       success_url: "#{ENV['APP_HOST']}/dashboard/subscription/edit?session_id={CHECKOUT_SESSION_ID}",
       cancel_url: "#{ENV['APP_HOST']}/dashboard/subscription/edit?cancel=true",
       payment_method_types: ['card'],
