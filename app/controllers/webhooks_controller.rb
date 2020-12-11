@@ -5,18 +5,14 @@ class WebhooksController < ApplicationController
     webhook_secret = ENV['STRIPE_WEBHOOK_SECRET']
     # webhook_secret = 'whsec_QB27LtZJNPY9bB3RRC63jJ1k9YQqT6JV'
 
-    sig_header = request.env['HTTP_STRIPE_SIGNATURE']
+    signature = request.env['HTTP_STRIPE_SIGNATURE']
     payload = request.body.read
 
-    begin
-      event = Stripe::Webhook.construct_event(
-        payload,
-        sig_header,
-        webhook_secret
-      )
-    rescue Stripe::SignatureVerificationError => e
-      ap '⚠️  Webhook signature verification failed.'
-    end
+    event = Stripe::Webhook.construct_event(
+      payload,
+      signature,
+      webhook_secret
+    )
 
     process_event!(event)
 
@@ -35,14 +31,9 @@ class WebhooksController < ApplicationController
       email = event.data.object.customer_email
       customer_id = event.data.object.customer
 
-      ap "EMAIL: #{email}"
-
       return if !email || !customer_id
 
       user = User.find_by(email: email)
-
-      ap "USER: #{user}"
-
       return if !user
 
       user.update!(
@@ -61,7 +52,7 @@ class WebhooksController < ApplicationController
       return if !user
 
       user.update!(
-        subscription_plan: 'paid',
+        subscription_type: 'paid',
         subscription_status: 'active'
       )
 
