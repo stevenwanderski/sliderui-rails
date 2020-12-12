@@ -56,13 +56,4 @@ class User < ActiveRecord::Base
   def get_hash(string)
     Digest::SHA2.new(512).hexdigest(string)
   end
-
-  # def set_token
-  #   return if token.present?
-  #   self.token = SecureRandom.uuid.gsub(/\-/,'')
-  # end
-  #
-  # def set_hashed_password
-  #   self.password_hash = get_hash(self.password)
-  # end
 end

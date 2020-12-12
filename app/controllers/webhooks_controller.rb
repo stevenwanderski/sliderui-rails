@@ -37,7 +37,7 @@ class WebhooksController < ApplicationController
       return if !user
 
       user.update!(
-        subscription_type: 'paid',
+        subscription_type: 'premium',
         subscription_status: 'active',
         stripe_customer_id: customer_id
       )
@@ -52,7 +52,7 @@ class WebhooksController < ApplicationController
       return if !user
 
       user.update!(
-        subscription_type: 'paid',
+        subscription_type: 'premium',
         subscription_status: 'active'
       )
 
