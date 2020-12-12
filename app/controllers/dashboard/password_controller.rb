@@ -1,4 +1,4 @@
-class Dashboard::AccountController < DashboardController
+class Dashboard::PasswordController < DashboardController
   def edit
   end
 

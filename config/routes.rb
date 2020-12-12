@@ -37,7 +37,7 @@ Rails.application.routes.draw do
       get '/embed', action: :embed
     end
 
-    resource :account, only: [:edit, :update], controller: 'account'
+    resource :password, only: [:edit, :update], controller: 'password'
     resource :subscription, only: [:edit, :update], controller: 'subscription'
   end
 end

@@ -1,0 +1,23 @@
+.account-nav {
+  border-bottom: solid 1px $gray-light;
+  display: flex;
+  margin-bottom: 40px;
+  max-width: 50%;
+  gap: 40px;
+
+  a {
+    font-size: 20px;
+    color: $gray-medium;
+    padding: 20px 0;
+
+    &:hover {
+      color: $black;
+      text-decoration: none;
+    }
+
+    &.active {
+      color: $black;
+      font-weight: 700;
+    }
+  }
+}
