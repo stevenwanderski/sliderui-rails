@@ -29,7 +29,8 @@ Rails.application.routes.draw do
       end
     end
 
-    resource :checkout, only: [:create], controller: :checkout
+    post '/stripe/checkout', to: 'stripe#checkout'
+    post '/stripe/portal', to: 'stripe#portal'
   end
 
   namespace :dashboard do

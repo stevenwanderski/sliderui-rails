@@ -15,29 +15,37 @@
 <script type="text/javascript">
   var stripe = Stripe('<%= ENV['STRIPE_PUBLIC_KEY'] %>');
 
-  var createCheckoutSession = function(priceId) {
-    return fetch("/api/checkout", {
-      method: "POST",
+  $('#stripe-checkout').on('click', (event) => {
+    event.preventDefault();
+    $('#stripe-checkout').html('Loading...').prop('disabled', true);
 
-      headers: {
-        "Content-Type": "application/json"
-      },
-
-      body: JSON.stringify({
-        priceId: priceId
-      })
-    }).then(function(result) {
+    return fetch('/api/stripe/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then((result) => {
       return result.json();
-    });
-  };
-
-  $('#checkout').on('click', function(event) {
-    var priceId = '<%= ENV['STRIPE_PRICE_ID'] %>';
-
-    createCheckoutSession(priceId).then(function(data) {
+    })
+    .then((payload) => {
       stripe.redirectToCheckout({
-        sessionId: data.sessionId
+        sessionId: payload.sessionId
       });
+    })
+  });
+
+  $('#stripe-portal').on('click', (event) => {
+    event.preventDefault();
+    $('#stripe-portal').html('Loading...').prop('disabled', true);
+
+    return fetch('/api/stripe/portal', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then((result) => {
+      return result.json();
+    })
+    .then((payload) => {
+      window.location.href = payload.portalUrl;
     });
   });
 </script>
