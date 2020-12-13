@@ -4,8 +4,8 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
+  get '/pricing', to: 'pricing#index'
   get '/sliders/:short_code', to: 'sliders#show'
-
   post '/webhooks/stripe', to: 'webhooks#stripe'
 
   constraints subdomain: 'app' do

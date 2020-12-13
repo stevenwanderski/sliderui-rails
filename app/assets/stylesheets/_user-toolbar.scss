@@ -4,6 +4,10 @@
   align-items: center;
   padding: 10px 40px;
 
+  .arrow-down {
+    margin-left: 5px;
+  }
+
   &__account {
     display: flex;
     align-items: center;
@@ -12,7 +16,7 @@
 
   &__avatar {
     border-radius: 50px;
-    margin-right: 5px;
+    margin-right: 10px;
     height: 30px;
     width: 30px;
   }
@@ -25,5 +29,31 @@
     display: flex;
     align-items: center;
     margin-right: 30px;
+    position: relative;
+
+    &:hover .user-toolbar__drop-down {
+      display: block;
+    }
+  }
+
+  &__drop-down {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 999;
+    display: none;
+
+    a {
+      display: block;
+      padding: 2px 0;
+    }
+
+    .inner {
+      margin-top: 34px;
+      padding: 16px;
+      width: 200px;
+      border: solid $gray-light 1px;
+      background: $white;
+    }
   }
 }

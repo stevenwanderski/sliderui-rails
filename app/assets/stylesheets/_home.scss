@@ -1,53 +1,25 @@
 .home {
   background: #fff;
 
-  * {
-    font-family: 'Rubik';
-  }
-
   h2 {
     font-size: 40px;
     font-weight: bold;
     letter-spacing: -2px;
     margin-bottom: 40px;
+    font-family: 'Rubik';
   }
 
-  .brand__logo {
-    height: 38px;
-    width: 38px;
-  }
-
-  .brand__name {
-    font-size: 28px;
-  }
-
-  header {
-    padding: 20px;
+  .header {
     margin-bottom: 100px;
-
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    a {
-      font-size: 18px;
-      font-weight: 300;
-      color: #777
-    }
 
     .button {
       display: none;
-      font-weight: bold;
-      color: #fff;
-      border-radius: 6px;
       margin-left: 50px;
     }
   }
 
   @media screen and (min-width: 800px) {
-    header {
+    .header {
       .button {
         display: inline-block;
       }
