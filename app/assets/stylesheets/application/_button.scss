@@ -1,17 +1,15 @@
 .button {
-  font-weight: bold;
+  font-weight: 600;
   color: #fff;
   border-radius: 6px;
   padding: 10px 16px;
   cursor: pointer;
-  border-style: solid;
-  border-width: $primary-border-width;
   font-size: 18px;
   display: inline-block;
   text-align: center;
   background: $primary;
-  border-color: $primary;
   color: $white;
+  border: none;
 
   &:not([disabled]):hover {
     background: darken($primary, 5%);
@@ -24,5 +22,9 @@
     background: $primary;
     border-radius: 10px;
     padding: 20px 40px;
+  }
+
+  &--full-width {
+    display: block;
   }
 }

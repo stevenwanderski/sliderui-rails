@@ -1,10 +1,13 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,600');
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,600,700,800');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
 
 @import 'variables';
 @import 'application/base';
 @import 'application/button';
+@import 'application/container';
 @import 'application/header';
+@import 'application/main';
+@import 'application/plan';
 @import 'authentication';
 @import 'brand';
 @import 'form';
