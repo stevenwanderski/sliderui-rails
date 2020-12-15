@@ -1,0 +1,25 @@
+.signup-plan {
+  margin: 45px 0;
+
+  &__layout {
+    display: flex;
+    gap: 20px;
+    align-items: baseline;
+  }
+
+  &__label {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+
+  &__value {
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 22px;
+  }
+
+  &__cost {
+    color: $gray-medium;
+    font-size: 18px;
+  }
+}
