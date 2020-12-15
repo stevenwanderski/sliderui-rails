@@ -1,8 +1,11 @@
 <%= render 'devise/shared/header' %>
 <%= render 'layouts/dashboard/flash_messages' %>
 
-<div class="authentication section">
-  <h1>Forgot Password</h1>
+<div class="authentication main">
+  <div class="main__header">
+    <h1>Reset Password</h1>
+    <p>After submitting instructions will be sent to you email.</p>
+  </div>
 
   <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
     <div class="form-row">
@@ -17,7 +20,7 @@
     </div>
 
     <div class="form-row">
-      <%= f.submit "Send me reset password instructions", class: 'button button--primary' %>
+      <%= f.submit 'Submit', class: 'button button--primary' %>
     </div>
   <% end %>
 </div>
