@@ -1,3 +1,5 @@
+<script src="https://js.stripe.com/v3/"></script>
+
 <header class="header container">
   <div class="brand">
     <div class="brand__logo"></div>
@@ -32,9 +34,11 @@
       </div>
 
       <div class="plan__button">
-        <a href="" class="button button--full-width">
-          Choose Plan
-        </a>
+        <%= link_to 'Choose Plan',
+            dashboard_pricing_path(plan: 'free'),
+            class: 'button button--full-width',
+            method: :post
+        %>
       </div>
     </div>
 
@@ -57,10 +61,32 @@
       </div>
 
       <div class="plan__button">
-        <a href="" class="button button--full-width">
+        <a href="" id="stripe-checkout" class="button button--full-width">
           Choose Plan
         </a>
       </div>
     </div>
   </div>
 </main>
+
+<script type="text/javascript">
+  var stripe = Stripe('<%= ENV['STRIPE_PUBLIC_KEY'] %>');
+
+  $('#stripe-checkout').on('click', (event) => {
+    event.preventDefault();
+    $('#stripe-checkout').html('Loading...').prop('disabled', true);
+
+    return fetch('/api/stripe/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then((result) => {
+      return result.json();
+    })
+    .then((payload) => {
+      stripe.redirectToCheckout({
+        sessionId: payload.sessionId
+      });
+    })
+  });
+</script>

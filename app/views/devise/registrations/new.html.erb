@@ -40,27 +40,9 @@
       <% end %>
     </div>
 
-    <div class="form-row">
-      <div class="signup-plan">
-        <div class="signup-plan__label">Pricing plan:</div>
-
-        <div class="signup-plan__layout">
-          <div class="signup-plan__value">
-            <%= @plan_label %>
-          </div>
-
-          <div class="signup-plan__cost">
-            $<%= @plan_cost %> USD / month
-          </div>
-        </div>
-      </div>
-
-      <%= f.hidden_field :subscription_type %>
-    </div>
-
     <div class="form-row form-actions">
       <%= f.submit 'Submit', class: 'button button--primary' %>
-      <%= link_to 'Cancel', pricing_path %>
+      <%= link_to 'Cancel', root_path %>
     </div>
   <% end %>
 </div>

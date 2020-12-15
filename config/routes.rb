@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
   devise_for :admins
-  
-  devise_for :users, :controllers => {
+
+  devise_for :users, controllers: {
     registrations: 'registrations'
   }
 
   root 'home#index'
 
-  get '/pricing', to: 'pricing#index'
   get '/sliders/:short_code', to: 'sliders#show'
   post '/webhooks/stripe', to: 'webhooks#stripe'
 
@@ -40,6 +39,9 @@ Rails.application.routes.draw do
     resources :sliders do
       get '/embed', action: :embed
     end
+
+    get '/pricing', to: 'pricing#index'
+    post '/pricing', to: 'pricing#create'
 
     resource :password, only: [:edit, :update], controller: 'password'
     resource :subscription, only: [:edit, :update], controller: 'subscription'
