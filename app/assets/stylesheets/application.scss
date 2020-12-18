@@ -2,14 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
 
 @import 'variables';
-@import 'application/base';
-@import 'application/button';
-@import 'application/container';
-@import 'application/header';
-@import 'application/input';
-@import 'application/main';
-@import 'application/plan';
-@import 'application/signup-plan';
 @import 'authentication';
 @import 'brand';
 @import 'form';
@@ -19,3 +11,13 @@
 @import 'home/how-it-works';
 @import 'error';
 @import 'flash';
+
+@import 'application/base';
+@import 'application/brand';
+@import 'application/button';
+@import 'application/container';
+@import 'application/header';
+@import 'application/input';
+@import 'application/main';
+@import 'application/plan';
+@import 'application/signup-plan';

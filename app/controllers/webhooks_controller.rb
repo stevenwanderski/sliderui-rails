@@ -3,8 +3,6 @@ class WebhooksController < ApplicationController
 
   def stripe
     webhook_secret = ENV['STRIPE_WEBHOOK_SECRET']
-    # webhook_secret = 'whsec_QB27LtZJNPY9bB3RRC63jJ1k9YQqT6JV'
-
     signature = request.env['HTTP_STRIPE_SIGNATURE']
     payload = request.body.read
 

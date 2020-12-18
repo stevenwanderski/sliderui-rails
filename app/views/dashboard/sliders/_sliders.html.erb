@@ -8,15 +8,15 @@
       </a>
     </div>
   </div>
-</div>
 
-<% @sliders.each do |slider| %>
-  <div class="slider-list__slide">
-    <div
-      class="slider-list__slide-image"
-      style="background-image: url('<%= slider.display_image_url %>')">
+  <% @sliders.each do |slider| %>
+    <div class="slider-list__slide">
+      <div
+        class="slider-list__slide-image"
+        style="background-image: url('<%= slider.display_image_url %>')">
+      </div>
+
+      <%= link_to slider.title, edit_dashboard_slider_path(slider) %>
     </div>
-
-    <%= link_to slider.title, edit_dashboard_slider_path(slider) %>
-  </div>
-<% end %>
+  <% end %>
+</div>

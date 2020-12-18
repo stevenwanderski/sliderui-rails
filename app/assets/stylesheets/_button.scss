@@ -1,10 +1,10 @@
 .button {
-  padding: 10px 16px;
+  padding: 12px 28px;
   cursor: pointer;
-  border-radius: 2px;
-  border-style: solid;
-  border-width: $primary-border-width;
-  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
   display: inline-block;
   text-align: center;
 
@@ -39,6 +39,7 @@
     background: lighten($primary, 27%);
     border-color: lighten($primary, 20%);
     color: $primary;
+    font-size: 14px;
 
     &:not([disabled]):hover {
       background: lighten($primary, 24%);

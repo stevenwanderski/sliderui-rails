@@ -6,9 +6,9 @@ class Dashboard::PasswordController < DashboardController
     @user = current_user
     if @user.update(user_params)
       sign_in(@user, bypass: true)
-      redirect_to edit_dashboard_account_path, notice: 'Successfully saved.'
+      redirect_to edit_dashboard_password_path, notice: 'Successfully saved.'
     else
-      redirect_to edit_dashboard_account_path, alert: 'Could not save.'
+      redirect_to edit_dashboard_password_path, alert: 'Could not save.'
     end
   end
 
