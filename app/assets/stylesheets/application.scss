@@ -6,9 +6,6 @@
 @import 'brand';
 @import 'form';
 @import 'label';
-@import 'home';
-@import 'home/hero';
-@import 'home/how-it-works';
 @import 'error';
 @import 'flash';
 
@@ -17,6 +14,9 @@
 @import 'application/button';
 @import 'application/container';
 @import 'application/header';
+@import 'application/home';
+@import 'application/home/hero';
+@import 'application/home/how-it-works';
 @import 'application/input';
 @import 'application/main';
 @import 'application/plan';
