@@ -23,6 +23,19 @@ class WebhooksController < ApplicationController
     return if !event
 
     case event.type
+    when 'customer.subscription.deleted'
+      email = event.data.object.customer_email
+      customer_id = event.data.object.customer
+      return if !email || !customer_id
+
+      user = User.find_by(email: email)
+      return if !user
+
+      user.update!(
+        subscription_type: 'free',
+        subscription_status: 'active',
+      )
+
     when 'invoice.paid'
       # Continue to provision the subscription as payments continue to be made.
       # Store the status in your database and check when a user accesses your service.
