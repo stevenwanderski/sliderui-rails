@@ -24,11 +24,10 @@ class WebhooksController < ApplicationController
 
     case event.type
     when 'customer.subscription.deleted'
-      email = event.data.object.customer_email
       customer_id = event.data.object.customer
-      return if !email || !customer_id
+      return if !customer_id
 
-      user = User.find_by(email: email)
+      user = User.find_by(stripe_customer_id: customer_id)
       return if !user
 
       user.update!(
