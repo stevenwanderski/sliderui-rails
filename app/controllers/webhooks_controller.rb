@@ -23,29 +23,6 @@ class WebhooksController < ApplicationController
     return if !event
 
     case event.type
-    when 'checkout.session.completed'
-      # Payment is successful and the subscription is created.
-      # You should provision the subscription.
-      email = event.data.object.customer_email
-      customer_id = event.data.object.customer
-
-      ap "EMAIL: #{email}"
-      ap "CUSTOMER ID: #{customer_id}"
-
-      return if !email || !customer_id
-
-      user = User.find_by(email: email)
-
-      ap "USER: #{user}"
-
-      return if !user
-
-      user.update!(
-        subscription_type: 'premium',
-        subscription_status: 'active',
-        stripe_customer_id: customer_id
-      )
-
     when 'invoice.paid'
       # Continue to provision the subscription as payments continue to be made.
       # Store the status in your database and check when a user accesses your service.

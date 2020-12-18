@@ -44,6 +44,8 @@ Rails.application.routes.draw do
     post '/pricing', to: 'pricing#create'
 
     resource :password, only: [:edit, :update], controller: 'password'
-    resource :subscription, only: [:edit, :update], controller: 'subscription'
+    resource :subscription, only: [:edit, :update], controller: 'subscription' do
+      get '/success', action: 'success'
+    end
   end
 end
