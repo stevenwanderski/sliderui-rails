@@ -29,9 +29,15 @@ class WebhooksController < ApplicationController
       email = event.data.object.customer_email
       customer_id = event.data.object.customer
 
+      ap "EMAIL: #{email}"
+      ap "CUSTOMER ID: #{customer_id}"
+
       return if !email || !customer_id
 
       user = User.find_by(email: email)
+
+      ap "USER: #{user}"
+
       return if !user
 
       user.update!(
