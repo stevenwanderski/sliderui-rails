@@ -23,7 +23,7 @@ class WebhooksController < ApplicationController
     return if !event
 
     case event.type
-    when 'checkout.session.completed'
+    when 'customer.subscription.created'
       # Payment is successful and the subscription is created.
       # You should provision the subscription.
       email = event.data.object.customer_email
