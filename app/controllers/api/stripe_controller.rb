@@ -6,7 +6,7 @@ class Api::StripeController < ApiController
   def checkout
     session = Stripe::Checkout::Session.create(
       customer_email: current_user.email,
-      success_url: edit_dashboard_subscription_url(session_id: '{CHECKOUT_SESSION_ID}'),
+      success_url: "#{ENV['APP_HOST']}/dashboard/subscription/edit?session_id={CHECKOUT_SESSION_ID}",
       cancel_url: edit_dashboard_subscription_url(cancel: 'true'),
       payment_method_types: ['card'],
       mode: 'subscription',
