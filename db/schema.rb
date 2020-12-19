@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201211020628) do
+ActiveRecord::Schema.define(version: 20201219205648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,8 +45,9 @@ ActiveRecord::Schema.define(version: 20201211020628) do
     t.string   "title"
     t.string   "short_code"
     t.jsonb    "settings",   default: {}
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "restricted", default: false
   end
 
   add_index "sliders", ["short_code"], name: "index_sliders_on_short_code", unique: true, using: :btree

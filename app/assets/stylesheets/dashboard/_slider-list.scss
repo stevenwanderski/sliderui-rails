@@ -44,6 +44,46 @@
       transition: opacity .5s;
     }
   }
+
+  &__restricted {
+    margin-top: 80px;
+  }
+
+  &__restricted-title {
+    position: relative;
+    text-align: center;
+    margin-bottom: 16px;
+
+    span {
+      color: $gray-medium;
+      background: $white;
+      padding: 10px 20px;
+      display: inline-block;
+      z-index: 10;
+      position: relative;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      border-top: solid 1px $gray-lightest;
+      top: 22px;
+      left: 0;
+      z-index: 9;
+    }
+  }
+
+  &__slide--restricted {
+    .slider-list__slide-image {
+      filter: grayscale(100%);
+      opacity: 0.5;
+    }
+
+    .slider-list__slide-link {
+      color: $gray-light;
+    }
+  }
 }
 
 .slider-list__button:hover {

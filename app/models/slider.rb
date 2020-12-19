@@ -9,6 +9,7 @@
 #  settings   :jsonb
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  restricted :boolean          default(FALSE)
 #
 # Indexes
 #

@@ -25,4 +25,23 @@
       <%= link_to slider.title, edit_dashboard_slider_path(slider) %>
     </div>
   <% end %>
+
+  <% if @restricted_sliders.any? %>
+    <div class="slider-list__restricted">
+      <div class="slider-list__restricted-title">
+        <span>Multiple sliders requires the Premium plan</span>
+      </div>
+
+      <% @restricted_sliders.each do |slider| %>
+        <div class="slider-list__slide slider-list__slide--restricted">
+          <div
+            class="slider-list__slide-image"
+            style="background-image: url('<%= slider.display_image_url %>')">
+          </div>
+
+          <%= link_to slider.title, edit_dashboard_slider_path(slider), class: 'slider-list__slide-link' %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
