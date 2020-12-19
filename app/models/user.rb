@@ -36,6 +36,13 @@ class User < ActiveRecord::Base
 
   has_many :sliders, dependent: :destroy
 
+  def can_add_slider?
+    return false
+    return true if subscription_type == 'premium' && subscription_status == 'active'
+
+    sliders.count.zero?
+  end
+
   def valid_password?(password)
     if self.password_hash.present?
       if get_hash(password) == self.password_hash

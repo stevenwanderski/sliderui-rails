@@ -74,8 +74,11 @@
     padding: 6px 10px;
   }
 
-  &--gray {
-    background: $gray-dark;
+  &--lock {
+    background: asset-url('icon-lock.svg') 20px 14px no-repeat $gray-light;
+    background-size: 18px;
+    color: $white;
+    padding-left: 45px;
   }
 
   &--purple {

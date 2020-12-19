@@ -104,8 +104,4 @@ button {
   &:hover {
     text-decoration: underline;
   }
-
-  &[disabled] {
-    cursor: wait;
-  }
 }

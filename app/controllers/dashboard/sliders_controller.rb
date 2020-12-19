@@ -1,4 +1,6 @@
 class Dashboard::SlidersController < DashboardController
+  before_action :ensure_subscription_type!, only: [:create, :new]
+
   def create
     @slider = current_user.sliders.build(slider_params)
 
@@ -35,6 +37,12 @@ class Dashboard::SlidersController < DashboardController
   end
 
   private
+
+  def ensure_subscription_type!
+    if !current_user.can_add_slider?
+      redirect_to edit_dashboard_subscription_path
+    end
+  end
 
   def slider_params
     params.require(:slider).permit(:title)
