@@ -42,12 +42,23 @@ class User < ActiveRecord::Base
     zero_sliders?
   end
 
-  def convert_sliders_to_free!
-    oldest_sliders.update_all(restricted: true)
+  def update_to_premium!(stripe_customer_id)
+    update!(
+      subscription_type: 'premium',
+      subscription_status: 'active',
+      stripe_customer_id: stripe_customer_id
+    )
+
+    convert_sliders_to_premium!
   end
 
-  def convert_sliders_to_premium!
-    self.sliders.update_all(restricted: false)
+  def update_to_free!
+    update!(
+      subscription_type: 'free',
+      subscription_status: 'active'
+    )
+
+    convert_sliders_to_free!
   end
 
   def valid_password?(password)
@@ -71,16 +82,24 @@ class User < ActiveRecord::Base
     subscription_type == 'premium' && subscription_status == 'active'
   end
 
+  def convert_sliders_to_free!
+    oldest_sliders.update_all(restricted: true)
+  end
+
+  def convert_sliders_to_premium!
+    sliders.update_all(restricted: false)
+  end
+
   def get_hash(string)
     Digest::SHA2.new(512).hexdigest(string)
   end
 
   def newest_slider
-    self.sliders.order(created_at: :desc).first
+    sliders.order(created_at: :desc).first
   end
 
   def oldest_sliders
-    self.sliders.where.not(id: newest_slider.id)
+    sliders.where.not(id: newest_slider.id)
   end
 
   def zero_sliders?

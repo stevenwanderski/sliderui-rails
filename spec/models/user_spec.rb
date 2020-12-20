@@ -28,27 +28,31 @@ describe User do
     end
   end
 
-  describe '#convert_sliders_to_free!' do
-    it 'saves all user sliders as restricted true except the most recent' do
-      user = create(:user)
+  describe '#update_to_free!' do
+    it 'updates subscription type and makes all but newest slider restricted' do
+      user = create(:user, subscription_type: 'premium')
       slider1 = create(:slider, user: user, restricted: false, created_at: 2.days.ago)
       slider2 = create(:slider, user: user, restricted: false, created_at: 10.days.ago)
 
-      user.convert_sliders_to_free!
+      user.update_to_free!
 
+      expect(user.reload.subscription_type).to eq('free')
       expect(slider1.reload.restricted?).to eq(false)
       expect(slider2.reload.restricted?).to eq(true)
     end
   end
 
-  describe '#convert_sliders_to_premium!' do
-    it 'saves all user sliders as restricted false' do
-      user = create(:user)
+  describe '#update_to_premium!' do
+    it 'updates subscription type and makes all sliders not restricted' do
+      stripe_customer_id = 'cus_123'
+      user = create(:user, subscription_type: 'free', stripe_customer_id: nil)
       slider1 = create(:slider, user: user, restricted: true)
       slider2 = create(:slider, user: user, restricted: true)
 
-      user.convert_sliders_to_premium!
+      user.update_to_premium!(stripe_customer_id)
 
+      expect(user.reload.subscription_type).to eq('premium')
+      expect(user.stripe_customer_id).to eq(stripe_customer_id)
       expect(slider1.reload.restricted?).to eq(false)
       expect(slider2.reload.restricted?).to eq(false)
     end
