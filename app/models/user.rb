@@ -37,10 +37,17 @@ class User < ActiveRecord::Base
   has_many :sliders, dependent: :destroy
 
   def can_add_slider?
-    return false
-    return true if subscription_type == 'premium' && subscription_status == 'active'
+    return true if active_premium?
 
-    sliders.count.zero?
+    zero_sliders?
+  end
+
+  def convert_sliders_to_free!
+    oldest_sliders.update_all(restricted: true)
+  end
+
+  def convert_sliders_to_premium!
+    self.sliders.update_all(restricted: false)
   end
 
   def valid_password?(password)
@@ -60,7 +67,23 @@ class User < ActiveRecord::Base
 
   private
 
+  def active_premium?
+    subscription_type == 'premium' && subscription_status == 'active'
+  end
+
   def get_hash(string)
     Digest::SHA2.new(512).hexdigest(string)
+  end
+
+  def newest_slider
+    self.sliders.order(created_at: :desc).first
+  end
+
+  def oldest_sliders
+    self.sliders.where.not(id: newest_slider.id)
+  end
+
+  def zero_sliders?
+    sliders.count.zero?
   end
 end
