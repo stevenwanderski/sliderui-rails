@@ -36,7 +36,10 @@ function loadBxsliderCss() {
 function sliderInit() {
   $(function() {
     $('[data-slider-id="<%= @slider.short_code %>"]').html('<%= @output.html_safe %>');
-    $('.slider').bxSlider(<%= raw @slider.settings.to_json %>);
+    
+    <% if !@slider.restricted? %>
+      $('.slider').bxSlider(<%= raw @slider.settings.to_json %>);
+    <% end %>
   });
 }
 
