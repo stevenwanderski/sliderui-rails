@@ -56,10 +56,22 @@ describe WebhooksController do
       }
     end
 
-    it 'sets the subscription type as paid' do
-      post :stripe, params: event
+    describe 'customer.subscription.deleted' do
+      skip 'converts user to free plan' do
 
-      expect(user.reload.subscription_type).to eq('paid')
+      end
+    end
+
+    describe 'invoice.paid' do
+      skip 'converts user to premium plan' do
+
+      end
+    end
+
+    describe 'invoice.payment_failed' do
+      skip 'converts user to free plan' do
+
+      end
     end
   end
 end

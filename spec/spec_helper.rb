@@ -20,6 +20,7 @@ Capybara.app_host = 'http://localhost:8081'
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
+  config.include Devise::TestHelpers, :type => :controller
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)

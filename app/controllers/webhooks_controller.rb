@@ -2,22 +2,25 @@ class WebhooksController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def stripe
-    webhook_secret = ENV['STRIPE_WEBHOOK_SECRET']
-    signature = request.env['HTTP_STRIPE_SIGNATURE']
-    payload = request.body.read
-
-    event = Stripe::Webhook.construct_event(
-      payload,
-      signature,
-      webhook_secret
-    )
-
+    event = get_stripe_webhook_event
     process_event!(event)
 
     render text: 'OK'
   end
 
   private
+
+  def get_stripe_webhook_event
+    webhook_secret = ENV['STRIPE_WEBHOOK_SECRET']
+    signature = request.env['HTTP_STRIPE_SIGNATURE']
+    payload = request.body.read
+
+    Stripe::Webhook.construct_event(
+      payload,
+      signature,
+      webhook_secret
+    )
+  end
 
   def process_event!(event)
     return if !event
@@ -36,7 +39,9 @@ class WebhooksController < ApplicationController
     when 'invoice.payment_failed'
       customer_id = event.data.object.customer
       user = User.find_by(stripe_customer_id: customer_id)
-      user.update!(subscription_status: 'past_due')
+
+      # TODO: Handle failed payment somehow
+      # user.update!(subscription_status: 'past_due')
     end
   end
 end
