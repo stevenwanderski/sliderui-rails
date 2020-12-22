@@ -37,6 +37,7 @@
         <%= link_to 'Choose Plan',
             dashboard_pricing_path(plan: 'free'),
             class: 'button button--full-width',
+            data: { plan: 'free' },
             method: :post
         %>
       </div>

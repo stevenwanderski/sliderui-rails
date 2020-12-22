@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
   before_action :authenticate_user!
-  # before_action :ensure_subscription
-  
+  before_action :ensure_subscription
+
   layout 'dashboard'
 
   private

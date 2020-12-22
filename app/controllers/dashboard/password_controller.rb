@@ -4,6 +4,7 @@ class Dashboard::PasswordController < DashboardController
 
   def update
     @user = current_user
+    
     if @user.update(user_params)
       sign_in(@user, bypass: true)
       redirect_to edit_dashboard_password_path, notice: 'Successfully saved.'
