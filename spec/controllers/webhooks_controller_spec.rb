@@ -2,75 +2,43 @@ require 'spec_helper'
 
 describe WebhooksController do
   describe '#stripe' do
-    let(:email) { 'frank@zappa.com' }
-    let!(:user) { create(:user, email: email, subscription_type: 'free') }
+    let(:event_type) { nil }
+    let(:subscription_type) { nil }
+    let!(:user) { create(:user, subscription_type: subscription_type, stripe_customer_id: 'cus_123') }
 
-    let(:event) do
-      {
-        "id": "evt_1HxAgKJGhZXsnHlsFqSKJGaX",
-        "object": "event",
-        "api_version": "2020-08-27",
-        "created": 1607689508,
-        "data": {
-          "object": {
-            "id": "cs_test_a1qA9eyhMcOjcJc8r1PZL0mnAt1i26zkh4Kxullo4OPQRGBrsO2B78EQMR",
-            "object": "checkout.session",
-            "allow_promotion_codes": nil,
-            "amount_subtotal": 500,
-            "amount_total": 500,
-            "billing_address_collection": nil,
-            "cancel_url": "https://sliderui-staging.herokuapp.com/dashboard/subscription/edit?cancel=true",
-            "client_reference_id": nil,
-            "currency": "usd",
-            "customer": "cus_IYHE4UuJctGAJ7",
-            "customer_email": email,
-            "livemode": false,
-            "locale": nil,
-            "metadata": {
-            },
-            "mode": "subscription",
-            "payment_intent": nil,
-            "payment_method_types": [
-              "card"
-            ],
-            "payment_status": "paid",
-            "setup_intent": nil,
-            "shipping": nil,
-            "shipping_address_collection": nil,
-            "submit_type": nil,
-            "subscription": "sub_IYHEToXM4ACv9Y",
-            "success_url": "https://sliderui-staging.herokuapp.com/dashboard/subscription/edit?session_id={CHECKOUT_SESSION_ID}",
-            "total_details": {
-              "amount_discount": 0,
-              "amount_tax": 0
-            }
-          }
-        },
-        "livemode": false,
-        "pending_webhooks": 3,
-        "request": {
-          "id": "req_aFNPkERrzCew6k",
-          "idempotency_key": nil
-        },
-        "type": "checkout.session.completed"
-      }
+    before do
+      object = double(customer: 'cus_123')
+      data = double(object: object)
+      event = double(type: event_type, data: data)
+      allow(Stripe::Webhook).to receive(:construct_event).and_return(event)
+
+      post :stripe, {}
     end
 
     describe 'customer.subscription.deleted' do
-      skip 'converts user to free plan' do
+      let(:event_type) { 'customer.subscription.deleted' }
+      let(:subscription_type) { 'premium' }
 
+      it 'converts user to free plan' do
+        expect(user.reload.subscription_type).to eq('free')
       end
     end
 
     describe 'invoice.paid' do
-      skip 'converts user to premium plan' do
+      let(:event_type) { 'invoice.paid' }
+      let(:subscription_type) { 'free' }
 
+      it 'converts user to premium plan' do
+        expect(user.reload.subscription_type).to eq('premium')
       end
     end
 
     describe 'invoice.payment_failed' do
-      skip 'converts user to free plan' do
+      let(:event_type) { 'invoice.payment_failed' }
+      let(:subscription_type) { 'premium' }
 
+      it 'converts user to free plan' do
+        expect(user.reload.subscription_type).to eq('free')
       end
     end
   end

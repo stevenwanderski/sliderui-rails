@@ -34,14 +34,12 @@ class WebhooksController < ApplicationController
     when 'invoice.paid'
       customer_id = event.data.object.customer
       user = User.find_by(stripe_customer_id: customer_id)
-      user.update_to_premium!
+      user.update_to_premium!(customer_id)
 
     when 'invoice.payment_failed'
       customer_id = event.data.object.customer
       user = User.find_by(stripe_customer_id: customer_id)
-
-      # TODO: Handle failed payment somehow
-      # user.update!(subscription_status: 'past_due')
+      user.update_to_free!
     end
   end
 end

@@ -99,6 +99,8 @@ class User < ActiveRecord::Base
   end
 
   def oldest_sliders
+    return Slider.none if newest_slider.nil?
+    
     sliders.where.not(id: newest_slider.id)
   end
 
