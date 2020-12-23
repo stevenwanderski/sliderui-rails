@@ -16,7 +16,7 @@
           <div class="setting-group__body">
             <div class="setting-group__row">
               <label>Mode</label>
-              <select v-model="mode">
+              <select v-model="mode" id="slider_settings_mode">
                 <option value="horizontal">Horizontal</option>
                 <option value="vertical">Vertical</option>
               </select>
