@@ -27,10 +27,16 @@ class Api::SlidesController < ApiController
   end
 
   def update_collection
-    params[:slides].each do |slide|
-      Slide.where(id: slide['id']).update_all(weight: slide['weight'])
+    params[:slides].each do |slide_param|
+      slide = Slide.find(slide_param['id'])
+
+      if !owns_slide?(slide)
+        return render json: { errors: 'Forbidden' }, status: 401
+      end
+
+      slide.update!(weight: slide_param['weight'])
     end
-    
+
     render nothing: true, status: 200
   end
 
