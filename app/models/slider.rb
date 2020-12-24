@@ -27,7 +27,7 @@ class Slider < ActiveRecord::Base
   def display_image_url
     return nil if slides.empty?
 
-    slides.order(weight: :asc).first.image.url
+    slides.first.image.url
   end
 
   private
