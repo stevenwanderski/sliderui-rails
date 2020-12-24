@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     registrations: 'registrations'
   }
 
-  root 'home#index'
+  root 'pages#home'
+  get '/privacy', to: 'pages#privacy'
+  get '/terms', to: 'pages#terms'
 
   get '/sliders/:short_code', to: 'sliders#show'
   post '/webhooks/stripe', to: 'webhooks#stripe'
