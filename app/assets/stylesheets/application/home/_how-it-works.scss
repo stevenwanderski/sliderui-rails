@@ -1,7 +1,4 @@
 .how-it-works {
-  background: $gray-lightest;
-  padding: 80px 20px;
-
   &__step {
     margin-bottom: 40px;
   }
@@ -24,12 +21,6 @@
       gap: 70px;
       max-width: 900px;
       margin: 0 auto;
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 100px;
-      font-size: 48px;
     }
 
     &__step-title {

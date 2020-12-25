@@ -17,7 +17,21 @@
     }
   }
 
+  &__section {
+    padding: 80px 20px;
+
+    &--gray {
+      background: $gray-lightest;
+    }
+  }
+
   @media screen and (min-width: 800px) {
+    h2 {
+      text-align: center;
+      margin-bottom: 100px;
+      font-size: 48px;
+    }
+
     .header {
       .button {
         display: inline-block;

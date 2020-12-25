@@ -25,7 +25,7 @@
     </a>
   </div>
 
-  <div class="how-it-works home-section--gray">
+  <div class="how-it-works home__section home__section--gray">
     <div class="container">
       <h2>How it Works</h2>
 
@@ -41,6 +41,59 @@
           <div class="how-it-works__step-title">Step 2: Add to your website</div>
           <div class="how-it-works__step-body">
             We provide a code snippet that can be copy and pasted into your website which will display your slider. Easy peasy.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pricing home__section">
+    <div class="container">
+      <h2>Pricing</h2>
+
+      <div class="plans">
+        <div class="plan">
+          <div class="plan__main">
+            <div class="plan__name">Free</div>
+
+            <div class="plan__cost">
+              <div class="value">$0</div>
+              <div class="label">/ month</div>
+            </div>
+
+            <div class="plan__features">
+              <ul>
+                <li>One slider</li>
+                <li>Dashboard access</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="plan__button">
+            <%= link_to 'Choose Plan', new_user_registration_path, class: 'button button--full-width' %>
+          </div>
+        </div>
+
+        <div class="plan">
+          <div class="plan__main">
+            <div class="plan__name">Premium</div>
+
+            <div class="plan__cost">
+              <div class="value">$5</div>
+              <div class="label">/ month</div>
+            </div>
+
+            <div class="plan__features">
+              <ul>
+                <li>Unlimited sliders</li>
+                <li>Email support</li>
+                <li>Dashboard access</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="plan__button">
+            <%= link_to 'Choose Plan', new_user_registration_path, class: 'button button--full-width' %>
           </div>
         </div>
       </div>
