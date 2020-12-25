@@ -47,4 +47,5 @@ Rails.application.configure do
   config.log_level = :debug
 
   ENV['APP_HOST'] = 'http://localhost:3000'
+  ENV['FREE_SLIDER_MAX'] = '1'
 end

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
   describe '#can_add_slider?' do
-    context 'active premium' do
+    context 'premium plan' do
       it 'returns true' do
         user = create(:user, subscription_type: 'premium', subscription_status: 'active')
 
@@ -10,20 +10,24 @@ describe User do
       end
     end
 
-    context 'free and zero sliders' do
-      it 'returns true' do
-        user = create(:user, subscription_type: 'free')
+    context 'free plan' do
+      context 'slider count is less than allowed max' do
+        it 'returns true' do
+          allow(Subscription).to receive(:get_max_slider_count).and_return(1)
+          user = create(:user, subscription_type: 'free')
 
-        expect(user.can_add_slider?).to eq(true)
+          expect(user.can_add_slider?).to eq(true)
+        end
       end
-    end
 
-    context 'free and has sliders' do
-      it 'returns false' do
-        user = create(:user, subscription_type: 'free')
-        slider = create(:slider, user: user)
+      context 'slider count is greater than or equal to allowed max' do
+        it 'returns false' do
+          allow(Subscription).to receive(:get_max_slider_count).and_return(1)
+          user = create(:user, subscription_type: 'free')
+          slider = create(:slider, user: user)
 
-        expect(user.can_add_slider?).to eq(false)
+          expect(user.can_add_slider?).to eq(false)
+        end
       end
     end
   end

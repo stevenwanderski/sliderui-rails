@@ -18,9 +18,9 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
-#  subscription_type      :string
+#  subscription_type      :string           default("free")
 #  stripe_customer_id     :string
-#  subscription_status    :string
+#  subscription_status    :string           default("active")
 #
 # Indexes
 #
@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   def can_add_slider?
     return true if active_premium?
 
-    zero_sliders?
+    sliders.count < Subscription.get_max_slider_count('free')
   end
 
   def update_to_premium!(stripe_customer_id)
@@ -100,7 +100,7 @@ class User < ActiveRecord::Base
 
   def oldest_sliders
     return Slider.none if newest_slider.nil?
-    
+
     sliders.where.not(id: newest_slider.id)
   end
 
