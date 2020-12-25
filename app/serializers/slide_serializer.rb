@@ -7,10 +7,6 @@ class SlideSerializer < ActiveModel::Serializer
     object.image.url
   end
 
-  def thumb_url
-    object.image.url
-  end
-
   def destroy_url
     api_slide_path(object)
   end
