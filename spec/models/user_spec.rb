@@ -4,7 +4,7 @@ describe User do
   describe '#active_premium?' do
     context 'user is premium and active' do
       it 'returns true' do
-        user = build(:user, subscription_type: 'premium', subscription_status: 'active')
+        user = build(:user, :premium)
 
         expect(user.active_premium?).to eq(true)
       end
@@ -24,7 +24,7 @@ describe User do
   describe '#can_add_slider?' do
     context 'premium plan' do
       it 'returns true' do
-        user = create(:user, subscription_type: 'premium', subscription_status: 'active')
+        user = create(:user, :premium)
 
         expect(user.can_add_slider?).to eq(true)
       end
@@ -59,7 +59,7 @@ describe User do
 
     context 'user is premium' do
       it 'returns all sliders' do
-        user = create(:user, subscription_type: 'premium', subscription_status: 'active')
+        user = create(:user, :premium)
         slider1 = create(:slider, user: user)
         slider2 = create(:slider, user: user)
         slider3 = create(:slider, user: user)
@@ -82,7 +82,7 @@ describe User do
 
   describe '#update_to_free!' do
     it 'updates subscription type' do
-      user = create(:user, subscription_type: 'premium')
+      user = create(:user, :premium)
 
       user.update_to_free!
 

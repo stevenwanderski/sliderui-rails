@@ -27,7 +27,7 @@ describe Slider do
 
     context 'user is premium and active' do
       it 'returns false' do
-        user = create(:user, subscription_type: 'premium', subscription_status: 'active')
+        user = create(:user, :premium)
         slider = create(:slider, user: user)
 
         expect(slider.restricted?).to eq(false)
@@ -37,7 +37,7 @@ describe Slider do
     context 'user is free' do
       context 'slider is included in unrestricted' do
         it 'returns false' do
-          user = create(:user, subscription_type: 'free')
+          user = create(:user)
           slider1 = create(:slider, user: user, created_at: 2.days.ago)
           slider2 = create(:slider, user: user, created_at: 5.days.ago)
 
@@ -47,7 +47,7 @@ describe Slider do
 
       context 'slider is not included in unrestricted' do
         it 'returns true' do
-          user = create(:user, subscription_type: 'free')
+          user = create(:user)
           slider1 = create(:slider, user: user, created_at: 2.days.ago)
           slider2 = create(:slider, user: user, created_at: 5.days.ago)
 
