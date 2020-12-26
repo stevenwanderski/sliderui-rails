@@ -9,7 +9,6 @@
 #  settings   :jsonb
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  restricted :boolean          default(FALSE)
 #
 # Indexes
 #
@@ -30,6 +29,12 @@ class Slider < ActiveRecord::Base
     slides.first.image.url
   end
 
+  def restricted?
+    return false if user.active_premium?
+    return false if unrestricted_ids.include?(id)
+    true
+  end
+
   private
 
   def set_short_code
@@ -37,5 +42,15 @@ class Slider < ActiveRecord::Base
       random_short_code = ('a'..'z').to_a.shuffle[0,6].join
       break random_short_code unless Slider.exists?(short_code: random_short_code)
     end
+  end
+
+  def unrestricted_ids
+    limit = Subscription.get_max_slider_count('free')
+
+    user
+      .sliders
+      .order(created_at: :desc)
+      .limit(limit)
+      .ids
   end
 end

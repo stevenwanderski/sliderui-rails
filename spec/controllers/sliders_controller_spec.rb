@@ -3,7 +3,7 @@ require 'spec_helper'
 describe SlidersController do
   describe '#show' do
     it 'renders the slides' do
-      slider = create(:slider, restricted: false)
+      slider = create(:slider)
       slide = create(:slide, slider: slider)
 
       get :show, short_code: slider.short_code, format: 'js'
@@ -13,7 +13,7 @@ describe SlidersController do
     end
 
     it 'creates a request log' do
-      slider = create(:slider, restricted: false)
+      slider = create(:slider)
       slide = create(:slide, slider: slider)
 
       expect {
@@ -23,7 +23,8 @@ describe SlidersController do
 
     context 'slider is restricted' do
       it 'shows the restricted message' do
-        slider = create(:slider, restricted: true)
+        allow_any_instance_of(Slider).to receive(:restricted?).and_return(true)
+        slider = create(:slider)
 
         get :show, short_code: slider.short_code, format: 'js'
 

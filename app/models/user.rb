@@ -18,9 +18,9 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
-#  subscription_type      :string           default("free")
+#  subscription_type      :string
 #  stripe_customer_id     :string
-#  subscription_status    :string           default("active")
+#  subscription_status    :string
 #
 # Indexes
 #
@@ -36,10 +36,28 @@ class User < ActiveRecord::Base
 
   has_many :sliders, dependent: :destroy
 
+  def active_premium?
+    subscription_type == 'premium' && subscription_status == 'active'
+  end
+
   def can_add_slider?
     return true if active_premium?
 
     sliders.count < Subscription.get_max_slider_count('free')
+  end
+
+  def sliders_restricted
+    return Slider.none if active_premium?
+
+    offset = Subscription.get_max_slider_count('free')
+    sliders.order(created_at: :desc).offset(offset)
+  end
+
+  def sliders_unrestricted
+    return sliders if active_premium?
+
+    limit = Subscription.get_max_slider_count('free')
+    sliders.order(created_at: :desc).limit(limit)
   end
 
   def update_to_premium!(stripe_customer_id)
@@ -48,8 +66,6 @@ class User < ActiveRecord::Base
       subscription_status: 'active',
       stripe_customer_id: stripe_customer_id
     )
-
-    convert_sliders_to_premium!
   end
 
   def update_to_free!
@@ -57,8 +73,6 @@ class User < ActiveRecord::Base
       subscription_type: 'free',
       subscription_status: 'active'
     )
-
-    convert_sliders_to_free!
   end
 
   def valid_password?(password)
@@ -78,33 +92,7 @@ class User < ActiveRecord::Base
 
   private
 
-  def active_premium?
-    subscription_type == 'premium' && subscription_status == 'active'
-  end
-
-  def convert_sliders_to_free!
-    oldest_sliders.update_all(restricted: true)
-  end
-
-  def convert_sliders_to_premium!
-    sliders.update_all(restricted: false)
-  end
-
   def get_hash(string)
     Digest::SHA2.new(512).hexdigest(string)
-  end
-
-  def newest_slider
-    sliders.order(created_at: :desc).first
-  end
-
-  def oldest_sliders
-    return Slider.none if newest_slider.nil?
-
-    sliders.where.not(id: newest_slider.id)
-  end
-
-  def zero_sliders?
-    sliders.count.zero?
   end
 end

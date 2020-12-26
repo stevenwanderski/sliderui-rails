@@ -1,6 +1,26 @@
 require 'spec_helper'
 
 describe User do
+  describe '#active_premium?' do
+    context 'user is premium and active' do
+      it 'returns true' do
+        user = build(:user, subscription_type: 'premium', subscription_status: 'active')
+
+        expect(user.active_premium?).to eq(true)
+      end
+    end
+
+    context 'user is not premium or active' do
+      it 'returns false' do
+        user = build(:user, subscription_type: 'free', subscription_status: 'active')
+        expect(user.active_premium?).to eq(false)
+
+        user = build(:user, subscription_type: 'premium', subscription_status: 'past_due')
+        expect(user.active_premium?).to eq(false)
+      end
+    end
+  end
+
   describe '#can_add_slider?' do
     context 'premium plan' do
       it 'returns true' do
@@ -32,17 +52,41 @@ describe User do
     end
   end
 
+  describe '#sliders_unrestricted' do
+    before do
+      allow(Subscription).to receive(:get_max_slider_count).and_return(1)
+    end
+
+    context 'user is premium' do
+      it 'returns all sliders' do
+        user = create(:user, subscription_type: 'premium', subscription_status: 'active')
+        slider1 = create(:slider, user: user)
+        slider2 = create(:slider, user: user)
+        slider3 = create(:slider, user: user)
+
+        expect(user.sliders_unrestricted.ids).to eq([slider1.id, slider2.id, slider3.id])
+      end
+    end
+
+    context 'user is free' do
+      it 'returns the newest sliders up to max' do
+        user = create(:user, subscription_type: 'free')
+        slider1 = create(:slider, user: user, created_at: 5.days.ago)
+        slider2 = create(:slider, user: user, created_at: 2.days.ago)
+        slider3 = create(:slider, user: user, created_at: 3.days.ago)
+
+        expect(user.sliders_unrestricted.ids).to eq([slider2.id])
+      end
+    end
+  end
+
   describe '#update_to_free!' do
-    it 'updates subscription type and makes all but newest slider restricted' do
+    it 'updates subscription type' do
       user = create(:user, subscription_type: 'premium')
-      slider1 = create(:slider, user: user, restricted: false, created_at: 2.days.ago)
-      slider2 = create(:slider, user: user, restricted: false, created_at: 10.days.ago)
 
       user.update_to_free!
 
       expect(user.reload.subscription_type).to eq('free')
-      expect(slider1.reload.restricted?).to eq(false)
-      expect(slider2.reload.restricted?).to eq(true)
     end
   end
 
@@ -50,15 +94,11 @@ describe User do
     it 'updates subscription type and makes all sliders not restricted' do
       stripe_customer_id = 'cus_123'
       user = create(:user, subscription_type: 'free', stripe_customer_id: nil)
-      slider1 = create(:slider, user: user, restricted: true)
-      slider2 = create(:slider, user: user, restricted: true)
 
       user.update_to_premium!(stripe_customer_id)
 
       expect(user.reload.subscription_type).to eq('premium')
       expect(user.stripe_customer_id).to eq(stripe_customer_id)
-      expect(slider1.reload.restricted?).to eq(false)
-      expect(slider2.reload.restricted?).to eq(false)
     end
   end
 end

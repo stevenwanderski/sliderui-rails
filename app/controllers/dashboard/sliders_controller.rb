@@ -12,8 +12,8 @@ class Dashboard::SlidersController < DashboardController
   end
 
   def index
-    @sliders = current_user.sliders.where(restricted: false)
-    @restricted_sliders = current_user.sliders.where(restricted: true)
+    @unrestricted_sliders = current_user.sliders_unrestricted
+    @restricted_sliders = current_user.sliders_restricted
   end
 
   def edit

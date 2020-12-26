@@ -20,6 +20,43 @@ describe Slider do
     end
   end
 
+  describe '#restricted?' do
+    before do
+      allow(Subscription).to receive(:get_max_slider_count).and_return(1)
+    end
+
+    context 'user is premium and active' do
+      it 'returns false' do
+        user = create(:user, subscription_type: 'premium', subscription_status: 'active')
+        slider = create(:slider, user: user)
+
+        expect(slider.restricted?).to eq(false)
+      end
+    end
+
+    context 'user is free' do
+      context 'slider is included in unrestricted' do
+        it 'returns false' do
+          user = create(:user, subscription_type: 'free')
+          slider1 = create(:slider, user: user, created_at: 2.days.ago)
+          slider2 = create(:slider, user: user, created_at: 5.days.ago)
+
+          expect(slider1.restricted?).to eq(false)
+        end
+      end
+
+      context 'slider is not included in unrestricted' do
+        it 'returns true' do
+          user = create(:user, subscription_type: 'free')
+          slider1 = create(:slider, user: user, created_at: 2.days.ago)
+          slider2 = create(:slider, user: user, created_at: 5.days.ago)
+
+          expect(slider2.restricted?).to eq(true)
+        end
+      end
+    end
+  end
+
   describe '#set_short_code' do
     it 'sets a unique short code on create' do
       slider = create(:slider)
