@@ -5,7 +5,6 @@
     font-size: 32px;
     font-weight: bold;
     letter-spacing: -1px;
-    margin-bottom: 40px;
     font-family: 'Rubik';
   }
 
@@ -25,10 +24,17 @@
     }
   }
 
+  &__section-header {
+    margin-bottom: 40px;
+
+    p {
+      font-size: 18px;
+      color: $gray-medium;
+    }
+  }
+
   @media screen and (min-width: 800px) {
     h2 {
-      text-align: center;
-      margin-bottom: 100px;
       font-size: 48px;
     }
 
@@ -36,6 +42,11 @@
       .button {
         display: inline-block;
       }
+    }
+
+    &__section-header {
+      margin-bottom: 100px;
+      text-align: center;
     }
   }
 }
