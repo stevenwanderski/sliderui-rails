@@ -1,0 +1,15 @@
+.footer {
+  .brand {
+    margin: 0 auto 20px;
+    justify-content: center;
+  }
+
+  &__link {
+    padding: 0 10px;
+    display: inline-block;
+  }
+
+  &__links {
+    text-align: center;
+  }
+}
