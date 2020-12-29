@@ -29,4 +29,17 @@ h1 {
 main {
   padding-top: 40px;
   padding-bottom: 60px;
+
+  h2 {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  p {
+    margin-bottom: 20px;
+  }
+
+  ul {
+    margin: 0 0 20px 60px;
+  }
 }
