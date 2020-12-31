@@ -34,4 +34,19 @@ describe 'Account' do
       expect(page).to have_button('Manage Subscription')
     end
   end
+
+  describe 'Delete Account' do
+    it 'deletes the user and sliders' do
+      user.update_to_free!
+      visit dashboard_account_path
+      click_link 'Delete Account and Sliders'
+      expect(page).to have_content('Your account has been successfully cancelled.')
+    end
+
+    it 'shows the downgrade instructions' do
+      user.update_to_premium!('cus_123')
+      visit dashboard_account_path
+      expect(page).to have_content('You have an active premium subscription.')
+    end
+  end
 end

@@ -1,0 +1,10 @@
+<div class="section section--padded">
+  <h1>Account</h1>
+  <%= render 'dashboard/shared/account_nav' %>
+
+  <% if current_user.subscription_type == 'free' %>
+    <%= render 'delete_account' %>
+  <% else %>
+    <%= render 'downgrade_account' %>
+  <% end %>
+</div>

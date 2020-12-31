@@ -45,6 +45,7 @@ Rails.application.routes.draw do
     get '/pricing', to: 'pricing#index'
     post '/pricing', to: 'pricing#create'
 
+    resource :account, only: [:show], controller: 'account'
     resource :password, only: [:edit, :update], controller: 'password'
     resource :subscription, only: [:edit, :update], controller: 'subscription' do
       get '/success', action: 'success'

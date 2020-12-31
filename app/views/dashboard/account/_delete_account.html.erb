@@ -1,0 +1,17 @@
+<p>
+  Deleting your account will remove all sliders and images.
+</p>
+
+<p class="flex-container flex-container--align-center flex-gap-10 margin-bottom-50">
+  <span class="font-32">⚠️</span>
+  <strong>This action is irreversible!</strong>
+</p>
+
+<div>
+  <%= link_to 'Delete Account and Sliders',
+      registration_path(current_user),
+      class: 'button button--danger',
+      method: :delete,
+      data: { confirm: 'Are you sure? No turning back now!' }
+  %>
+</div>

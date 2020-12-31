@@ -85,6 +85,11 @@
     background: $purple;
   }
 
+  &--danger {
+    color: $white;
+    background: red;
+  }
+
   &--full-width {
     width: 100%;
   }
