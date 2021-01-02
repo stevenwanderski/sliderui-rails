@@ -11,6 +11,10 @@ test:
   <<: *default
   database: bxslider_test
 
+staging:
+  <<: *default
+  database: bxslider_staging
+
 production:
   <<: *default
   database: bxslider_production
