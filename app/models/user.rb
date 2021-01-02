@@ -21,6 +21,7 @@
 #  subscription_type      :string
 #  stripe_customer_id     :string
 #  subscription_status    :string
+#  is_legacy              :boolean          default(FALSE)
 #
 # Indexes
 #
@@ -37,6 +38,7 @@ class User < ActiveRecord::Base
   has_many :sliders, dependent: :destroy
 
   def active_premium?
+    return true if is_legacy?
     subscription_type == 'premium' && subscription_status == 'active'
   end
 

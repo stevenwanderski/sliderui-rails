@@ -19,6 +19,13 @@ describe User do
         expect(user.active_premium?).to eq(false)
       end
     end
+
+    context 'user is legacy' do
+      it 'returns true' do
+        user = build(:user, is_legacy: true)
+        expect(user.active_premium?).to eq(true)
+      end
+    end
   end
 
   describe '#can_add_slider?' do
