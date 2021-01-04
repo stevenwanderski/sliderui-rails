@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     end
 
     resources :request_logs, only: [:index]
+    resources :users, only: [:index]
   end
 
   namespace :api do
