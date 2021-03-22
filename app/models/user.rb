@@ -38,7 +38,6 @@ class User < ActiveRecord::Base
   has_many :sliders, dependent: :destroy
 
   def active_premium?
-    return true if is_legacy?
     subscription_type == 'premium' && subscription_status == 'active'
   end
 
