@@ -1,4 +1,4 @@
-class CreateSliders < ActiveRecord::Migration
+class CreateSliders < ActiveRecord::Migration[5.2]
   def change
     create_table :sliders, id: :uuid do |t|
       t.uuid :user_id

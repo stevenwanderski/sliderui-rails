@@ -1,13 +1,14 @@
+ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara/rspec'
 
-ActiveRecord::Migration.maintain_test_schema!
+ActiveRecord::Migration[5.2].maintain_test_schema!
 DatabaseCleaner.strategy = :truncation
 
 RSpec.configure do |config|
   include Warden::Test::Helpers
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
 
   Warden.test_mode!

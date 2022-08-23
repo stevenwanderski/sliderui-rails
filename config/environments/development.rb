@@ -48,4 +48,7 @@ Rails.application.configure do
 
   ENV['APP_HOST'] = 'http://localhost:3000'
   ENV['FREE_SLIDER_MAX'] = '1'
+  ENV['S3_KEY'] = 'abc'
+  ENV['S3_SECRET'] = 'abc'
+  ENV['S3_REGION'] = 'east-1'
 end

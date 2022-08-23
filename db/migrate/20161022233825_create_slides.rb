@@ -1,4 +1,4 @@
-class CreateSlides < ActiveRecord::Migration
+class CreateSlides < ActiveRecord::Migration[5.2]
   def change
     create_table :slides, id: :uuid do |t|
       t.uuid :slider_id, null: false
