@@ -6,7 +6,7 @@ describe SlidersController do
       slider = create(:slider)
       slide = create(:slide, slider: slider)
 
-      get :show, short_code: slider.short_code, format: 'js'
+      get :show, params: { short_code: slider.short_code, format: 'js' }
 
       expect(response.code).to eq('200')
       expect(assigns[:output]).to match('dags.jpg')
@@ -17,7 +17,7 @@ describe SlidersController do
       slide = create(:slide, slider: slider)
 
       expect {
-        get :show, short_code: slider.short_code, format: 'js'
+        get :show, params: { short_code: slider.short_code, format: 'js' }
       }.to change(RequestLog, :count).by(1)
     end
 
@@ -26,7 +26,7 @@ describe SlidersController do
         allow_any_instance_of(Slider).to receive(:restricted?).and_return(true)
         slider = create(:slider)
 
-        get :show, short_code: slider.short_code, format: 'js'
+        get :show, params: { short_code: slider.short_code, format: 'js' }
 
         expect(response.code).to eq('200')
         expect(assigns[:output]).to match('This SliderUI image gallery is only available with the premium plan.')

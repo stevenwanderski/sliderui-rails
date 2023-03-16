@@ -37,7 +37,7 @@ class Api::SlidesController < ApiController
       slide.update!(weight: slide_param['weight'])
     end
 
-    render nothing: true, status: 200
+    head :ok
   end
 
   private

@@ -1,5 +1,7 @@
+ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+require 'capybara/rails'
 require 'capybara/rspec'
 
 ActiveRecord::Migration.maintain_test_schema!
@@ -7,8 +9,8 @@ DatabaseCleaner.strategy = :truncation
 
 RSpec.configure do |config|
   include Warden::Test::Helpers
-  config.include FactoryGirl::Syntax::Methods
-  config.include Devise::TestHelpers, type: :controller
+  config.include FactoryBot::Syntax::Methods
+  config.include Devise::Test::ControllerHelpers, type: :controller
 
   Warden.test_mode!
 
@@ -26,10 +28,26 @@ RSpec.configure do |config|
   end
 end
 
+Webdrivers::Chromedriver.required_version = '2.36'
+
+Capybara.server = :puma, { Silent: true }
 Capybara.asset_host = 'http://localhost:3000/'
 
 Capybara.register_driver :chrome do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome)
 end
 
-Capybara.javascript_driver = :chrome
+Capybara.register_driver :headless_chrome do |app|
+  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+    chromeOptions: {
+      args: %w[headless enable-features=NetworkService,NetworkServiceInProcess]
+    }
+  )
+
+  Capybara::Selenium::Driver.new app,
+    browser: :chrome,
+    desired_capabilities: capabilities
+end
+
+Capybara.default_driver = :headless_chrome
+Capybara.javascript_driver = :headless_chrome

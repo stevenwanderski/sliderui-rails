@@ -12,7 +12,7 @@ describe Api::SlidesController do
     it 'creates a slide' do
       slider = create(:slider, user: user)
 
-      post :create, slide: { slider_id: slider.id, weight: 99 }
+      post :create, params: { slide: { slider_id: slider.id, weight: 99 } }
 
       expect(response.code).to eq('200')
       expect(slider.slides.count).to eq(1)
@@ -23,7 +23,7 @@ describe Api::SlidesController do
         other_user = create(:user, email: 'other@user.com')
         slider = create(:slider, user: other_user)
 
-        post :create, slide: { slider_id: slider.id, weight: 99 }
+        post :create, params: { slide: { slider_id: slider.id, weight: 99 } }
 
         expect(response.code).to eq('401')
         expect(slider.slides.count).to eq(0)
@@ -36,7 +36,7 @@ describe Api::SlidesController do
       slider = create(:slider, user: user)
       slide = create(:slide, slider: slider)
 
-      delete :destroy, id: slide.id
+      delete :destroy, params: { id: slide.id }
 
       expect(response.code).to eq('200')
       expect(slider.slides.count).to eq(0)
@@ -48,7 +48,7 @@ describe Api::SlidesController do
         slider = create(:slider, user: other_user)
         slide = create(:slide, slider: slider)
 
-        delete :destroy, id: slide.id
+        delete :destroy, params: { id: slide.id }
 
         expect(response.code).to eq('401')
         expect(slider.slides.count).to eq(1)
@@ -67,7 +67,7 @@ describe Api::SlidesController do
         { id: slide2.id, weight: '66' }
       ]
 
-      put :update_collection, slides: data
+      put :update_collection, params: { slides: data }
 
       expect(response.code).to eq('200')
       expect(slide1.reload.weight).to eq(87)
@@ -86,7 +86,7 @@ describe Api::SlidesController do
           { id: slide2.id, weight: '66' }
         ]
 
-        put :update_collection, slides: data
+        put :update_collection, params: { slides: data }
 
         expect(response.code).to eq('401')
         expect(slide1.reload.weight).to eq(0)

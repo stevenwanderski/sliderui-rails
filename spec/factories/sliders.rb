@@ -1,6 +1,6 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :slider do
     user
-    title 'Puff Tentacle'
+    title { 'Puff Tentacle' }
   end
 end

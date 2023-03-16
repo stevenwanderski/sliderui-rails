@@ -40,6 +40,7 @@ describe 'Account' do
       user.update_to_free!
       visit dashboard_account_path
       click_link 'Delete Account and Sliders'
+      accept_confirm('Are you sure? No turning back now!')
       expect(page).to have_content('Your account has been successfully cancelled.')
     end
 

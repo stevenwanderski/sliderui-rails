@@ -7,11 +7,11 @@ class Dashboard::SubscriptionController < DashboardController
     stripe_session = Stripe::Checkout::Session.retrieve(params[:session_id])
 
     if stripe_session.customer_email != current_user.email
-      return render text: 'Emails do not match.'
+      return render plain: 'Emails do not match.'
     end
 
     if stripe_session.payment_status != 'paid'
-      return render text: 'Not paid.'
+      return render plain: 'Not paid.'
     end
 
     current_user.update_to_premium!(stripe_session.customer)

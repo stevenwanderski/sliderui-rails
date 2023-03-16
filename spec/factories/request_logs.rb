@@ -1,7 +1,7 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :request_log do
     slider
     user
-    referrer "https://some/url"
+    referrer { "https://some/url" }
   end
 end

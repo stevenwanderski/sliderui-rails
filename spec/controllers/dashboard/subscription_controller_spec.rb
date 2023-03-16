@@ -22,7 +22,7 @@ describe Dashboard::SubscriptionController do
       sign_in(user)
     end
 
-    subject { post :success, session_id: 'ses_123' }
+    subject { post :success, params: { session_id: 'ses_123' } }
 
     it 'converts user to premium plan' do
       subject

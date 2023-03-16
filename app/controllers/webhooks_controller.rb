@@ -5,7 +5,7 @@ class WebhooksController < ApplicationController
     event = get_stripe_webhook_event
     process_event!(event)
 
-    render text: 'OK'
+    render plain: 'OK'
   end
 
   private
