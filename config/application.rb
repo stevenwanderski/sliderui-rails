@@ -45,5 +45,7 @@ module Bxslider
     config.to_prepare do
       Devise::Mailer.layout 'mailer'
     end
+
+    config.active_record.legacy_connection_handling = false
   end
 end
