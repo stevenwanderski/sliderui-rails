@@ -12,7 +12,7 @@ describe WebhooksController do
       event = double(type: event_type, data: data)
       allow(Stripe::Webhook).to receive(:construct_event).and_return(event)
 
-      post :stripe, {}
+      post :stripe
     end
 
     describe 'customer.subscription.deleted' do

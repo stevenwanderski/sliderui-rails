@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.7.6'
+ruby '3.0.3'
 
-gem 'rails', '5.0.7.2'
+gem 'rails', '6.1.7.3'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
 gem 'sass-rails'
@@ -23,6 +23,8 @@ gem 'active_link_to'
 gem 'premailer-rails'
 gem 'webpacker'
 gem 'stripe'
+
+gem 'rexml'
 
 group :development, :test do
   gem 'dotenv-rails'
