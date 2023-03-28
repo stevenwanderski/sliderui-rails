@@ -2,13 +2,14 @@
 #
 # Table name: sliders
 #
-#  id         :uuid             not null, primary key
-#  user_id    :uuid
-#  title      :string
-#  short_code :string
-#  settings   :jsonb
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id                 :uuid             not null, primary key
+#  user_id            :uuid
+#  title              :string
+#  short_code         :string
+#  settings           :jsonb
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  request_logs_count :integer
 #
 # Indexes
 #
@@ -17,6 +18,7 @@
 
 class Slider < ActiveRecord::Base
   has_many :slides, -> { order(weight: :asc) }, dependent: :destroy
+  has_many :request_logs
   belongs_to :user
 
   before_create :set_short_code
