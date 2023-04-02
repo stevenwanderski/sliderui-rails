@@ -19,6 +19,10 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :sliders, only: [:index] do
       resources :slides, only: [:index]
+
+      collection do
+        get '/request_logs', to: 'sliders#by_request_logs'
+      end
     end
 
     resources :request_logs, only: [:index]

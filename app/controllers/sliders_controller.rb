@@ -5,15 +5,17 @@ class SlidersController < ApplicationController
   def show
     @slider = Slider.find_by(short_code: params[:short_code])
 
-    begin
-      RequestLog.create!(
-        slider: @slider,
-        user: @slider.user,
-        referrer: request.referrer
-      )
-    rescue => e
-      # Oops.
-    end
+    ap request.referrer
+
+    # begin
+    #   RequestLog.create!(
+    #     slider: @slider,
+    #     user: @slider.user,
+    #     referrer: request.referrer
+    #   )
+    # rescue => e
+    #   # Oops.
+    # end
 
     if @slider.restricted?
       @output = content_tag(:p,

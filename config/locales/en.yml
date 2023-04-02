@@ -23,3 +23,4 @@ en:
   time:
     formats:
       default: "%m/%d/%Y %l:%M%P"
+      short: "%m/%d/%Y"
