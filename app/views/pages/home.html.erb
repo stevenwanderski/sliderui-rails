@@ -4,11 +4,6 @@
       <div class="brand__logo"></div>
       <div class="brand__name">SliderUI</div>
     </div>
-
-    <div>
-      <%= link_to 'Login', new_user_session_path, class: 'header__link' %>
-      <%= link_to 'Sign up', new_user_registration_path, class: 'button button--primary' %>
-    </div>
   </header>
 
   <div class="hero container">
@@ -20,7 +15,7 @@
       SliderUI provides an easy-to-use interface for creating an image slideshow that can be added to any webpage with only two lines of code.
     </p>
 
-    <a href="/users/sign_up" class="button button--primary button--hero">
+    <a href="/dashboard/sliders/new" class="button button--primary button--hero">
       Click to get started
     </a>
   </div>
@@ -49,61 +44,6 @@
     </div>
   </div>
 
-  <div class="pricing home__section">
-    <div class="container">
-      <div class="home__section-header">
-        <h2>Pricing</h2>
-        <p>Upgrade or cancel your subscription any time.</p>
-      </div>
-
-      <div class="plans">
-        <div class="plan">
-          <div class="plan__main">
-            <div class="plan__name">Free</div>
-
-            <div class="plan__cost">
-              <div class="value">$0</div>
-              <div class="label">/ month</div>
-            </div>
-
-            <div class="plan__features">
-              <ul>
-                <li>One slider</li>
-                <li>Dashboard access</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="plan__button">
-            <%= link_to 'Choose Plan', new_user_registration_path, class: 'button button--full-width' %>
-          </div>
-        </div>
-
-        <div class="plan">
-          <div class="plan__main">
-            <div class="plan__name">Premium</div>
-
-            <div class="plan__cost">
-              <div class="value">$5</div>
-              <div class="label">/ month</div>
-            </div>
-
-            <div class="plan__features">
-              <ul>
-                <li>Unlimited sliders</li>
-                <li>Email support</li>
-                <li>Dashboard access</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="plan__button">
-            <%= link_to 'Choose Plan', new_user_registration_path, class: 'button button--full-width' %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 
 <%= render 'layouts/application/footer' %>
