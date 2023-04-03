@@ -9,4 +9,19 @@
     font-size: 16px;
     margin-bottom: 20px;
   }
+
+  .hand {
+    position: absolute;
+    left: 40px;
+    top: -7px;
+    z-index: 999;
+    animation: up-down 1s infinite;
+    font-size: 40px;
+  }
+}
+
+@keyframes up-down {
+  50% {
+    margin-left: -20px;
+  }
 }

@@ -2,6 +2,10 @@
   <div class="slides">
     <div class="scrollable">
       <div class="scrollable__header">
+        <div class="hand" v-if="noSlides">
+          👉
+        </div>
+
         <image-uploader
           labelClass="button button--secondary button--full-width button--add-slide"
           fileInputId="slide-image-new"
@@ -11,8 +15,8 @@
       </div>
 
       <div class="scrollable__body scrollable__body--button">
-        <div v-if="noSlides" class="slides__empty">
-          Add at least one slide to make a proper slider 🎈
+        <div v-if="noSlides" class="slides__emptyxxx">
+          ⬆️ Start by adding a slide here!
         </div>
 
         <draggable

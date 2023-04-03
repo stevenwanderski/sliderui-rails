@@ -39,18 +39,22 @@ Rails.application.routes.draw do
   end
 
   namespace :dashboard do
-    resources :sliders do
-      get '/embed', action: :embed
-    end
+    # resources :sliders do
+    #   get '/embed', action: :embed
+    # end
 
-    get '/pricing', to: 'pricing#index'
-    post '/pricing', to: 'pricing#create'
+    get '/sliders/new', to: 'sliders#new', as: :new_slider
+    get '/sliders/:short_code', to: 'sliders#edit', as: :edit_slider
+    get '/sliders/:short_code/embed', to: 'sliders#embed', as: :embed_slider
 
-    resource :account, only: [:show], controller: 'account'
-    resource :password, only: [:edit, :update], controller: 'password'
-    resource :subscription, only: [:edit, :update], controller: 'subscription' do
-      get '/success', action: 'success'
-    end
+    # get '/pricing', to: 'pricing#index'
+    # post '/pricing', to: 'pricing#create'
+
+    # resource :account, only: [:show], controller: 'account'
+    # resource :password, only: [:edit, :update], controller: 'password'
+    # resource :subscription, only: [:edit, :update], controller: 'subscription' do
+    #   get '/success', action: 'success'
+    # end
   end
 
   match '*unmatched', to: 'application#not_found_method', via: :all

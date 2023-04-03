@@ -23,7 +23,7 @@ class Slider < ActiveRecord::Base
 
   before_create :set_short_code
 
-  validates :title, presence: true
+  # validates :title, presence: true
 
   def display_image_url
     return nil if slides.empty?

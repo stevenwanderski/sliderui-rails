@@ -1,5 +1,5 @@
 class Dashboard::SlidersController < DashboardController
-  before_action :ensure_subscription_type!, only: [:create, :new]
+  # before_action :ensure_subscription_type!, only: [:create, :new]
 
   def create
     @slider = current_user.sliders.build(slider_params)
@@ -17,14 +17,17 @@ class Dashboard::SlidersController < DashboardController
   end
 
   def edit
-    @slider = current_user.sliders.find(params[:id])
+    # @slider = current_user.sliders.find(params[:id])
+    @slider = Slider.find_by(short_code: params[:short_code])
 
     serializable_resource = ActiveModelSerializers::SerializableResource.new(@slider.slides)
     @slides = serializable_resource.as_json
   end
 
   def new
-    @slider = current_user.sliders.build
+    # @slider = current_user.sliders.build
+    @slider = Slider.create!
+    redirect_to dashboard_edit_slider_path(@slider.short_code)
   end
 
   def destroy
@@ -34,7 +37,7 @@ class Dashboard::SlidersController < DashboardController
   end
 
   def embed
-    @slider = current_user.sliders.find(params[:slider_id])
+    @slider = Slider.find_by(short_code: params[:short_code])
   end
 
   private

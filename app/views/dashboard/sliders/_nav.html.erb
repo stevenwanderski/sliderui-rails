@@ -1,17 +1,10 @@
 <nav>
-  <%= active_link_to 'Edit', edit_dashboard_slider_path(slider), class: 'slider-layout__tab-link' %>
-  <%= active_link_to 'Embed Slider', dashboard_slider_embed_path(slider_id: slider.id), class: 'slider-layout__tab-link' %>
+  <%= active_link_to 'Edit', dashboard_edit_slider_path(slider.short_code), class: 'slider-layout__tab-link' %>
+  <%= active_link_to 'Embed Slider', dashboard_embed_slider_path(slider.short_code), class: 'slider-layout__tab-link' %>
 </nav>
 
 <div class="slider-layout__controls">
   <div class="slider-layout__meta">
-    <%= slider.title %>
+    Slider ID: <strong><%= slider.short_code %></strong>
   </div>
-
-  <%= link_to 'Delete',
-      dashboard_slider_path(slider),
-      class: 'link--danger',
-      data: { confirm: 'Are you sure?' },
-      method: :delete
-  %>
 </div>

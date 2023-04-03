@@ -15,20 +15,13 @@ class SlidersController < ApplicationController
       # Oops.
     end
 
-    if @slider.restricted?
-      @output = content_tag(:p,
-        'This SliderUI image gallery is only available with the premium plan.',
-        style: 'background: #f5f5f5; padding: 20px; border: solid #ccc 1px; text-align: center;'
-      )
-    else
-      @output = '<div class="slider">'
-      @slider.slides.each do |slide|
-        if slide.image.present?
-          @output += '<div><img src="' + slide.image.url + '" /></div>'
-        end
+    @output = '<div class="slider">'
+    @slider.slides.each do |slide|
+      if slide.image.present?
+        @output += '<div><img src="' + slide.image.url + '" /></div>'
       end
-      @output += '</div>'
     end
+    @output += '</div>'
 
     respond_to do |format|
       format.js

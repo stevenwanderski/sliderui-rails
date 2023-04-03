@@ -38,7 +38,7 @@
       </div>
 
       <div v-else-if="noSlides" class="slider-preview__placeholder">
-        Slider will appear after adding a slide 😬
+        ⬅️ Start by adding a slide on the left!
       </div>
 
       <slider-preview

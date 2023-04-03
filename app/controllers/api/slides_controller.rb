@@ -1,9 +1,5 @@
 class Api::SlidesController < ApiController
   def create
-    if !owns_slider?(slide_params[:slider_id])
-      return render json: { errors: 'Forbidden' }, status: 401
-    end
-
     slide = Slide.new(slide_params)
     if slide.save
       render json: slide
@@ -15,10 +11,6 @@ class Api::SlidesController < ApiController
   def destroy
     slide = Slide.find(params[:id])
 
-    if !owns_slide?(slide)
-      return render json: { errors: 'Forbidden' }, status: 401
-    end
-
     if slide.destroy
       render json: slide
     else
@@ -29,10 +21,6 @@ class Api::SlidesController < ApiController
   def update_collection
     params[:slides].each do |slide_param|
       slide = Slide.find(slide_param['id'])
-
-      if !owns_slide?(slide)
-        return render json: { errors: 'Forbidden' }, status: 401
-      end
 
       slide.update!(weight: slide_param['weight'])
     end
