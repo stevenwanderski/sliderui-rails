@@ -1,7 +1,7 @@
 class Dashboard::PricingController < DashboardController
   layout 'application'
-  skip_before_action :ensure_subscription
-  before_action :check_existing_subscription
+  # skip_before_action :ensure_subscription
+  # before_action :check_existing_subscription
 
   def index
   end
