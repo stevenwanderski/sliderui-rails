@@ -18,7 +18,7 @@
             <%= link_to request_log.referrer, request_log.referrer, target: '_blank' %>
           <% end %>
         </td>
-        <td><%= request_log.user.email %></td>
+        <td><%= request_log&.user&.email %></td>
       </tr>
     <% end %>
   </tbody>
