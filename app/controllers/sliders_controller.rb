@@ -6,11 +6,13 @@ class SlidersController < ApplicationController
     @slider = Slider.find_by(short_code: params[:short_code])
 
     begin
-      RequestLog.create!(
-        slider: @slider,
-        user: @slider.user,
-        referrer: request.referrer
-      )
+      if params[:source] != 'dashboard'
+        RequestLog.create!(
+          slider: @slider,
+          user: @slider.user,
+          referrer: request.referrer
+        )
+      end
     rescue => e
       # Oops.
     end

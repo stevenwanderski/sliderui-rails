@@ -12,7 +12,7 @@
       document.querySelector('#script-container').innerHTML = '';
 
       const script = document.createElement('script');
-      script.src = `${this.appHost}/sliders/${this.shortCode}.js`;
+      script.src = `${this.appHost}/sliders/${this.shortCode}.js?source=dashboard`;
       document.querySelector('#script-container').appendChild(script);
     },
 
