@@ -1,0 +1,32 @@
+<h1>Slider: <%= @slider.short_code %></h1>
+<hr>
+
+<div class="mb-5">
+  <p>Request logs: <%= @slider.request_logs.count %></p>
+
+  <% if !@slider.request_logs.count.zero? %>
+  <ul>
+    <% @slider.request_logs.order(created_at: :desc).limit(5).each do |request_log| %>
+      <li><%= link_to request_log.referrer, request_log.referrer, target: '_blank' %></li>
+    <% end %>
+  </ul>
+  <% end %>
+</div>
+
+<% if @slides.empty? %>
+  This slider has zero slides.
+<% else %>
+  <table class="table table-striped w-50">
+    <tbody>
+      <% @slides.each do |slide| %>
+        <tr>
+          <td>
+            <%= image_tag(slide.image.url, class: 'slide__image') %>
+          </td>
+        </tr>
+      <% end %>
+    </thead>
+  </table>
+
+  <%= paginate @slides, theme: 'twitter-bootstrap-4' %>
+<% end %>

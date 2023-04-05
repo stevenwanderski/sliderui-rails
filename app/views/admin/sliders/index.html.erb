@@ -6,7 +6,7 @@
       <th>Date</th>
       <th>Title</th>
       <th>Slides</th>
-      <th>User</th>
+      <th>Requests</th>
     </tr>
   </thead>
 
@@ -14,9 +14,9 @@
     <% @sliders.each do |slider| %>
       <tr>
         <td><%= l(slider.created_at) %></td>
-        <td><%= link_to slider.title, admin_slider_slides_path(slider_id: slider.id) %></td>
+        <td><%= link_to slider.short_code, admin_slider_path(slider) %></td>
         <td><%= slider.slides.count %></td>
-        <td><%= slider&.user&.email %></td>
+        <td><%= number_with_delimiter(slider.request_logs.count) %></td>
       </tr>
     <% end %>
   </tbody>

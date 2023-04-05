@@ -17,10 +17,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :sliders, only: [:index] do
-      resources :slides, only: [:index]
-    end
-
+    resources :sliders, only: [:index, :show]
     resources :request_logs, only: [:index]
     resources :users, only: [:index]
   end

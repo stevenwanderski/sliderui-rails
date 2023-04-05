@@ -5,18 +5,18 @@ default: &default
 
 development:
   <<: *default
-  database: bxslider_development
+  database: sliderui_development
 
 test:
   <<: *default
-  database: bxslider_test
+  database: sliderui_test
 
 staging:
   <<: *default
-  database: bxslider_staging
+  database: sliderui_staging
 
 production:
   <<: *default
-  database: bxslider_production
-  username: bxslider
-  password: <%= ENV['BXSLIDER_DATABASE_PASSWORD'] %>
+  database: sliderui_production
+  username: sliderui
+  password: <%= ENV['sliderui_DATABASE_PASSWORD'] %>
