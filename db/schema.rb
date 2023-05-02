@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_28_123204) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_02_185418) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -45,6 +45,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_28_123204) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.integer "request_logs_count"
+    t.string "width", default: "1600"
+    t.string "height", default: "250"
+    t.string "mode", default: "linear"
+    t.string "speed", default: "500"
+    t.boolean "auto_enabled", default: false
+    t.string "auto_interval", default: "2000"
+    t.boolean "controls_enabled", default: true
+    t.boolean "pager_enabled", default: true
     t.index ["short_code"], name: "index_sliders_on_short_code", unique: true
   end
 
@@ -55,6 +63,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_28_123204) do
     t.string "image"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+  end
+
+  create_table "track_logs", force: :cascade do |t|
+    t.string "short_code"
+    t.text "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

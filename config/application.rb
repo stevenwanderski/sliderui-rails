@@ -40,6 +40,11 @@ module Bxslider
         origins 'localhost:8080', 'localhost:8081', 'http://www.sliderui.com', 'https://www.sliderui.com'
         resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options]
       end
+
+      allow do
+        origins '*'
+        resource '/track', headers: :any, methods: :post
+      end
     end
 
     config.to_prepare do

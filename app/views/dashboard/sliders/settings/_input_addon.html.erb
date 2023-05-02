@@ -1,0 +1,7 @@
+<%= render 'dashboard/sliders/settings/form_item' do %>
+  <%= f.label attr, label, class: 'label' %>
+  <div class="flex rounded-md shadow-sm">
+    <%= f.text_field attr, type: 'number', class: 'input-trailing-addon' %>
+    <span class="trailing-addon"><%= addon %></span>
+  </div>
+<% end %>

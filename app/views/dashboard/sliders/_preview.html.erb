@@ -1,11 +1,11 @@
-<div class="section flex-child--full-width">
-  <h3>Preview</h3>
-  <div class="slider-preview">
-
-    <div data-slider-id="<%= @slider.short_code %>"></div>
-    <div id="script-container">
-      <script type="text/javascript" src="http://localhost:3000/sliders/<%= short_code %>.js"></script>
+<div id="slider-preview">
+  <% if slider.slides.empty? %>
+    <div class="slider-preview__placeholder">
+      ⬅️ Start by adding a slide on the left!
     </div>
-
-  </div>
+  <% else %>
+    <div data-slider-id="<%= slider.short_code %>">
+      <%= render 'slider_code', slider: slider %>
+    </div>
+  <% end %>
 </div>

@@ -3,10 +3,15 @@
 <head>
   <title>SliderUI</title>
   <%= favicon_link_tag 'icon-star.png' %>
+  <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
   <%= stylesheet_link_tag 'dashboard', media: 'all' %>
-  <%= javascript_pack_tag 'slider_vue' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
+
+  <script src="//unpkg.com/alpinejs" defer></script>
+  <style>[x-cloak] { display: none !important; }</style>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2.7.0/hint.min.css">
 </head>
 <body class="dashboard">
   <%= render 'layouts/dashboard/header' %>
@@ -16,6 +21,20 @@
 
     <%= yield %>
   </div>
+
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/6451404e31ebfa0fe7fb9673/1gvem6d2q';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+  </script>
+  <!--End of Tawk.to Script-->
 
   <%= render 'layouts/analytics' %>
 </body>

@@ -1,0 +1,5 @@
+<% slider_preview = render 'preview', slider: @slider %>
+
+$('#slider-preview').html('<%= j(slider_preview) %>');
+
+<%= render 'toast', text: 'Changes saved.' %>

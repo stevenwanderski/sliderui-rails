@@ -1,0 +1,307 @@
+<% slide_width_percent = 100.0 / @slider.slides.count %>
+<% selector = "[data-slider-id='#{slider.short_code}']".html_safe %>
+
+<style>
+  <%= selector %> .slider {
+    position: relative;
+    height: <%= @slider.height %>px;
+    max-width: <%= @slider.width.present? ? "#{@slider.width}px" : '100%' %>;
+  }
+
+  <%= selector %> .slider-viewport {
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+  }
+
+  <%= selector %> .slide {
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+  }
+
+  <%= selector %> .slider-linear .slider-track {
+    width: <%= @slider.slides.count * 100 %>%;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: margin-left <%= @slider.speed %>ms ease-in-out;
+  }
+
+  <%= selector %> .slider-linear .slide {
+    position: absolute;
+    top: 0;
+  }
+
+  <% slider.slides.each_with_index do |slide, index| %>
+    <%= selector %> .slider-linear .slide[data-slide-index="<%= index %>"] {
+      left: <%= slide_width_percent * index %>%;
+      width: <%= slide_width_percent %>%;
+    }
+  <% end %>
+
+  <%= selector %> .slider-fade .slider-track {
+    position: relative;
+    height: <%= @slider.height %>px;
+    width: 100%;
+  }
+
+  <%= selector %> .slider-fade .slide {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity <%= @slider.speed %>ms ease-in-out;
+  }
+
+  <%= selector %> .slider-fade .slide:first-child {
+    opacity: 1;
+  }
+
+  <%= selector %> .slider-controls {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: <%= (@slider.height.to_i / 2).round %>px;
+    width: 100%;
+    margin-top: -25px;
+    padding-left: 20px;
+    padding-right: 20px;
+    z-index: 20;
+  }
+
+  <%= selector %> .slider-controls a {
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+  }
+
+  <%= selector %> .slider-controls a:hover {
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  <%= selector %> .slider-controls svg {
+    width: 25px;
+    height: 25px;
+    color: #eee;
+  }
+
+  <%= selector %> .slider-prev svg {
+    margin-left: -3px;
+  }
+
+  <%= selector %> .slider-next svg {
+    margin-left: 3px;
+  }
+
+  <%= selector %> .slider-pagination {
+    display: flex;
+    gap: 7px;
+    justify-content: center;
+    margin-top: -40px;
+    z-index: 20;
+    position: relative;
+  }
+
+  <%= selector %> .slider-page {
+    width: 15px;
+    height: 15px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+  }
+
+  <%= selector %> .slider-page:hover {
+    background: rgba(255, 255, 255, 1);
+  }
+
+  <%= selector %> .slider-page.active {
+    background: #fff;
+  }
+</style>
+
+<div class="slider slider-<%= slider.mode %>">
+  <div class="slider-viewport">
+    <div class="slider-track">
+      <% slider.slides.each_with_index do |slide, index| %>
+        <div style="background-image: url('<%= slide.image.url %>')" class="slide" data-slide-index="<%= index %>"></div>
+      <% end %>
+    </div>
+
+    <% if slider.controls_enabled? %>
+      <div class="slider-controls">
+        <a class="slider-prev" href="";>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+          </svg>
+        </a>
+
+        <a class="slider-next" href="">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </a>
+      </div>
+    <% end %>
+  </div>
+
+  <% if slider.pager_enabled? %>
+    <div class="slider-pagination">
+      <% slider.slides.each_with_index do |slide, index| %>
+        <div class="slider-page" data-slide-index="<%= index %>"></div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  (function() {
+    let SliderUI = {
+      sliderId: '<%= slider.short_code %>',
+      mode: '<%= slider.mode %>',
+      index: 0,
+      oldIndex: null,
+      slideCount: '<%= slider.slides.count %>',
+      working: false,
+      touchstartX: 0,
+      touchendX: 0,
+      auto: <%= slider.auto_enabled %>,
+      autoInterval: '<%= slider.auto_interval %>',
+
+      init() {
+        this.$slider = $('[data-slider-id="' + this.sliderId + '"]');
+
+        this.setActiveSlide(0);
+        this.initAuto();
+
+        this.$slider.find('.slider-track').on('transitionend', () => {
+          this.working = false;
+        });
+
+        this.$slider.find('.slider-prev').on('click', (event) => {
+          event.preventDefault();
+
+          if (this.working) { return; }
+
+          this.working = true;
+          this.oldIndex = this.index;
+          this.index = this.getPrevIndex();
+
+          this.goToSlide(this.index);
+        });
+
+        this.$slider.find('.slider-next').on('click', (event) => {
+          event.preventDefault();
+
+          if (this.working) { return; }
+
+          this.working = true;
+          this.oldIndex = this.index;
+          this.index = this.getNextIndex();
+
+          this.goToSlide(this.index);
+        });
+
+        this.$slider.find('.slider-page').on('click', (event) => {
+          if (this.working) { return; }
+
+          const clickedIndex = $(event.target).data('slide-index');
+          if (clickedIndex === this.index) { return; }
+
+          this.working = true;
+          this.oldIndex = this.index
+          this.index = clickedIndex
+
+          this.goToSlide(this.index);
+        });
+
+        this.$slider.find('.slider').get(0).addEventListener('touchstart', (event) => {
+          this.touchstartX = event.changedTouches[0].screenX;
+        });
+
+        this.$slider.find('.slider').get(0).addEventListener('touchend', (event) => {
+          this.touchendX = event.changedTouches[0].screenX;
+          this.checkSwipeDirection();
+        });
+      },
+
+      checkSwipeDirection() {
+        if (this.touchendX < this.touchstartX) {
+          this.index = this.getNextIndex();
+          this.goToSlide(this.index);
+        }
+
+        if (this.touchendX > this.touchstartX) {
+          this.index = this.getPrevIndex();
+          this.goToSlide(this.index);
+        }
+      },
+
+      fadeTo(oldIndex, newIndex) {
+        this.$slider.find('.slide').eq(newIndex).css({ 'opacity': 1, 'z-index': 10 });
+        this.$slider.find('.slide')
+          .eq(oldIndex)
+          .css({
+            'z-index': 11,
+            'opacity': 0
+          });
+      },
+
+      getNextIndex() {
+        if (this.index === this.slideCount - 1) {
+          return 0;
+        } else {
+          return this.index + 1;
+        }
+      },
+
+      getPrevIndex() {
+        if (this.index === 0) {
+          return this.slideCount - 1;
+        } else {
+          return this.index - 1;
+        }
+      },
+
+      goToSlide(newIndex) {
+        if (this.mode === 'fade') {
+          this.fadeTo(this.oldIndex, newIndex);
+        } else {
+          this.slideTo(newIndex);
+        }
+
+        this.setActiveSlide(newIndex);
+      },
+
+      initAuto() {
+        if (!this.auto) { return; }
+
+        setInterval(() => {
+          this.oldIndex = this.index;
+          this.index = this.getNextIndex();
+          this.goToSlide(this.index);
+        }, this.autoInterval);
+      },
+
+      setActiveSlide(index) {
+        this.$slider.find('.slider-page').removeClass('active');
+        this.$slider.find('.slider-page').eq(index).addClass('active');
+      },
+
+      slideTo(index) {
+        const left = (index * (-100)) + "%";
+
+        this.$slider.find('.slider-track').css('margin-left', left);
+      }
+    }
+
+    SliderUI.init();
+  })();
+</script>

@@ -16,22 +16,22 @@
     margin-left: 5px;
   }
 
-  &__control--edit {
-    width: 18px;
-    height: 18px;
-    background: asset-url('icon-gear.svg') no-repeat;
-    background-size: contain;
-    display: block;
-    margin-right: 10px;
-  }
+  // &__control--edit {
+  //   width: 18px;
+  //   height: 18px;
+  //   background: asset-url('icon-trash.svg') no-repeat;
+  //   background-size: contain;
+  //   display: block;
+  //   margin-right: 10px;
+  // }
 
-  &__control--move {
-    width: 18px;
-    height: 18px;
-    background: asset-url('icon-drag.svg') no-repeat;
-    background-size: contain;
-    display: block;
-  }
+  // &__control--move {
+  //   width: 18px;
+  //   height: 18px;
+  //   background: asset-url('icon-drag.svg') no-repeat;
+  //   background-size: contain;
+  //   display: block;
+  // }
 
   &__preview {
     width: 70px;

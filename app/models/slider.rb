@@ -10,6 +10,14 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  request_logs_count :integer
+#  width              :string           default("1600")
+#  height             :string           default("250")
+#  mode               :string           default("linear")
+#  speed              :string           default("500")
+#  auto_enabled       :boolean          default(FALSE)
+#  auto_interval      :string           default("2000")
+#  controls_enabled   :boolean          default(TRUE)
+#  pager_enabled      :boolean          default(TRUE)
 #
 # Indexes
 #

@@ -1,0 +1,7 @@
+<% slides = render 'slides', slides: @slides %>
+<% slider_preview = render 'preview', slider: @slider %>
+
+$('#slides').replaceWith('<%= j(slides) %>');
+$('#slider-preview').replaceWith('<%= j(slider_preview) %>');
+
+<%= render 'toast', text: 'Image saved.' %>

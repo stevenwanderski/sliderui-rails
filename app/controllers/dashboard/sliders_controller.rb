@@ -19,9 +19,12 @@ class Dashboard::SlidersController < DashboardController
   def edit
     # @slider = current_user.sliders.find(params[:id])
     @slider = Slider.find_by(short_code: params[:short_code])
+    @slides = @slider.slides
+  end
 
-    serializable_resource = ActiveModelSerializers::SerializableResource.new(@slider.slides)
-    @slides = serializable_resource.as_json
+  def update
+    @slider = Slider.find_by(short_code: params[:short_code])
+    @slider.update!(slider_params)
   end
 
   def new
@@ -40,6 +43,32 @@ class Dashboard::SlidersController < DashboardController
     @slider = Slider.find_by(short_code: params[:short_code])
   end
 
+  def slide_create
+    slide = Slide.create!(slide_params)
+
+    @slider = Slider.find_by(short_code: params[:short_code])
+    @slides = @slider.slides
+  end
+
+  def slide_destroy
+    slide = Slide.find(params[:slide_id])
+    slide.destroy!
+
+    @slider = Slider.find_by(short_code: params[:short_code])
+    @slides = @slider.slides
+  end
+
+  def slides_update
+    params[:slides].each_with_index do |slide_id, index|
+      slide = Slide.find(slide_id)
+
+      slide.update!(weight: index)
+    end
+
+    @slider = Slider.find_by(short_code: params[:short_code])
+    @slides = @slider.slides
+  end
+
   private
 
   def ensure_subscription_type!
@@ -49,6 +78,10 @@ class Dashboard::SlidersController < DashboardController
   end
 
   def slider_params
-    params.require(:slider).permit(:title)
+    params.require(:slider).permit!
+  end
+
+  def slide_params
+    params.require(:slide).permit(:content, :weight, :image, :slider_id)
   end
 end
