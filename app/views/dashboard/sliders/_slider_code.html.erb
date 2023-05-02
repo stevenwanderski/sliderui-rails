@@ -4,7 +4,6 @@
 <style>
   <%= selector %> .slider {
     position: relative;
-    height: <%= @slider.height %>px;
     max-width: <%= @slider.width.present? ? "#{@slider.width}px" : '100%' %>;
   }
 
@@ -65,7 +64,7 @@
     display: flex;
     justify-content: space-between;
     position: absolute;
-    top: <%= (@slider.height.to_i / 2).round %>px;
+    top: 50%;
     width: 100%;
     margin-top: -25px;
     padding-left: 20px;
@@ -131,7 +130,9 @@
   <div class="slider-viewport">
     <div class="slider-track">
       <% slider.slides.each_with_index do |slide, index| %>
-        <div style="background-image: url('<%= slide.image.url %>')" class="slide" data-slide-index="<%= index %>"></div>
+        <div class="slide" data-slide-index="<%= index %>">
+          <%= image_tag "#{slide.image.url}?timestamp=#{Time.now.to_i}" %>
+        </div>
       <% end %>
     </div>
 
@@ -178,8 +179,15 @@
       init() {
         this.$slider = $('[data-slider-id="' + this.sliderId + '"]');
 
-        this.setActiveSlide(0);
-        this.initAuto();
+        this.$slider.find('.slide').first().find('img').on('load', (event) => {
+          const height = $(event.target).height();
+          this.$slider.find('.slider').height(height);
+        });
+
+        $(window).on('resize', () => {
+          const height = this.$slider.find('.slide').first().find('img').height();
+          this.$slider.find('.slider').height(height);
+        });
 
         this.$slider.find('.slider-track').on('transitionend', () => {
           this.working = false;
@@ -230,6 +238,9 @@
           this.touchendX = event.changedTouches[0].screenX;
           this.checkSwipeDirection();
         });
+
+        this.setActiveSlide(0);
+        this.initAuto();
       },
 
       checkSwipeDirection() {
