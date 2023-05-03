@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :sliders, only: [:index, :show]
     resources :request_logs, only: [:index]
+    resources :track_logs, only: [:index]
     resources :users, only: [:index]
   end
 
