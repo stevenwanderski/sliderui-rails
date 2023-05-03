@@ -6,7 +6,7 @@
 
   <% if !@slider.request_logs.count.zero? %>
   <ul>
-    <% @slider.request_logs.order(created_at: :desc).limit(5).each do |request_log| %>
+    <% @slider.request_logs.order(created_at: :desc).each do |request_log| %>
       <li><%= link_to request_log.referrer, request_log.referrer, target: '_blank' %></li>
     <% end %>
   </ul>

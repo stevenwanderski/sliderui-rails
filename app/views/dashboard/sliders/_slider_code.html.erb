@@ -20,6 +20,10 @@
     background-position: center center;
   }
 
+  <%= selector %> .slide img {
+    max-width: 100%;
+  }
+
   <%= selector %> .slider-linear .slider-track {
     width: <%= @slider.slides.count * 100 %>%;
     position: absolute;
