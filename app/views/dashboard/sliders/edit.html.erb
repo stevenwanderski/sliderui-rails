@@ -1,55 +1,15 @@
-<div class="slider-layout">
-  <div class="slider-layout__header">
-    <%= render 'nav', slider: @slider %>
-  </div>
-
-  <div id="root" class="slider-layout__body">
-    <div class="slider-settings">
-      <div class="section slider-settings__slides" x-data="{ visible: 'images' }">
-        <div class="scrollable">
-          <div class="scrollable__header">
-            <nav>
-              <button
-                class="section__tab-link"
-                :class="visible == 'images' ? 'active' : ''"
-                @click="visible = 'images'"
-              >
-                Images
-              </button>
-
-              <button
-                class="section__tab-link"
-                :class="visible == 'settings' ? 'active' : ''"
-                @click="visible = 'settings'"
-              >
-                Settings
-              </button>
-            </nav>
-          </div>
-
-          <div class="scrollable__body">
-            <%= render 'settings', slider: @slider %>
-            <%= render 'slides', slides: @slider.slides %>
-          </div>
-        </div>
-      </div>
-
-      <div class="section flex-child--full-width">
-        <h3>Preview</h3>
-
-        <%= render 'preview', slider: @slider %>
-      </div>
-    </div>
-  </div>
+<div x-data="{ modal: false }">
+  <%= render 'slider_page', slider: @slider %>
+  <%= render 'install', slider: @slider %>
 </div>
 
-<div class="loader" style="display: none;">
+<div id="loader" class="z-50 fixed top-0 bottom-0 left-0 right-0 items-center justify-center font-medium bg-white/90 hidden">
   Loading...
 </div>
 
 <script>
-  $(document).on('change', '#file-upload', function(event) {
-    $('.loader').show();
+  $(document).on('change', '.file-upload', function(event) {
+    $('#loader').removeClass('hidden').addClass('flex');
 
     const file = event.target.files[0];
     const formData = new FormData();
@@ -64,7 +24,7 @@
         contentType: false,
         processData: false,
         success: function() {
-          $('.loader').hide();
+          $('#loader').addClass('hidden').removeClass('flex');
         }
     });
   });

@@ -1,0 +1,44 @@
+<div id="slider-page" class="flex gap-8 py-8">
+  <% if slider.slides.any? %>
+    <div class="flex-shrink-0 w-80 flex flex-col" x-data="{ visible: 'images' }">
+      <div class="w-full mb-6">
+        <button @click="modal = true" type="button" class="w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+          Install Slider
+        </button>
+      </div>
+
+      <div class="bg-white rounded-md p-4 border border-gray-200 w-full">
+        <div class="flex justify-between mb-4">
+          <nav class="flex space-x-2">
+            <button
+              class="text-gray-500 hover:text-gray-700 rounded-md px-2 py-1 text-sm font-medium"
+              :class="visible == 'images' ? 'bg-gray-100 text-gray-700' : ''"
+              @click="visible = 'images'"
+            >
+              Images
+            </button>
+
+            <button
+              class="text-gray-500 hover:text-gray-700 rounded-md px-2 py-1 text-sm font-medium"
+              :class="visible == 'settings' ? 'bg-gray-100 text-gray-700' : ''"
+              @click="visible = 'settings'"
+            >
+              Settings
+            </button>
+          </nav>
+        </div>
+
+        <div>
+          <%= render 'settings', slider: slider %>
+          <%= render 'slides', slides: slider.slides %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="flex-grow flex w-full">
+    <div class="bg-white rounded-md p-4 border border-gray-200 flex-grow">
+      <%= render 'preview', slider: slider %>
+    </div>
+  </div>
+</div>

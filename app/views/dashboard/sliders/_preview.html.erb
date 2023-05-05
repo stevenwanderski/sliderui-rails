@@ -1,8 +1,6 @@
 <div id="slider-preview">
   <% if slider.slides.empty? %>
-    <div class="slider-preview__placeholder">
-      ⬅️ Start by adding a slide on the left!
-    </div>
+    <%= render 'dashboard/sliders/preview/empty' %>
   <% else %>
     <div data-slider-id="<%= slider.short_code %>">
       <%= render 'slider_code', slider: slider %>

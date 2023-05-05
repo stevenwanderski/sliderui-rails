@@ -1,41 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full">
 <head>
   <title>SliderUI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= favicon_link_tag 'icon-star.png' %>
   <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-  <%= stylesheet_link_tag 'dashboard', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 
   <script src="//unpkg.com/alpinejs" defer></script>
   <style>[x-cloak] { display: none !important; }</style>
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2.7.0/hint.min.css">
 </head>
-<body class="dashboard">
-  <%= render 'layouts/dashboard/header' %>
 
-  <div class="container__body">
-    <%= render 'layouts/dashboard/flash_messages' %>
+<body class="h-full">
+  <div class="min-h-full bg-gray-100">
+    <%= render 'layouts/dashboard/header' %>
 
-    <%= yield %>
+    <main>
+      <div class="mx-auto max-w-full sm:px-6 lg:px-8">
+        <%= yield %>
+      </div>
+    </main>
+
+    <div id="toast"></div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+      var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+      (function(){
+      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+      s1.async=true;
+      s1.src='https://embed.tawk.to/6451404e31ebfa0fe7fb9673/1gvem6d2q';
+      s1.charset='UTF-8';
+      s1.setAttribute('crossorigin','*');
+      s0.parentNode.insertBefore(s1,s0);
+      })();
+    </script>
+    <!--End of Tawk.to Script-->
+
+    <%= render 'layouts/analytics' %>
   </div>
-
-  <!--Start of Tawk.to Script-->
-  <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/6451404e31ebfa0fe7fb9673/1gvem6d2q';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-    })();
-  </script>
-  <!--End of Tawk.to Script-->
-
-  <%= render 'layouts/analytics' %>
 </body>
 </html>
