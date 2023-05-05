@@ -1,29 +1,16 @@
-<div class="slides" id="slides" x-show="visible == 'images'">
-  <div class="scrollable">
-    <div class="scrollable__header">
-      <% if slides.none? %>
-        <div class="hand">👉</div>
-      <% end %>
+<div id="slides" x-show="visible == 'images'">
+  <div class="mb-4">
+    <input
+      accept="image/jpeg, image/png, image/gif"
+      class="file-upload sr-only"
+      type="file"
+      id="file-upload-sidebar"
+    >
 
-      <div class="image-uploader">
-        <input
-          accept="image/jpeg, image/png, image/gif"
-          class="image-uploader__file"
-          type="file"
-          id="file-upload"
-        >
-
-        <label
-          class="image-uploader__label button button--secondary button--full-width button--add-slide"
-          for="file-upload"
-        >
-          Add Image
-        </label>
-      </div>
-    </div>
-
-    <div class="scrollable__body scrollable__body--button">
-      <%= render 'slide_list', slides: slides %>
-    </div>
+    <label class="text-center block cursor-pointer rounded-md bg-indigo-50 px-3 py-2 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-100" for="file-upload-sidebar">
+      Add Image
+    </label>
   </div>
+
+  <%= render 'slide_list', slides: slides %>
 </div>

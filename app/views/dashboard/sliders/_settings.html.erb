@@ -1,72 +1,64 @@
-<div data-section="settings" class="scrollable" x-show="visible == 'settings'" x-cloak>
-  <%= form_for(slider, url: dashboard_update_slider_path, html: { class: 'form--slider-settings' }, remote: true) do |f| %>
-    <div class="scrollable">
-      <div class="scrollable__header">
-        <button class="button button--secondary button--full-width">
-          Save Settings
-        </button>
+<div data-section="settings" class="" x-show="visible == 'settings'" x-cloak>
+  <%= form_for(slider, url: dashboard_update_slider_path, remote: true) do |f| %>
+    <div class="mb-4">
+      <button class="w-full text-center block cursor-pointer rounded-md bg-indigo-50 px-3 py-2 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-100">
+        Save Settings
+      </button>
+    </div>
+
+    <div class="divide divide-y">
+      <div class="space-y-2 pb-4">
+        <%= render 'dashboard/sliders/settings/form_item' do %>
+          <%= f.label :mode, 'Transition Type', class: 'label' %>
+          <%= f.select :mode,
+              options_for_select([ ['Horizontal', 'linear'], ['Fade', 'fade'] ], slider.mode),
+              {},
+              class: 'input-select'
+          %>
+        <% end %>
+
+        <%= render 'dashboard/sliders/settings/input_addon',
+            f: f,
+            attr: :width,
+            addon: 'px',
+            label: 'Max Width'
+        %>
+
+        <%= render 'dashboard/sliders/settings/input_addon',
+            f: f,
+            attr: :speed,
+            addon: 'ms',
+            label: 'Transition Duration'
+        %>
       </div>
 
-      <div class="scrollable__body scrollable__body--button">
-        <div class="setting-group">
+      <div class="space-y-2 py-4">
+        <%= render 'dashboard/sliders/settings/checkbox_toggle',
+            f: f,
+            attr: :controls_enabled,
+            label: 'Controls Enabled'
+        %>
 
-          <div class="divide divide-y">
-            <div class="setting-group__body space-y-2 pb-4">
-              <%= render 'dashboard/sliders/settings/form_item' do %>
-                <%= f.label :mode, 'Transition Type', class: 'label' %>
-                <%= f.select :mode,
-                    options_for_select([ ['Horizontal', 'linear'], ['Fade', 'fade'] ], slider.mode),
-                    {},
-                    class: 'input-select'
-                %>
-              <% end %>
+        <%= render 'dashboard/sliders/settings/checkbox_toggle',
+            f: f,
+            attr: :pager_enabled,
+            label: 'Pager Enabled'
+        %>
+      </div>
 
-              <%= render 'dashboard/sliders/settings/input_addon',
-                  f: f,
-                  attr: :width,
-                  addon: 'px',
-                  label: 'Max Width'
-              %>
+      <div class="space-y-2 py-4">
+        <%= render 'dashboard/sliders/settings/checkbox_toggle',
+            f: f,
+            attr: :auto_enabled,
+            label: 'Auto Slideshow'
+        %>
 
-              <%= render 'dashboard/sliders/settings/input_addon',
-                  f: f,
-                  attr: :speed,
-                  addon: 'ms',
-                  label: 'Transition Duration'
-              %>
-            </div>
-
-            <div class="space-y-2 py-4">
-              <%= render 'dashboard/sliders/settings/checkbox_toggle',
-                  f: f,
-                  attr: :controls_enabled,
-                  label: 'Controls Enabled'
-              %>
-
-              <%= render 'dashboard/sliders/settings/checkbox_toggle',
-                  f: f,
-                  attr: :pager_enabled,
-                  label: 'Pager Enabled'
-              %>
-            </div>
-
-            <div class="space-y-2 py-4">
-              <%= render 'dashboard/sliders/settings/checkbox_toggle',
-                  f: f,
-                  attr: :auto_enabled,
-                  label: 'Auto Slideshow'
-              %>
-
-              <%= render 'dashboard/sliders/settings/input_addon',
-                  f: f,
-                  attr: :auto_interval,
-                  addon: 'ms',
-                  label: 'Auto Interval'
-              %>
-            </div>
-          </div>
-
-        </div>
+        <%= render 'dashboard/sliders/settings/input_addon',
+            f: f,
+            attr: :auto_interval,
+            addon: 'ms',
+            label: 'Auto Interval'
+        %>
       </div>
     </div>
   <% end %>
