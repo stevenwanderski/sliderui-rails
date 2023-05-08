@@ -18,6 +18,7 @@
 #  auto_interval      :string           default("2000")
 #  controls_enabled   :boolean          default(TRUE)
 #  pager_enabled      :boolean          default(TRUE)
+#  version            :integer
 #
 # Indexes
 #
