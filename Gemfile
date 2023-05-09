@@ -23,7 +23,6 @@ gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
 gem 'active_link_to'
 gem 'premailer-rails'
-gem 'webpacker'
 gem 'stripe'
 gem 'tailwindcss-rails'
 
