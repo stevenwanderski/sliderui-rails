@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_02_185418) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_08_184402) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -53,6 +53,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_185418) do
     t.string "auto_interval", default: "2000"
     t.boolean "controls_enabled", default: true
     t.boolean "pager_enabled", default: true
+    t.integer "version"
     t.index ["short_code"], name: "index_sliders_on_short_code", unique: true
   end
 

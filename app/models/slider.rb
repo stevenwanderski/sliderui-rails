@@ -18,6 +18,7 @@
 #  auto_interval      :string           default("2000")
 #  controls_enabled   :boolean          default(TRUE)
 #  pager_enabled      :boolean          default(TRUE)
+#  version            :integer
 #
 # Indexes
 #
@@ -43,6 +44,10 @@ class Slider < ActiveRecord::Base
     return false if user.active_premium?
     return false if unrestricted_ids.include?(id)
     true
+  end
+
+  def v2?
+    self.version == 2
   end
 
   private
