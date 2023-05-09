@@ -16,9 +16,9 @@ class Dashboard::SlidersController < DashboardController
   end
 
   def edit
-    # @slider = current_user.sliders.find(params[:id])
     @slider = Slider.find_by(short_code: params[:short_code])
     @slides = @slider.slides
+    @modal_open = params[:install] == 'true'
 
     if !current_user
       @user = User.new

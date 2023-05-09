@@ -1,4 +1,4 @@
-<div x-data="{ modal: false }">
+<div x-data="{ modal: <%= @modal_open %> }">
   <%= render 'slider_page', slider: @slider %>
   <%= render 'install', slider: @slider %>
 </div>
