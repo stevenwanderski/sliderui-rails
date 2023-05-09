@@ -1,9 +1,5 @@
 <div id="slider-preview">
-  <% if slider.slides.empty? %>
-    <%= render 'dashboard/sliders/preview/empty' %>
-  <% else %>
-    <div data-slider-id="<%= slider.short_code %>">
-      <%= render 'slider_code', slider: slider %>
-    </div>
-  <% end %>
+  <div data-slider-id="<%= slider.short_code %>">
+    <%= render 'slider_code', slider: slider %>
+  </div>
 </div>

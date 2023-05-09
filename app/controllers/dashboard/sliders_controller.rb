@@ -12,14 +12,17 @@ class Dashboard::SlidersController < DashboardController
   end
 
   def index
-    @unrestricted_sliders = current_user.sliders_unrestricted
-    @restricted_sliders = current_user.sliders_restricted
+    @sliders = current_user.sliders
   end
 
   def edit
     # @slider = current_user.sliders.find(params[:id])
     @slider = Slider.find_by(short_code: params[:short_code])
     @slides = @slider.slides
+
+    if !current_user
+      @user = User.new
+    end
   end
 
   def update
@@ -28,15 +31,19 @@ class Dashboard::SlidersController < DashboardController
   end
 
   def new
-    # @slider = current_user.sliders.build
-    @slider = Slider.create!
+    if current_user
+      @slider = current_user.sliders.create!(version: 2)
+    else
+      @slider = Slider.create!(version: 2)
+    end
+
     redirect_to dashboard_edit_slider_path(@slider.short_code)
   end
 
   def destroy
-    @slider = current_user.sliders.find(params[:id])
+    @slider = current_user.sliders.find_by(short_code: params[:short_code])
     @slider.destroy!
-    redirect_to dashboard_sliders_path, notice: "Slider \"#{@slider.title}\" was deleted."
+    redirect_to dashboard_sliders_path, notice: "Slider #{@slider.short_code} was deleted."
   end
 
   def embed
@@ -69,6 +76,38 @@ class Dashboard::SlidersController < DashboardController
     @slides = @slider.slides
   end
 
+  def user_create
+    @user = User.new(user_params)
+    @slider = Slider.find_by(short_code: params[:short_code])
+
+    if @user.save
+      @slider.update!(user: @user)
+      sign_in(@user)
+    else
+      render 'user_create_error'
+    end
+  end
+
+  def session_create
+    @slider = Slider.find_by(short_code: params[:short_code])
+    @user = User.find_by(email: user_params[:email])
+
+    if @user.nil?
+      @user = User.new(user_params)
+      @session_error = 'Invalid email or password'
+      return render 'session_create_error'
+    end
+
+    if !@user.valid_password?(user_params[:password])
+      @user = User.new(user_params)
+      @session_error = 'Invalid email or password'
+      return render 'session_create_error'
+    end
+
+    @slider.update!(user: @user)
+    sign_in(@user)
+  end
+
   private
 
   def ensure_subscription_type!
@@ -83,5 +122,9 @@ class Dashboard::SlidersController < DashboardController
 
   def slide_params
     params.require(:slide).permit(:content, :weight, :image, :slider_id)
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :password)
   end
 end

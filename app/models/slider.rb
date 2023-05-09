@@ -46,6 +46,10 @@ class Slider < ActiveRecord::Base
     true
   end
 
+  def v2?
+    self.version == 2
+  end
+
   private
 
   def set_short_code

@@ -1,4 +1,4 @@
-<div data-section="settings" class="" x-show="visible == 'settings'" x-cloak>
+<div data-section="settings" class="divide divide-y" x-show="visible == 'settings'" x-cloak>
   <%= form_for(slider, url: dashboard_update_slider_path, remote: true) do |f| %>
     <div class="mb-4">
       <button class="w-full text-center block cursor-pointer rounded-md bg-indigo-50 px-3 py-2 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-100">
@@ -60,6 +60,19 @@
             label: 'Auto Interval'
         %>
       </div>
+    </div>
+  <% end %>
+
+  <% if current_user %>
+    <div class="py-4">
+      <%= link_to 'Delete Slider',
+          dashboard_destroy_slider_path,
+          class: 'w-full text-center block cursor-pointer rounded-md bg-red-50 px-3 py-2 text-sm font-semibold text-red-600 shadow-sm hover:bg-red-100',
+          data: {
+            confirm: 'Are you sure?',
+            method: :delete
+          }
+      %>
     </div>
   <% end %>
 </div>
