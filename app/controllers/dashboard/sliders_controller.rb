@@ -1,16 +1,4 @@
 class Dashboard::SlidersController < DashboardController
-  # before_action :ensure_subscription_type!, only: [:create, :new]
-
-  def create
-    @slider = current_user.sliders.build(slider_params)
-
-    if @slider.save
-      redirect_to edit_dashboard_slider_path(@slider)
-    else
-      render 'new'
-    end
-  end
-
   def index
     @sliders = current_user.sliders
   end
@@ -44,10 +32,6 @@ class Dashboard::SlidersController < DashboardController
     @slider = current_user.sliders.find_by(short_code: params[:short_code])
     @slider.destroy!
     redirect_to dashboard_sliders_path, notice: "Slider #{@slider.short_code} was deleted."
-  end
-
-  def embed
-    @slider = Slider.find_by(short_code: params[:short_code])
   end
 
   def slide_create
@@ -109,12 +93,6 @@ class Dashboard::SlidersController < DashboardController
   end
 
   private
-
-  def ensure_subscription_type!
-    if !current_user.can_add_slider?
-      redirect_to edit_dashboard_subscription_path
-    end
-  end
 
   def slider_params
     params.require(:slider).permit!
