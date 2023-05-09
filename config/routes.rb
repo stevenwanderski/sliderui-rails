@@ -33,10 +33,6 @@ Rails.application.routes.draw do
     post '/sliders/:short_code/sign_in', to: 'sliders#session_create', as: :slider_session_create
 
     resource :account, only: [:show, :update], controller: 'account'
-    # resource :password, only: [:edit, :update], controller: 'password'
-    # resource :subscription, only: [:edit, :update], controller: 'subscription' do
-    #   get '/success', action: 'success'
-    # end
   end
 
   post '/track', to: 'track#create'
