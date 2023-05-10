@@ -8,6 +8,7 @@ class Admin::SlidersController < AdminController
       .references(:slides)
       .where('slides.id IS NOT NULL')
       .where.not(request_logs_count: nil)
+      .where.not(track_logs_count: nil)
       .page(params[:page])
       .per(50)
 
