@@ -19,6 +19,7 @@
 #  controls_enabled   :boolean          default(TRUE)
 #  pager_enabled      :boolean          default(TRUE)
 #  version            :integer
+#  track_logs_count   :integer
 #
 # Indexes
 #
@@ -28,23 +29,10 @@
 class Slider < ActiveRecord::Base
   has_many :slides, -> { order(weight: :asc) }, dependent: :destroy
   has_many :request_logs
+  has_many :track_logs
   belongs_to :user
 
   before_create :set_short_code
-
-  # validates :title, presence: true
-
-  def display_image_url
-    return nil if slides.empty?
-
-    slides.first.image.url
-  end
-
-  def restricted?
-    return false if user.active_premium?
-    return false if unrestricted_ids.include?(id)
-    true
-  end
 
   def v2?
     self.version == 2
@@ -57,15 +45,5 @@ class Slider < ActiveRecord::Base
       random_short_code = ('a'..'z').to_a.shuffle[0,6].join
       break random_short_code unless Slider.exists?(short_code: random_short_code)
     end
-  end
-
-  def unrestricted_ids
-    limit = Subscription.get_max_slider_count('free')
-
-    user
-      .sliders
-      .order(created_at: :desc)
-      .limit(limit)
-      .ids
   end
 end

@@ -3,12 +3,25 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Date</th>
+      <th>
+        <%= link_to admin_sliders_path(sort: :date, dir: sort_new_direction('date', @sort, @direction)) do %>
+          Date <%= sort_arrow('date', @sort, @direction) %>
+        <% end %>
+      </th>
       <th>Slider</th>
       <th></th>
       <th></th>
       <th>Slide Count</th>
-      <th>Requests</th>
+      <th>
+        <%= link_to admin_sliders_path(sort: :requests, dir: sort_new_direction('requests', @sort, @direction)) do %>
+          Requests <%= sort_arrow('requests', @sort, @direction) %>
+        <% end %>
+      </th>
+      <th>
+        <%= link_to admin_sliders_path(sort: :tracks, dir: sort_new_direction('tracks', @sort, @direction)) do %>
+          Track Logs <%= sort_arrow('tracks', @sort, @direction) %>
+        <% end %>
+      </th>
       <th>User</th>
     </tr>
   </thead>
@@ -28,7 +41,8 @@
           %>
         </td>
         <td><%= slider.slides.count %></td>
-        <td><%= number_with_delimiter(slider.request_logs.count) %></td>
+        <td><%= number_with_delimiter(slider.request_logs_count) %></td>
+        <td><%= number_with_delimiter(slider.track_logs.count) %></td>
         <td>
           <% if slider.user.present? %>
             <%= slider.user.email %>

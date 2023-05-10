@@ -7,6 +7,8 @@
 #  url        :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  slider_id  :uuid
 #
 class TrackLog < ActiveRecord::Base
+  belongs_to :slider, counter_cache: true
 end

@@ -6,8 +6,20 @@
 
   <% if !@slider.request_logs.count.zero? %>
   <ul>
-    <% @slider.request_logs.order(created_at: :desc).each do |request_log| %>
-      <li><%= link_to request_log.referrer, request_log.referrer, target: '_blank' %></li>
+    <% @slider.request_logs.limit(20).order(created_at: :desc).each do |request_log| %>
+      <li><%= l(request_log.created_at) %>: <%= link_to request_log.referrer&.truncate(60), request_log.referrer, target: '_blank' %></li>
+    <% end %>
+  </ul>
+  <% end %>
+</div>
+
+<div class="mb-5">
+  <p>Track logs: <%= @slider.track_logs.count %></p>
+
+  <% if !@slider.track_logs.count.zero? %>
+  <ul>
+    <% @slider.track_logs.limit(20).order(created_at: :desc).each do |track_log| %>
+      <li><%= l(track_log.created_at) %>: <%= link_to track_log.url.truncate(60), track_log.url, target: '_blank' %></li>
     <% end %>
   </ul>
   <% end %>
