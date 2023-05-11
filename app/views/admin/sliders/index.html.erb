@@ -23,6 +23,7 @@
         <% end %>
       </th>
       <th>User</th>
+      <th>Last Request</th>
     </tr>
   </thead>
 
@@ -46,6 +47,11 @@
         <td>
           <% if slider.user.present? %>
             <%= slider.user.email %>
+          <% end %>
+        </td>
+        <td>
+          <% if slider.request_logs.any? %>
+            <%= l(slider.request_logs.order(created_at: :desc).first.created_at, format: :short) %>
           <% end %>
         </td>
       </tr>
