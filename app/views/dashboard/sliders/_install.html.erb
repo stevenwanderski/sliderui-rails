@@ -11,11 +11,7 @@
       -->
 
       <div id="install-body">
-        <% if !current_user %>
-          <%= render 'authentication' %>
-        <% else %>
-          <%= render 'embed_code', slider: @slider %>
-        <% end %>
+        <%= render 'embed_code', slider: @slider %>
       </div>
     </div>
   </div>

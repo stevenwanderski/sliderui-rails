@@ -4,26 +4,18 @@ class Dashboard::SlidersController < DashboardController
   end
 
   def edit
-    @slider = Slider.find_by(short_code: params[:short_code])
+    @slider = current_user.sliders.find_by(short_code: params[:short_code])
     @slides = @slider.slides
     @modal_open = params[:install] == 'true'
-
-    if !current_user
-      @user = User.new
-    end
   end
 
   def update
-    @slider = Slider.find_by(short_code: params[:short_code])
+    @slider = current_user.sliders.find_by(short_code: params[:short_code])
     @slider.update!(slider_params)
   end
 
   def new
-    if current_user
-      @slider = current_user.sliders.create!(version: 2)
-    else
-      @slider = Slider.create!(version: 2)
-    end
+    @slider = current_user.sliders.create!(version: 2)
 
     redirect_to dashboard_edit_slider_path(@slider.short_code)
   end
@@ -37,7 +29,7 @@ class Dashboard::SlidersController < DashboardController
   def slide_create
     slide = Slide.create!(slide_params)
 
-    @slider = Slider.find_by(short_code: params[:short_code])
+    @slider = current_user.sliders.find_by(short_code: params[:short_code])
     @slides = @slider.slides
   end
 
@@ -45,7 +37,7 @@ class Dashboard::SlidersController < DashboardController
     slide = Slide.find(params[:slide_id])
     slide.destroy!
 
-    @slider = Slider.find_by(short_code: params[:short_code])
+    @slider = current_user.sliders.find_by(short_code: params[:short_code])
     @slides = @slider.slides
   end
 
@@ -56,41 +48,41 @@ class Dashboard::SlidersController < DashboardController
       slide.update!(weight: index)
     end
 
-    @slider = Slider.find_by(short_code: params[:short_code])
+    @slider = current_user.sliders.find_by(short_code: params[:short_code])
     @slides = @slider.slides
   end
 
-  def user_create
-    @user = User.new(user_params)
-    @slider = Slider.find_by(short_code: params[:short_code])
+  # def user_create
+  #   @user = User.new(user_params)
+  #   @slider = Slider.find_by(short_code: params[:short_code])
 
-    if @user.save
-      @slider.update!(user: @user)
-      sign_in(@user)
-    else
-      render 'user_create_error'
-    end
-  end
+  #   if @user.save
+  #     @slider.update!(user: @user)
+  #     sign_in(@user)
+  #   else
+  #     render 'user_create_error'
+  #   end
+  # end
 
-  def session_create
-    @slider = Slider.find_by(short_code: params[:short_code])
-    @user = User.find_by(email: user_params[:email])
+  # def session_create
+  #   @slider = Slider.find_by(short_code: params[:short_code])
+  #   @user = User.find_by(email: user_params[:email])
 
-    if @user.nil?
-      @user = User.new(user_params)
-      @session_error = 'Invalid email or password'
-      return render 'session_create_error'
-    end
+  #   if @user.nil?
+  #     @user = User.new(user_params)
+  #     @session_error = 'Invalid email or password'
+  #     return render 'session_create_error'
+  #   end
 
-    if !@user.valid_password?(user_params[:password])
-      @user = User.new(user_params)
-      @session_error = 'Invalid email or password'
-      return render 'session_create_error'
-    end
+  #   if !@user.valid_password?(user_params[:password])
+  #     @user = User.new(user_params)
+  #     @session_error = 'Invalid email or password'
+  #     return render 'session_create_error'
+  #   end
 
-    @slider.update!(user: @user)
-    sign_in(@user)
-  end
+  #   @slider.update!(user: @user)
+  #   sign_in(@user)
+  # end
 
   private
 
@@ -102,7 +94,7 @@ class Dashboard::SlidersController < DashboardController
     params.require(:slide).permit(:content, :weight, :image, :slider_id)
   end
 
-  def user_params
-    params.require(:user).permit(:email, :password)
-  end
+  # def user_params
+  #   params.require(:user).permit(:email, :password)
+  # end
 end
