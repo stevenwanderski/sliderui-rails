@@ -1,0 +1,8 @@
+<p>
+  <strong>Email</strong>: <%= @user.email %><br>
+  <strong>Created</strong>: <%= l(@user.created_at) %>
+</p>
+
+<%= render 'mailers/button' do %>
+  <%= link_to 'Go to admin panel', admin_sliders_url %>
+<% end %>

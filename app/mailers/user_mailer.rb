@@ -10,4 +10,10 @@ class UserMailer < ApplicationMailer
 
     mail(to: @user.email, subject: 'Your SliderUI trial will expire in 7 days')
   end
+
+  def admin_notify
+    @user = params[:user]
+
+    mail(to: 'steven.wanderski@gmail.com', subject: 'New SliderUI user!')
+  end
 end

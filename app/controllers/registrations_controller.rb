@@ -7,6 +7,7 @@ class RegistrationsController < Devise::RegistrationsController
     if resource.persisted?
       resource.set_free_trial!
       UserMailer.with(user: resource).welcome_email.deliver_now
+      UserMailer.with(user: resource).admin_notify.deliver_now
 
       sign_up(resource_name, resource)
       respond_with resource, location: after_sign_up_path_for(resource)
