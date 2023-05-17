@@ -1,0 +1,42 @@
+<p>Thank you for creating an account!</p>
+
+<p>
+  Please enjoy your 14-day free trial which includes all
+  of the features provided by SliderUI.
+</p>
+
+<p>
+  Access your sliders here:
+</p>
+
+<%= render 'mailers/button' do %>
+  <%= link_to 'Your Dashboard', dashboard_sliders_url %>
+<% end %>
+
+<hr>
+
+<p>Please note that your trial ends on <strong><%= l(@user.trial_ends_at, format: :short) %></strong>.</p>
+
+<p>
+  But don't worry!
+  We will send you a reminder email 7 days before so that you'll have plenty of
+  time to upgrade your account and continue to use SliderUI.
+</p>
+
+<p>
+  For only $1.99/month, you'll continue to enjoy all the features that make SliderUI great:
+</p>
+
+<ul>
+  <li>UNLIMITED sliders</li>
+  <li>20 slides per slider</li>
+  <li>Embed on unlimited websites</li>
+  <li>Manage slider images and settings at any time</li>
+  <li>48-hour support response time</li>
+</ul>
+
+<p>Click here to upgrade your account now:</p>
+
+<%= render 'mailers/button' do %>
+  <%= link_to 'Upgrade your account', dashboard_subscription_checkout_url %>
+<% end %>

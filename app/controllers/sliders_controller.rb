@@ -5,9 +5,7 @@ class SlidersController < ApplicationController
   def show
     @slider = Slider.find_by(short_code: params[:short_code])
 
-    if @slider.v2? && @slider.user.blank?
-      return render js: ''
-    end
+    @inactive_user = @slider.user && !@slider.user.active?
 
     begin
       RequestLog.create!(

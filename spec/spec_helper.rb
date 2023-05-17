@@ -3,6 +3,7 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
+require 'webmock/rspec'
 
 ActiveRecord::Migration.maintain_test_schema!
 DatabaseCleaner.strategy = :truncation
@@ -51,3 +52,8 @@ end
 
 Capybara.default_driver = :headless_chrome
 Capybara.javascript_driver = :headless_chrome
+
+WebMock.disable_net_connect!({
+  allow_localhost: true,
+  allow: 'chromedriver.storage.googleapis.com'
+})

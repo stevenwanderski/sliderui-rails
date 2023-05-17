@@ -41,6 +41,7 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.asset_host = 'http://localhost:3000'
 
   config.action_mailer.smtp_settings = {
     :user_name => '8e3cd11046d422',
@@ -52,7 +53,4 @@ Rails.application.configure do
   }
 
   config.log_level = :debug
-
-  ENV['APP_HOST'] = 'http://localhost:3000'
-  ENV['FREE_SLIDER_MAX'] = '1'
 end

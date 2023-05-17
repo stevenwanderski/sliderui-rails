@@ -1,13 +1,18 @@
 <%= render 'jquery' %>
-<% output = render 'dashboard/sliders/slider_code', slider: @slider %>
+
+<% if @inactive_user %>
+  <% output = render 'inactive_user' %>
+<% else %>
+  <% output = render 'dashboard/sliders/slider_code', slider: @slider %>
+
+  $.ajax({
+    url: '<%= ENV['APP_HOST'] %>/track',
+    type: 'POST',
+    data: {
+      short_code: '<%= @slider.short_code %>',
+      url: window.location.href
+    }
+  })
+<% end %>
 
 $('[data-slider-id="<%= @slider.short_code %>"]').html('<%= j(output) %>')
-
-$.ajax({
-  url: '<%= ENV['APP_HOST'] %>/track',
-  type: 'POST',
-  data: {
-    short_code: '<%= @slider.short_code %>',
-    url: window.location.href
-  }
-})

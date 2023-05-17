@@ -31,8 +31,8 @@
               </div>
             </div>
             <% end %>
-            <p class="pointer-events-none mt-2 block truncate text-sm font-medium text-gray-900">
-              ID: <%= slider.short_code %>
+            <p class="pointer-events-none mt-2 block truncate text-sm font-medium text-gray-500">
+              Created: <%= l(slider.created_at, format: :short) %>
             </p>
           <% end %>
         </div>

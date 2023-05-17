@@ -22,6 +22,8 @@
 #  stripe_customer_id     :string
 #  subscription_status    :string
 #  is_legacy              :boolean          default(FALSE)
+#  stripe_subscription_id :string
+#  trial_ends_at          :datetime
 #
 # Indexes
 #
@@ -37,63 +39,32 @@ class User < ActiveRecord::Base
 
   has_many :sliders, dependent: :destroy
 
-  def active_premium?
-    subscription_type == 'premium' && subscription_status == 'active'
+  def active?
+    ['subscribed', 'trial'].include?(subscription_status)
   end
 
-  def can_add_slider?
-    return true if active_premium?
-
-    sliders.count < Subscription.get_max_slider_count('free')
-  end
-
-  def sliders_restricted
-    return Slider.none if active_premium?
-
-    offset = Subscription.get_max_slider_count('free')
-    sliders.order(created_at: :desc).offset(offset)
-  end
-
-  def sliders_unrestricted
-    return sliders if active_premium?
-
-    limit = Subscription.get_max_slider_count('free')
-    sliders.order(created_at: :desc).limit(limit)
-  end
-
-  def update_to_premium!(stripe_customer_id)
+  def set_free_trial!
     update!(
-      subscription_type: 'premium',
-      subscription_status: 'active',
-      stripe_customer_id: stripe_customer_id
+      trial_ends_at: 14.days.from_now,
+      subscription_status: 'trial'
     )
   end
 
-  def update_to_free!
-    update!(
-      subscription_type: 'free',
-      subscription_status: 'active'
-    )
+  def subscribed?
+    subscription_status == 'subscribed'
   end
 
-  def valid_password?(password)
-    if self.password_hash.present?
-      if get_hash(password) == self.password_hash
-        self.password = password
-        self.password_hash = nil
-        self.save!
-        true
-      else
-        false
-      end
-    else
-      super
-    end
+  def trial_days
+    return if trial_ends_at.blank?
+
+    (trial_ends_at - Time.now).seconds.in_days.ceil
   end
 
-  private
+  def trial?
+    subscription_status == 'trial'
+  end
 
-  def get_hash(string)
-    Digest::SHA2.new(512).hexdigest(string)
+  def self.days_to_expire(days)
+    User.where('trial_ends_at < ? AND trial_ends_at > ?', (days+1).days.from_now, (days-1).days.from_now)
   end
 end

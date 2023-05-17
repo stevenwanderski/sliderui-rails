@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/terms', to: 'pages#terms'
 
   get '/sliders/:short_code', to: 'sliders#show'
+  post '/webhooks/stripe', to: 'webhooks#stripe'
 
   namespace :admin do
     resources :sliders, only: [:index, :show]
@@ -31,6 +32,9 @@ Rails.application.routes.draw do
 
     post '/sliders/:short_code/sign_up', to: 'sliders#user_create', as: :slider_user_create
     post '/sliders/:short_code/sign_in', to: 'sliders#session_create', as: :slider_session_create
+
+    get '/subscription/checkout', to: 'subscription#checkout', as: :subscription_checkout
+    get '/subscription/success', to: 'subscription#success', as: :subscription_success
 
     resource :account, only: [:show, :update], controller: 'account'
   end
