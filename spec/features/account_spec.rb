@@ -1,16 +1,16 @@
 require 'spec_helper'
 
 describe 'Account' do
-  let(:user) { create(:user, stripe_customer_id: stripe_customer_id) }
-  let(:stripe_customer_id) { nil }
+  let(:user) { create(:user, subscription_status: subscription_status) }
+  let(:subscription_status) { nil }
 
   before do
     login_as(user, scope: :user)
   end
 
   describe 'Account Portal' do
-    context 'when a user has a stripe customer ID' do
-      let(:stripe_customer_id) { 'cus_123' }
+    context 'when a user is subscribed' do
+      let(:subscription_status) { 'subscribed' }
 
       it 'shows a customer portal link' do
         allow(Stripe::BillingPortal::Session).to receive(:create).and_return({ url: 'portal.com' })
@@ -20,8 +20,8 @@ describe 'Account' do
       end
     end
 
-    context 'when a user does not have a stripe customer ID' do
-      let(:stripe_customer_id) { nil }
+    context 'when a user does is not subscribed' do
+      let(:subscription_status) { 'trial' }
 
       it 'shows a checkout link' do
         allow(Stripe::Checkout::Session).to receive(:create).and_return({ url: 'checkout.com' })
@@ -33,6 +33,8 @@ describe 'Account' do
   end
 
   describe 'Password' do
+    let(:subscription_status) { 'trial' }
+
     it 'updates the user password' do
       allow(Stripe::Checkout::Session).to receive(:create).and_return({ url: 'fake.com' })
 
