@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     if resource.is_a? Admin
       admin_sliders_path
     elsif resource.is_a? User
-      dashboard_sliders_path
+      stored_location_for(resource) || dashboard_sliders_path
     end
   end
 

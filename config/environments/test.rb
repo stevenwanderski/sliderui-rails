@@ -8,7 +8,7 @@ Rails.application.configure do
   config.cache_classes = false
 
   config.assets.debug = true
-
+  config.assets.css_compressor = nil
 
   # Do not eager load code on boot. This avoids loading your whole application
   # just for the purpose of running a single test. If you are using a tool that
@@ -43,5 +43,5 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  ENV['FREE_SLIDER_MAX'] = '1'
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end

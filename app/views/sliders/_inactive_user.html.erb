@@ -1,0 +1,43 @@
+<style>
+  .sliderui-expired {
+    border: solid 2px #999;
+    background: white;
+    padding: 50px;
+    border-radius: 10px;
+  }
+
+  .sliderui-expired p {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    color: black;
+    text-align: center;
+    margin: 0 0 10px;
+    padding: 0;
+  }
+
+  .sliderui-expired a {
+    color: #4f46e5;
+    text-decoration: underline;
+  }
+
+  .sliderui-expired a:hover {
+    color: #6366f1;
+  }
+
+  .sliderui-expired-image {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .sliderui-expired img {
+    width: 120px;
+  }
+</style>
+
+<div class="sliderui-expired">
+  <div class="sliderui-expired-image"><img src="<%= asset_url('logo-text.png') %>" /></div>
+
+  <p>Your free trail has expired.</p>
+
+  <p><a href="https://sliderui.com">Click here to upgrade your account.</a></p>
+</div>

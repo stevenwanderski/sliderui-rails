@@ -14,6 +14,7 @@ gem 'annotate'
 gem 'rack-cors', require: 'rack/cors'
 gem 'carrierwave'
 gem 'fog-aws'
+gem 'mini_magick'
 gem 'factory_bot_rails'
 gem 'sentry-ruby'
 gem 'sentry-rails'
@@ -40,6 +41,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'launchy'
   gem 'rails-controller-testing'
+  gem 'webmock'
 end
 
 group :development do

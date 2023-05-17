@@ -1,0 +1,27 @@
+<p>
+  This is a friendly reminder to let you know that your SliderUI trial
+  will expire in 7 days.
+</p>
+
+<p>
+  In order to keep your sliders active be sure to upgrade
+  your account before <strong><%= l(@user.trial_ends_at, format: :short) %></strong>.
+</p>
+
+<%= render 'mailers/button' do %>
+  <%= link_to 'Upgrade your account', dashboard_subscription_checkout_url %>
+<% end %>
+
+<hr>
+
+<p>
+  Remember, for only $1.99/month you'll continue to enjoy all the features that make SliderUI great:
+</p>
+
+<ul>
+  <li>UNLIMITED sliders</li>
+  <li>20 slides per slider</li>
+  <li>Embed on unlimited websites</li>
+  <li>Manage slider images and settings at any time</li>
+  <li>48-hour support response time</li>
+</ul>
