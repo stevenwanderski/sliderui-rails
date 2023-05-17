@@ -4,11 +4,9 @@ class Admin::SlidersController < AdminController
     @direction = params[:dir] || 'desc'
 
     @sliders = Slider
-      .includes(:slides)
-      .references(:slides)
-      .where('slides.id IS NOT NULL')
-      .where.not(request_logs_count: nil)
-      .where.not(track_logs_count: nil)
+      .includes(:user)
+      .references(:user)
+      .where('users.id IS NOT NULL')
       .page(params[:page])
       .per(50)
 

@@ -14,6 +14,6 @@ class UserMailer < ApplicationMailer
   def admin_notify
     @user = params[:user]
 
-    mail(to: 'steven.wanderski@gmail.com', subject: 'New SliderUI user!')
+    mail(to: 'steven.wanderski@gmail.com', subject: 'New SliderUI User')
   end
 end
