@@ -6,7 +6,7 @@ class Dashboard::SubscriptionController < DashboardController
       line_items: [
         { price: ENV['STRIPE_PRICE_ID'], quantity: 1 },
       ],
-      mode: 'subscription',
+      mode: 'payment',
       customer_email: current_user.email
     })
 
@@ -18,8 +18,8 @@ class Dashboard::SubscriptionController < DashboardController
 
     current_user.update!(
       stripe_customer_id: stripe_session[:customer],
-      stripe_subscription_id: stripe_session[:subscription],
-      subscription_status: 'subscribed'
+      status: 'paid',
+      stripe_purchased_at: Time.now
     )
 
     redirect_to dashboard_sliders_path, notice: 'Thank you for upgrading your account!'

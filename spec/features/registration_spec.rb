@@ -13,6 +13,6 @@ describe 'Registration Flow' do
     user = User.first
     free_trial_days = (user.trial_ends_at - Time.now).seconds.in_days.ceil
     expect(free_trial_days).to eq(14)
-    expect(user.subscription_status).to eq('trial')
+    expect(user.status).to eq('trial')
   end
 end

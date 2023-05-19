@@ -20,10 +20,11 @@
 #  last_sign_in_ip        :inet
 #  subscription_type      :string
 #  stripe_customer_id     :string
-#  subscription_status    :string
+#  status                 :string
 #  is_legacy              :boolean          default(FALSE)
 #  stripe_subscription_id :string
 #  trial_ends_at          :datetime
+#  stripe_purchased_at    :datetime
 #
 # Indexes
 #
@@ -40,18 +41,18 @@ class User < ActiveRecord::Base
   has_many :sliders, dependent: :destroy
 
   def active?
-    ['subscribed', 'trial'].include?(subscription_status)
+    ['paid', 'trial'].include?(status)
   end
 
   def set_free_trial!
     update!(
       trial_ends_at: 14.days.from_now,
-      subscription_status: 'trial'
+      status: 'trial'
     )
   end
 
-  def subscribed?
-    subscription_status == 'subscribed'
+  def paid?
+    status == 'paid'
   end
 
   def trial_days
@@ -61,7 +62,7 @@ class User < ActiveRecord::Base
   end
 
   def trial?
-    subscription_status == 'trial'
+    status == 'trial'
   end
 
   def self.days_to_expire(days)

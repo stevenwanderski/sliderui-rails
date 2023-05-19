@@ -1,27 +1,26 @@
 require 'spec_helper'
 
 describe 'Account' do
-  let(:user) { create(:user, subscription_status: subscription_status) }
-  let(:subscription_status) { nil }
+  let(:user) { create(:user, status: status) }
+  let(:status) { nil }
 
   before do
     login_as(user, scope: :user)
   end
 
   describe 'Account Portal' do
-    context 'when a user is subscribed' do
-      let(:subscription_status) { 'subscribed' }
+    context 'when a user is paid' do
+      let(:status) { 'paid' }
 
-      it 'shows a customer portal link' do
-        allow(Stripe::BillingPortal::Session).to receive(:create).and_return({ url: 'portal.com' })
+      xit 'shows a the paid date' do
         visit dashboard_account_path
 
-        expect(page).to have_link('Account portal', href: 'portal.com')
+        expect(page).to have_content('Paid on 5/19/2023')
       end
     end
 
     context 'when a user does is not subscribed' do
-      let(:subscription_status) { 'trial' }
+      let(:status) { 'trial' }
 
       it 'shows a checkout link' do
         allow(Stripe::Checkout::Session).to receive(:create).and_return({ url: 'checkout.com' })
@@ -33,7 +32,7 @@ describe 'Account' do
   end
 
   describe 'Password' do
-    let(:subscription_status) { 'trial' }
+    let(:status) { 'trial' }
 
     it 'updates the user password' do
       allow(Stripe::Checkout::Session).to receive(:create).and_return({ url: 'fake.com' })

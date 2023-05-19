@@ -15,7 +15,7 @@ class DashboardController < ApplicationController
       line_items: [
         { price: ENV['STRIPE_PRICE_ID'], quantity: 1 },
       ],
-      mode: 'subscription',
+      mode: 'payment',
       customer_email: current_user.email
     })
 
