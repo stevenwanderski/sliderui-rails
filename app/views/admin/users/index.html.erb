@@ -1,16 +1,13 @@
 <h1>Users</h1>
 
-<p>
-  Free: <strong><%= number_with_delimiter(@free_count) %></strong><br>
-  Premium: <strong><%= number_with_delimiter(@premium_count) %></strong>
-</p>
-
 <table class="table table-striped">
   <thead>
     <tr>
       <th>Date</th>
       <th>Email</th>
-      <th>Plan</th>
+      <th>Status</th>
+      <th>Paid On</th>
+      <th>Trial Ends</th>
       <th>Sliders</th>
     </tr>
   </thead>
@@ -20,8 +17,22 @@
       <tr>
         <td><%= l(user.created_at) %></td>
         <td><%= user.email %></td>
-        <td><%= user.subscription_type %></td>
-        <td><%= user.sliders.count %></td>
+        <td><%= user.status %></td>
+        <td>
+          <% if user.stripe_purchased_at.present? %>
+            <%= l(user.stripe_purchased_at) %>
+          <% else %>
+            --
+          <% end %>
+        </td>
+        <td><%= l(user.trial_ends_at) %></td>
+        <td>
+          <% if user.sliders.any? %>
+              <% user.sliders.each do |slider| %>
+                <div><%= link_to(slider.short_code, admin_slider_path(slider)) %>: <%= pluralize(slider.slides.count, 'slide') %></div>
+              <% end %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
