@@ -9,7 +9,7 @@
 #  settings           :jsonb
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  request_logs_count :integer
+#  request_logs_count :integer          default(0)
 #  width              :string           default("1600")
 #  height             :string           default("250")
 #  mode               :string           default("linear")
@@ -19,7 +19,7 @@
 #  controls_enabled   :boolean          default(TRUE)
 #  pager_enabled      :boolean          default(TRUE)
 #  version            :integer
-#  track_logs_count   :integer
+#  track_logs_count   :integer          default(0)
 #
 # Indexes
 #

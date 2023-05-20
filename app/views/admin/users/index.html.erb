@@ -29,7 +29,7 @@
         <td>
           <% if user.sliders.any? %>
               <% user.sliders.each do |slider| %>
-                <div><%= link_to(slider.short_code, admin_slider_path(slider)) %>: <%= pluralize(slider.slides.count, 'slide') %></div>
+                <div><%= link_to(slider.short_code, admin_slider_path(slider)) %>: <%= pluralize(slider.slides.count, 'slide') %>, <%= number_with_delimiter(slider.request_logs_count) %> requests</div>
               <% end %>
           <% end %>
         </td>

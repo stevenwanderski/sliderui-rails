@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_19_215655) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_20_131357) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -44,7 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_19_215655) do
     t.jsonb "settings", default: {}
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
-    t.integer "request_logs_count"
+    t.integer "request_logs_count", default: 0
     t.string "width", default: "1600"
     t.string "height", default: "250"
     t.string "mode", default: "linear"
@@ -54,7 +54,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_19_215655) do
     t.boolean "controls_enabled", default: true
     t.boolean "pager_enabled", default: true
     t.integer "version"
-    t.integer "track_logs_count"
+    t.integer "track_logs_count", default: 0
     t.index ["short_code"], name: "index_sliders_on_short_code", unique: true
   end
 
