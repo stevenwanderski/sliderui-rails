@@ -21,14 +21,14 @@ describe 'Account' do
       end
     end
 
-    context 'when a user does is not subscribed' do
+    context 'when a user is in free trial' do
       let(:status) { 'trial' }
 
       it 'shows a checkout link' do
         allow(Stripe::Checkout::Session).to receive(:create).and_return({ url: 'checkout.com' })
         visit dashboard_account_path
 
-        expect(page).to have_link('Account portal', href: 'checkout.com')
+        expect(page).to have_link('Upgrade Account', href: 'checkout.com')
       end
     end
   end
