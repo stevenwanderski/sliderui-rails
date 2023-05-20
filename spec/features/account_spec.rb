@@ -1,8 +1,9 @@
 require 'spec_helper'
 
 describe 'Account' do
-  let(:user) { create(:user, status: status) }
+  let(:user) { create(:user, status: status, stripe_purchased_at: stripe_purchased_at) }
   let(:status) { nil }
+  let(:stripe_purchased_at) { nil }
 
   before do
     login_as(user, scope: :user)
@@ -11,11 +12,12 @@ describe 'Account' do
   describe 'Account Portal' do
     context 'when a user is paid' do
       let(:status) { 'paid' }
+      let(:stripe_purchased_at) { Date.new(2023, 5, 19) }
 
-      xit 'shows a the paid date' do
+      it 'shows a the paid date' do
         visit dashboard_account_path
 
-        expect(page).to have_content('Paid on 5/19/2023')
+        expect(page).to have_content('Paid on: 05/19/2023')
       end
     end
 

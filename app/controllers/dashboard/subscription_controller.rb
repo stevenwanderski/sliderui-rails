@@ -22,6 +22,6 @@ class Dashboard::SubscriptionController < DashboardController
       stripe_purchased_at: Time.now
     )
 
-    redirect_to dashboard_sliders_path, notice: 'Thank you for upgrading your account!'
+    redirect_to dashboard_sliders_path, notice: 'Thank you for purchasing SliderUI!'
   end
 end
