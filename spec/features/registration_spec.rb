@@ -8,7 +8,7 @@ describe 'Registration Flow' do
     fill_in 'Password', with: 'testtest'
     fill_in 'Password confirmation', with: 'testtest'
     click_button 'Create account'
-    expect(page).to have_content('Get started by creating a new slider!')
+    expect(page).to have_content('Get started by adding a new image.')
 
     user = User.first
     free_trial_days = (user.trial_ends_at - Time.now).seconds.in_days.ceil

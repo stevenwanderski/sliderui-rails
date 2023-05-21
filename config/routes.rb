@@ -30,9 +30,6 @@ Rails.application.routes.draw do
     get '/sliders/:short_code/slide_destroy/:slide_id', to: 'sliders#slide_destroy', as: :slide_destroy
     post '/sliders/:short_code/slides_update', to: 'sliders#slides_update', as: :slides_update
 
-    post '/sliders/:short_code/sign_up', to: 'sliders#user_create', as: :slider_user_create
-    post '/sliders/:short_code/sign_in', to: 'sliders#session_create', as: :slider_session_create
-
     get '/subscription/checkout', to: 'subscription#checkout', as: :subscription_checkout
     get '/subscription/success', to: 'subscription#success', as: :subscription_success
 

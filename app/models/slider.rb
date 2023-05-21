@@ -34,14 +34,6 @@ class Slider < ActiveRecord::Base
 
   before_create :set_short_code
 
-  def v1?
-    self.version == 1
-  end
-
-  def v2?
-    self.version == 2
-  end
-
   private
 
   def set_short_code

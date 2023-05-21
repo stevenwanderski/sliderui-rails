@@ -6,11 +6,17 @@ class RegistrationsController < Devise::RegistrationsController
 
     if resource.persisted?
       resource.set_free_trial!
-      UserMailer.with(user: resource).welcome_email.deliver_now
-      UserMailer.with(user: resource).admin_notify.deliver_now
+      slider = resource.sliders.create!
+
+      begin
+        UserMailer.with(user: resource).welcome_email.deliver_now
+        UserMailer.with(user: resource).admin_notify.deliver_now
+      rescue => e
+        Sentry.capture_exception(e)
+      end
 
       sign_up(resource_name, resource)
-      respond_with resource, location: after_sign_up_path_for(resource)
+      respond_with resource, location: dashboard_edit_slider_path(short_code: slider.short_code)
     else
       clean_up_passwords resource
       set_minimum_password_length
