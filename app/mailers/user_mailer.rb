@@ -16,4 +16,10 @@ class UserMailer < ApplicationMailer
 
     mail(to: 'steven.wanderski@gmail.com', subject: 'New SliderUI User')
   end
+
+  def admin_payment_success
+    @user = params[:user]
+
+    mail(to: 'steven.wanderski@gmail.com', subject: '💰 SliderUI Payment!')
+  end
 end

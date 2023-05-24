@@ -22,6 +22,12 @@ class Dashboard::SubscriptionController < DashboardController
       stripe_purchased_at: Time.now
     )
 
+    begin
+      AdminMailer.with(user: current_user).new_payment.deliver_now
+    rescue => e
+      Sentry.capture_exception(e)
+    end
+
     redirect_to dashboard_sliders_path, notice: 'Thank you for purchasing SliderUI!'
   end
 end
