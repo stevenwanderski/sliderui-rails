@@ -25,10 +25,9 @@ describe 'Account' do
       let(:status) { 'trial' }
 
       it 'shows a checkout link' do
-        allow(Stripe::Checkout::Session).to receive(:create).and_return({ url: 'checkout.com' })
         visit dashboard_account_path
 
-        expect(page).to have_link('Upgrade Account', href: 'checkout.com')
+        expect(page).to have_link('Upgrade Account')
       end
     end
   end
@@ -37,8 +36,6 @@ describe 'Account' do
     let(:status) { 'trial' }
 
     it 'updates the user password' do
-      allow(Stripe::Checkout::Session).to receive(:create).and_return({ url: 'fake.com' })
-
       visit dashboard_account_path
       fill_in 'Password', with: 'Testtest00'
       fill_in 'Password confirmation', with: 'Testtest00'

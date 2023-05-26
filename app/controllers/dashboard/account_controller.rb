@@ -1,18 +1,5 @@
 class Dashboard::AccountController < DashboardController
   def show
-    if !current_user.paid?
-      portal = Stripe::Checkout::Session.create({
-        cancel_url: request.url,
-        success_url: ENV['APP_HOST'] + '/dashboard/subscription/success?session_id={CHECKOUT_SESSION_ID}',
-        line_items: [
-          { price: ENV['STRIPE_PRICE_ID'], quantity: 1 },
-        ],
-        mode: 'payment',
-        customer_email: current_user.email
-      })
-
-      @portal_url = portal[:url]
-    end
   end
 
   def update
