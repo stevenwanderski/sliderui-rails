@@ -25,6 +25,7 @@
 #  stripe_subscription_id :string
 #  trial_ends_at          :datetime
 #  stripe_purchased_at    :datetime
+#  trial_reminder_sent_at :datetime
 #
 # Indexes
 #
