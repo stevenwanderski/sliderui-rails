@@ -8,7 +8,7 @@
       <th>Status</th>
       <th>Paid On</th>
       <th>Trial Ends</th>
-      <th>Remind On</th>
+      <th>Reminder Sent</th>
       <th>Sliders</th>
     </tr>
   </thead>
@@ -27,7 +27,13 @@
           <% end %>
         </td>
         <td><%= l(user.trial_ends_at, format: :short) %></td>
-        <td><%= l(user.trial_ends_at - 7.days, format: :short) %></td>
+        <td>
+          <% if user.trial_reminder_sent_at.present? %>
+            <%= l(user.trial_reminder_sent_at, format: :short) %>
+          <% else %>
+            --
+          <% end %>
+        </td>
         <td>
           <% if user.sliders.any? %>
               <% user.sliders.each do |slider| %>
