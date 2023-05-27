@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
   has_many :sliders, dependent: :destroy
 
   def active?
-    ['paid', 'trial'].include?(status)
+    ['paid', 'trial', 'active'].include?(status)
   end
 
   def set_free_trial!
