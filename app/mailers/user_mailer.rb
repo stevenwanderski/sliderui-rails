@@ -11,6 +11,12 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: 'Your SliderUI trial will expire in 7 days')
   end
 
+  def payment_success
+    @user = params[:user]
+
+    mail(to: @user.email, subject: 'Thank you for your SliderUI purchase')
+  end
+
   def admin_notify
     @user = params[:user]
 

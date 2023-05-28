@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_26_190343) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_28_122339) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -99,6 +99,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_190343) do
     t.datetime "trial_ends_at"
     t.datetime "stripe_purchased_at"
     t.datetime "trial_reminder_sent_at"
+    t.string "stripe_transaction_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

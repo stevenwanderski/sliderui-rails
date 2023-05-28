@@ -8,4 +8,14 @@ class UserMailerPreview < ActionMailer::Preview
     user = User.where.not(trial_ends_at: nil).first
     UserMailer.with(user: user).trial_reminder
   end
+
+  def payment_success
+    user = OpenStruct.new(
+      email: 'frank@zappa.com',
+      stripe_purchased_at: Time.now,
+      stripe_transaction_id: 'pi_123456789abcdefghijkl'
+    )
+
+    UserMailer.with(user: user).payment_success
+  end
 end

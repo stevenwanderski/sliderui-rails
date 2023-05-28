@@ -1,0 +1,17 @@
+<p>Dear <%= @user.email %>,</p>
+
+<p>
+  Thank you for purchasing a life-time subscription to SliderUI!
+  Please keep the following information for your records:
+</p>
+
+<ul>
+  <li><strong>Purchased on:</strong> <%= l(@user.stripe_purchased_at, format: :short) %></li>
+  <li><strong>Transaction ID:</strong> <%= @user.stripe_transaction_id %></li>
+</ul>
+
+<p>Use the following to link access your account:</p>
+
+<%= render 'mailers/button' do %>
+  <%= link_to 'SliderUI Account', dashboard_sliders_url %>
+<% end %>

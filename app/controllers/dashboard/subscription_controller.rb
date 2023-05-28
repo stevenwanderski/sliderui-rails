@@ -18,9 +18,16 @@ class Dashboard::SubscriptionController < DashboardController
 
     current_user.update!(
       stripe_customer_id: stripe_session[:customer],
-      status: 'paid',
-      stripe_purchased_at: Time.now
+      stripe_transaction_id: stripe_session[:payment_intent],
+      stripe_purchased_at: Time.now,
+      status: 'paid'
     )
+
+    begin
+      UserMailer.with(user: current_user).payment_success.deliver_now
+    rescue => e
+      Sentry.capture_exception(e)
+    end
 
     begin
       AdminMailer.with(user: current_user).new_payment.deliver_now
