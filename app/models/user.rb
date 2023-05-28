@@ -25,6 +25,7 @@
 #  stripe_subscription_id :string
 #  trial_ends_at          :datetime
 #  stripe_purchased_at    :datetime
+#  trial_reminder_sent_at :datetime
 #
 # Indexes
 #
@@ -41,7 +42,7 @@ class User < ActiveRecord::Base
   has_many :sliders, dependent: :destroy
 
   def active?
-    ['paid', 'trial'].include?(status)
+    ['paid', 'trial', 'active'].include?(status)
   end
 
   def set_free_trial!
