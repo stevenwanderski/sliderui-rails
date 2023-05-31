@@ -46,6 +46,11 @@ class User < ActiveRecord::Base
     ['paid', 'trial', 'active'].include?(status)
   end
 
+  def send_trial_reminder!
+    UserMailer.with(user: self).trial_reminder.deliver_now
+    update!(trial_reminder_sent_at: Time.now)
+  end
+
   def set_free_trial!
     update!(
       trial_ends_at: 14.days.from_now,
