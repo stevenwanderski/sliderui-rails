@@ -54,5 +54,6 @@ module Bxslider
     config.active_record.legacy_connection_handling = false
 
     config.action_view.logger = nil
+    config.assets.logger = false
   end
 end
