@@ -8,7 +8,7 @@ class UserMailer < ApplicationMailer
   def trial_reminder
     @user = params[:user]
 
-    mail(to: @user.email, subject: 'Your SliderUI trial will expire in 7 days')
+    mail(to: @user.email, subject: "Your SliderUI trial will expire in #{@user.trial_days} days")
   end
 
   def payment_success
