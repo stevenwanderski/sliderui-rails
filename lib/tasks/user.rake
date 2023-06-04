@@ -14,4 +14,18 @@ namespace :user do
 
     Rails.logger.info("[TRIAL REMINDERS] Done.")
   end
+
+  desc 'Expire trials'
+  task expire_trials: :environment do
+    Rails.logger.info('[TRIAL EXPIRES] Starting check...')
+
+    users = User.where(status: 'trial').where('trial_ends_at < ?', Time.now)
+
+    users.each do |user|
+      user.expire_free_trial!
+      Rails.logger.info("[TRIAL EXPIRES] Expired user: #{user.email}")
+    end
+
+    Rails.logger.info("[TRIAL EXPIRES] Done.")
+  end
 end

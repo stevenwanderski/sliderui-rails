@@ -4,6 +4,11 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.with(user: user).welcome_email
   end
 
+  def trial_expired
+    user = User.where.not(trial_ends_at: nil).first
+    UserMailer.with(user: user).trial_expired
+  end
+
   def trial_reminder
     user = User.where.not(trial_ends_at: nil).first
     UserMailer.with(user: user).trial_reminder
