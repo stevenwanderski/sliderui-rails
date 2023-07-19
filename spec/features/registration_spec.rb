@@ -17,7 +17,7 @@ describe 'Registration Flow' do
 
     submit_registration
 
-    expect(ActionMailer::Base.deliveries.count).to eq(2)
+    expect(ActionMailer::Base.deliveries.count).to eq(1)
   end
 end
 

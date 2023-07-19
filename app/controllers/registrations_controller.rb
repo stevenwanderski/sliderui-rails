@@ -10,7 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
 
       begin
         UserMailer.with(user: resource).welcome_email.deliver_now
-        AdminMailer.with(user: resource).new_user.deliver_now
+        # AdminMailer.with(user: resource).new_user.deliver_now
       rescue => e
         Sentry.capture_exception(e)
       end
