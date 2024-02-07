@@ -26,6 +26,7 @@ gem 'premailer-rails'
 gem 'stripe'
 gem 'tailwindcss-rails'
 gem 'faraday'
+gem 'lograge'
 
 gem 'rexml'
 gem 'psych', '< 4'
