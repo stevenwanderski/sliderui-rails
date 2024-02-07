@@ -54,7 +54,7 @@ module Bxslider
     config.active_record.legacy_connection_handling = false
 
     # config.action_view.logger = nil
-    config.assets.quiet = true
+    # config.assets.quiet = true
 
     # config.hosts << ".ngrok-free.app"
   end
