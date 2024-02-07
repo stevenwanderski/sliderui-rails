@@ -25,9 +25,11 @@ gem 'active_link_to'
 gem 'premailer-rails'
 gem 'stripe'
 gem 'tailwindcss-rails'
+gem 'faraday'
 
 gem 'rexml'
 gem 'psych', '< 4'
+
 
 group :development, :test do
   gem 'dotenv-rails'

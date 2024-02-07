@@ -55,5 +55,7 @@ module Bxslider
 
     config.action_view.logger = nil
     config.assets.logger = false
+
+    # config.hosts << ".ngrok-free.app"
   end
 end

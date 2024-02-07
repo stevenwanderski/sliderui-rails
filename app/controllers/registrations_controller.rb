@@ -1,5 +1,9 @@
 class RegistrationsController < Devise::RegistrationsController
   def create
+    if !valid_recaptcha?
+      return redirect_to new_user_registration_path, alert: 'Shoo, fly.'
+    end
+
     build_resource(sign_up_params)
 
     resource.save
@@ -10,7 +14,6 @@ class RegistrationsController < Devise::RegistrationsController
 
       begin
         UserMailer.with(user: resource).welcome_email.deliver_now
-        # AdminMailer.with(user: resource).new_user.deliver_now
       rescue => e
         Sentry.capture_exception(e)
       end
@@ -28,5 +31,9 @@ class RegistrationsController < Devise::RegistrationsController
 
   def after_sign_up_path_for(resource)
     dashboard_sliders_path
+  end
+
+  def valid_recaptcha?
+    Recaptcha.valid?(token: params['g-recaptcha-response'])
   end
 end
