@@ -53,4 +53,5 @@ Rails.application.configure do
   }
 
   config.log_level = :debug
+  config.action_view.logger = nil
 end
