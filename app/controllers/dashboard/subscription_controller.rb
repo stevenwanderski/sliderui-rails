@@ -10,7 +10,7 @@ class Dashboard::SubscriptionController < DashboardController
       customer_email: current_user.email
     })
 
-    redirect_to stripe_portal[:url]
+    redirect_to(stripe_portal[:url], allow_other_host: true)
   end
 
   def success
