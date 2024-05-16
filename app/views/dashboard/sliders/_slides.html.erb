@@ -1,15 +1,9 @@
 <div id="slides" x-show="visible == 'images'">
   <div class="mb-4">
-    <input
-      accept="image/jpeg, image/png, image/gif"
-      class="file-upload sr-only"
-      type="file"
-      id="file-upload-sidebar"
-    >
-
-    <label class="text-center block cursor-pointer rounded-md bg-indigo-50 px-3 py-2 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-100" for="file-upload-sidebar">
-      Add Image
-    </label>
+    <%= link_to 'Add Slide',
+        dashboard_sliders_slide_new_path(short_code: slider.short_code),
+        class: 'text-center w-full block cursor-pointer rounded-md bg-indigo-50 px-3 py-2 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-100'
+    %>
   </div>
 
   <%= render 'slide_list', slides: slides %>

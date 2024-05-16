@@ -17,7 +17,7 @@
                 :class="visible == 'images' ? 'bg-gray-100 text-gray-700' : ''"
                 @click="visible = 'images'"
               >
-                Images
+                Slides
               </button>
 
               <button
@@ -32,7 +32,7 @@
 
           <div>
             <%= render 'settings', slider: slider %>
-            <%= render 'slides', slides: slider.slides %>
+            <%= render 'slides', slider: slider, slides: slider.slides %>
           </div>
         </div>
       </div>

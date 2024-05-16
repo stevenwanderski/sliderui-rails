@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_28_122339) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_15_181448) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -65,6 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_28_122339) do
     t.string "image"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.text "url"
   end
 
   create_table "track_logs", force: :cascade do |t|

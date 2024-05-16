@@ -27,6 +27,7 @@ gem 'stripe'
 gem 'tailwindcss-rails'
 gem 'faraday'
 gem 'lograge'
+gem 'validate_url'
 
 gem 'rexml'
 gem 'psych', '< 4'
