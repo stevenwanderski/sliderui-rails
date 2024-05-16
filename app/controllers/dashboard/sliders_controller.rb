@@ -25,13 +25,6 @@ class Dashboard::SlidersController < DashboardController
     redirect_to dashboard_sliders_path, notice: "Slider #{@slider.short_code} was deleted."
   end
 
-  def slide_create
-    slide = Slide.create!(slide_params)
-
-    @slider = current_user.sliders.find_by(short_code: params[:short_code])
-    @slides = @slider.slides
-  end
-
   def slide_destroy
     slide = Slide.find(params[:slide_id])
     slide.destroy!
