@@ -135,7 +135,13 @@
     <div class="slider-track">
       <% slider.slides.each_with_index do |slide, index| %>
         <div class="slide" data-slide-index="<%= index %>">
-          <%= image_tag "#{slide.image.url}" %>
+          <% if slide.url.present? %>
+            <%= link_to slide.url do %>
+              <%= image_tag "#{slide.image.url}" %>
+            <% end %>
+          <% else %>
+            <%= image_tag "#{slide.image.url}" %>
+          <% end %>
         </div>
       <% end %>
     </div>

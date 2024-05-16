@@ -32,6 +32,8 @@ Rails.application.routes.draw do
 
     get '/sliders/:short_code/slides/new', to: 'sliders/slides#new', as: :sliders_slide_new
     post '/sliders/:short_code/slides', to: 'sliders/slides#create', as: :sliders_slide
+    get '/sliders/:short_code/slides/:id', to: 'sliders/slides#edit', as: :sliders_slide_edit
+    patch '/sliders/:short_code/slides/:id', to: 'sliders/slides#update', as: :sliders_slide_update
 
     get '/subscription/checkout', to: 'subscription#checkout', as: :subscription_checkout
     get '/subscription/success', to: 'subscription#success', as: :subscription_success

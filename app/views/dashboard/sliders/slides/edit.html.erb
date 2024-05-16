@@ -1,0 +1,41 @@
+<div class="bg-white rounded-md p-4 border border-gray-200 w-full my-8">
+  <h1 class="text-xl font-semibold mb-8">Edit Slide</h1>
+
+  <%= form_for(@slide, url: dashboard_sliders_slide_update_path) do |f| %>
+    <div class="space-y-8 w-1/2">
+      <div>
+        <%= f.label :image, class: 'label mb-2' %>
+
+        <div
+          style="background-image: url(<%= @slide.image.url %>)"
+          class="w-24 h-16 bg-center bg-cover rounded-md mb-2"
+        ></div>
+
+        <%= f.file_field :image, class: 'text-sm' %>
+
+        <% if f.object.errors[:image].present? %>
+          <%= render 'dashboard/shared/form_error',
+              messages: @slide.errors[:image]
+          %>
+        <% end %>
+      </div>
+
+      <div>
+        <%= f.label :url, 'Link (optional)', class: 'label mb-2' %>
+        <%= f.text_field :url, class: 'input' %>
+
+        <% if f.object.errors[:url].present? %>
+          <%= render 'dashboard/shared/form_error',
+              messages: @slide.errors[:url]
+          %>
+        <% end %>
+      </div>
+
+      <div class="flex gap-4">
+        <%= f.submit 'Save Slide', class: 'button' %>
+
+        <%= link_to 'Cancel', dashboard_edit_slider_path(@slider.short_code), class: 'button-white' %>
+      </div>
+    </div>
+  <% end %>
+</div>
