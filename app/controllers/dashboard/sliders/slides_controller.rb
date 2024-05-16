@@ -5,11 +5,11 @@ class Dashboard::Sliders::SlidesController < DashboardController
   end
 
   def create
-    slider = current_user.sliders.find_by(short_code: params[:short_code])
-    @slide = slider.slides.new(slide_params)
+    @slider = current_user.sliders.find_by(short_code: params[:short_code])
+    @slide = @slider.slides.new(slide_params)
 
     if @slide.save
-      redirect_to dashboard_edit_slider_path(slider.short_code)
+      redirect_to dashboard_edit_slider_path(@slider.short_code)
     else
       render :new
     end
