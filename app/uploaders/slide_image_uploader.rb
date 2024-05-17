@@ -14,7 +14,7 @@ class SlideImageUploader < CarrierWave::Uploader::Base
   end
 
   def size_range
-    1.byte..2.megabytes
+    1.byte..5.megabytes
   end
 
   process :resize_to_limit => [2000, 2000]
