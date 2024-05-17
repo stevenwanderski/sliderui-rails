@@ -21,7 +21,7 @@ class RegistrationsController < Devise::RegistrationsController
       sign_up(resource_name, resource)
       respond_with resource, location: dashboard_edit_slider_path(short_code: slider.short_code)
     else
-      clean_up_passwords resource
+      clean_up_passwords(resource)
       set_minimum_password_length
       respond_with resource
     end

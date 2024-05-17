@@ -9,7 +9,7 @@ class Dashboard::Sliders::SlidesController < DashboardController
     @slide = @slider.slides.new(slide_params)
 
     if @slide.save
-      redirect_to dashboard_edit_slider_path(@slider.short_code)
+      redirect_to dashboard_edit_slider_path(@slider.short_code), notice: 'Slide created.'
     else
       render :new
     end
