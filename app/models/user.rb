@@ -80,4 +80,12 @@ class User < ActiveRecord::Base
   def self.days_to_expire(days)
     User.where('trial_ends_at < ? AND trial_ends_at > ?', (days+1).days.from_now, (days-1).days.from_now)
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ['email']
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ['sliders']
+  end
 end

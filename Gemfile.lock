@@ -274,6 +274,10 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    ransack (4.1.1)
+      activerecord (>= 6.1.5)
+      activesupport (>= 6.1.5)
+      i18n
     regexp_parser (2.7.0)
     request_store (1.5.1)
       rack (>= 1.4)
@@ -392,6 +396,7 @@ DEPENDENCIES
   rails (= 7.0.4.3)
   rails-controller-testing
   rails_12factor
+  ransack
   rexml
   rspec-rails
   sass-rails

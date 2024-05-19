@@ -34,6 +34,10 @@ class Slider < ActiveRecord::Base
 
   before_create :set_short_code
 
+  def self.ransackable_attributes(auth_object = nil)
+    ['short_code']
+  end
+
   private
 
   def set_short_code
