@@ -3,9 +3,9 @@ class SlidersController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def show
-    @slider = Slider.find_by(short_code: params[:short_code])
-
-    @inactive_user = @slider.user && !@slider.user.active?
+    @short_code = params[:short_code]
+    @slider = Slider.find_by(short_code: @short_code)
+    @inactive_user = @slider.present? && @slider.user && !@slider.user.active?
 
     begin
       RequestLog.create!(

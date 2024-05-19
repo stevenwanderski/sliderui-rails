@@ -1,6 +1,8 @@
 <%= render 'jquery' %>
 
-<% if @inactive_user %>
+<% if @slider.nil? %>
+  <% output = render 'not_found' %>
+<% elsif @inactive_user %>
   <% output = render 'inactive_user' %>
 <% else %>
   <% output = render 'dashboard/sliders/slider_code', slider: @slider %>
@@ -9,10 +11,10 @@
     url: '<%= ENV['APP_HOST'] %>/track',
     type: 'POST',
     data: {
-      short_code: '<%= @slider.short_code %>',
+      short_code: '<%= @short_code %>',
       url: window.location.href
     }
   })
 <% end %>
 
-$('[data-slider-id="<%= @slider.short_code %>"]').html('<%= j(output) %>')
+$('[data-slider-id="<%= @short_code %>"]').html('<%= j(output) %>')
