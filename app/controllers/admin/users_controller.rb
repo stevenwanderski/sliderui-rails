@@ -15,6 +15,6 @@ class Admin::UsersController < AdminController
 
     user.send_expired_outreach!
 
-    redirect_to admin_users_path, notice: "Expired outreach mailer was sent to #{user.email}"
+    redirect_to admin_users_path(q: params.permit![:q]), notice: "Expired outreach mailer was sent to #{user.email}"
   end
 end

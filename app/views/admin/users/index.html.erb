@@ -73,7 +73,7 @@
           <% if user.expired_outreach_sent_at.present? %>
             <%= l(user.expired_outreach_sent_at) %>
           <% elsif user.expired? %>
-            <%= link_to 'Send', send_expired_outreach_admin_user_path(user), data: { confirm: 'Are you sure?' } %>
+            <%= link_to 'Send', send_expired_outreach_admin_user_path(user, q: params.permit![:q]), data: { confirm: 'Are you sure?' } %>
           <% end %>
         </td>
       </tr>
