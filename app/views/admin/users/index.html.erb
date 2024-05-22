@@ -13,6 +13,15 @@
         <%= f.search_field :sliders_short_code_cont %>
       </div>
 
+      <div class="mb-2">
+        <%= f.label :status_eq, 'Status' %>
+        <%= f.select :status_eq, {
+          'Paid' => 'paid',
+          'Trial' => 'trial',
+          'Expired' => 'expired'
+        }, { include_blank: '- All -' } %>
+      </div>
+
       <%= f.submit %>
     </div>
   <% end %>

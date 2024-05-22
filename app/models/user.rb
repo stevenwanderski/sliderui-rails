@@ -82,7 +82,7 @@ class User < ActiveRecord::Base
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ['email']
+    ['email', 'status']
   end
 
   def self.ransackable_associations(auth_object = nil)
