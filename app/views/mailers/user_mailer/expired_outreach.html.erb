@@ -1,0 +1,22 @@
+<p>Dear <%= @user.email %>,</p>
+
+<p>Steven here, creator of SliderUI.</p>
+
+<p>Thank you for trying out SliderUI! I noticed that you recently completed a free trial but decided not to continue with a paid account. I'd love to understand your experience and would appreciate your feedback.</p>
+
+<p>Could you please take a few moments to share your thoughts on why you chose not to upgrade? I'd be happy to offer you a free account in return for your completing the following two-minute survey:</p>
+
+<%= render 'mailers/button' do %>
+  <%= link_to 'Free Trial Survey', "https://docs.google.com/forms/d/e/1FAIpQLSfpNQo0Wk1JDFinWXrYC-VfHk3SDNAg8dbhZRSsyHKdIXohsA/viewform?usp=pp_url&entry.859318728=#{@user.email}" %>
+<% end %>
+
+<p>Thank you in advance and please don't hesitate to contact me with any questions.</p>
+
+<p>
+  Steven Wanderski<br />
+  support@sliderui.com
+</p>
+
+<hr>
+
+<%= render 'mailers/unsubscribe', user: @user %>

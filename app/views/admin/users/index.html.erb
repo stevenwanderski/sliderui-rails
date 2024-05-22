@@ -1,6 +1,6 @@
 <h1>Users</h1>
 
-<div class="mb-3">
+<div class="mb-3" style="font-size: 14px;">
   <%= search_form_for(@q, url: admin_users_path) do |f| %>
     <div class="d-flex gap-3">
       <div class="mb-2">
@@ -27,7 +27,7 @@
   <% end %>
 </div>
 
-<table class="table table-striped">
+<table class="table table-striped" style="font-size: 14px;">
   <thead>
     <tr>
       <th>Date</th>
@@ -37,6 +37,7 @@
       <th>Trial Ends</th>
       <th>Reminder Sent</th>
       <th>Sliders</th>
+      <th>Expired Outreach</th>
     </tr>
   </thead>
 
@@ -66,6 +67,13 @@
               <% user.sliders.each do |slider| %>
                 <div><%= link_to(slider.short_code, admin_slider_path(slider)) %>: <%= pluralize(slider.slides.count, 'slide') %>, <%= number_with_delimiter(slider.request_logs_count) %> requests</div>
               <% end %>
+          <% end %>
+        </td>
+        <td>
+          <% if user.expired_outreach_sent_at.present? %>
+            <%= l(user.expired_outreach_sent_at) %>
+          <% elsif user.expired? %>
+            <%= link_to 'Send', send_expired_outreach_admin_user_path(user), data: { confirm: 'Are you sure?' } %>
           <% end %>
         </td>
       </tr>

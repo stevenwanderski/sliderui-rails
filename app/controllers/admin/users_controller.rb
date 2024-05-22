@@ -9,4 +9,12 @@ class Admin::UsersController < AdminController
       .page(params[:page])
       .per(50)
   end
+
+  def send_expired_outreach
+    user = User.find(params[:id])
+
+    user.send_expired_outreach!
+
+    redirect_to admin_users_path, notice: "Expired outreach mailer was sent to #{user.email}"
+  end
 end

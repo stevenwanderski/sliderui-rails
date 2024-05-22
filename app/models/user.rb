@@ -2,31 +2,33 @@
 #
 # Table name: users
 #
-#  id                     :uuid             not null, primary key
-#  email                  :string
-#  password_hash          :string
-#  token                  :string
-#  confirmed              :boolean          default(FALSE)
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  encrypted_password     :string           default(""), not null
-#  reset_password_token   :string
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  sign_in_count          :integer          default(0), not null
-#  current_sign_in_at     :datetime
-#  last_sign_in_at        :datetime
-#  current_sign_in_ip     :inet
-#  last_sign_in_ip        :inet
-#  subscription_type      :string
-#  stripe_customer_id     :string
-#  status                 :string
-#  is_legacy              :boolean          default(FALSE)
-#  stripe_subscription_id :string
-#  trial_ends_at          :datetime
-#  stripe_purchased_at    :datetime
-#  trial_reminder_sent_at :datetime
-#  stripe_transaction_id  :string
+#  id                       :uuid             not null, primary key
+#  email                    :string
+#  password_hash            :string
+#  token                    :string
+#  confirmed                :boolean          default(FALSE)
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  encrypted_password       :string           default(""), not null
+#  reset_password_token     :string
+#  reset_password_sent_at   :datetime
+#  remember_created_at      :datetime
+#  sign_in_count            :integer          default(0), not null
+#  current_sign_in_at       :datetime
+#  last_sign_in_at          :datetime
+#  current_sign_in_ip       :inet
+#  last_sign_in_ip          :inet
+#  subscription_type        :string
+#  stripe_customer_id       :string
+#  status                   :string
+#  is_legacy                :boolean          default(FALSE)
+#  stripe_subscription_id   :string
+#  trial_ends_at            :datetime
+#  stripe_purchased_at      :datetime
+#  trial_reminder_sent_at   :datetime
+#  stripe_transaction_id    :string
+#  unsubscribed_at          :datetime
+#  expired_outreach_sent_at :datetime
 #
 # Indexes
 #
@@ -51,6 +53,10 @@ class User < ActiveRecord::Base
     update!(status: 'expired')
   end
 
+  def expired?
+    status == 'expired'
+  end
+
   def send_trial_reminder!
     UserMailer.with(user: self).trial_reminder.deliver_now
     update!(trial_reminder_sent_at: Time.now)
@@ -67,6 +73,12 @@ class User < ActiveRecord::Base
     status == 'paid'
   end
 
+  def send_expired_outreach!
+    UserMailer.with(user: self).expired_outreach.deliver_now
+
+    update!(expired_outreach_sent_at: Time.now)
+  end
+
   def trial_days
     return if trial_ends_at.blank?
 
@@ -75,6 +87,10 @@ class User < ActiveRecord::Base
 
   def trial?
     status == 'trial'
+  end
+
+  def unsubscribe!
+    update!(unsubscribed_at: Time.now)
   end
 
   def self.days_to_expire(days)

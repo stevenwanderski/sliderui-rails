@@ -16,7 +16,11 @@ Rails.application.routes.draw do
     resources :sliders, only: [:index, :show]
     resources :request_logs, only: [:index]
     resources :track_logs, only: [:index]
-    resources :users, only: [:index]
+    resources :users, only: [:index] do
+      member do
+        get 'send_expired_outreach', action: :send_expired_outreach
+      end
+    end
   end
 
   namespace :dashboard do
@@ -42,6 +46,8 @@ Rails.application.routes.draw do
   end
 
   post '/track', to: 'track#create'
+  get '/unsubscribe/:user_id', to: 'unsubscriptions#create', as: :unsubscribe
+  get '/unsubscribe/:user_id/success', to: 'unsubscriptions#show', as: :unsubscribe_success
 
   match '*unmatched', to: 'application#not_found_method', via: :all
 end

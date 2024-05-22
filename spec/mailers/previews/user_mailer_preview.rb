@@ -23,4 +23,9 @@ class UserMailerPreview < ActionMailer::Preview
 
     UserMailer.with(user: user).payment_success
   end
+
+  def expired_outreach
+    user = User.where.not(email: nil).first
+    UserMailer.with(user: user).expired_outreach
+  end
 end

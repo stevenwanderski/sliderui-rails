@@ -34,4 +34,13 @@ class UserMailer < ApplicationMailer
 
     mail(to: 'steven.wanderski@gmail.com', subject: '💰 SliderUI Payment!')
   end
+
+  def expired_outreach
+    @user = params[:user]
+
+    mail(
+      to: @user.email,
+      subject: 'SliderUI free trial feedback'
+    )
+  end
 end

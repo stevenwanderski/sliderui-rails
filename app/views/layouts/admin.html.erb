@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <%= stylesheet_link_tag 'admin', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= favicon_link_tag 'logo.png' %>
   <%= csrf_meta_tags %>
 
@@ -16,6 +17,10 @@
   <%= render 'layouts/admin/nav' %>
 
   <div class="container-xxl">
+    <div class="mt-4">
+      <%= render 'layouts/admin/flash_messages' %>
+    </div>
+
     <%= yield %>
   </div>
 </body>
