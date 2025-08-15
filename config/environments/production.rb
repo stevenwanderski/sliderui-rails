@@ -83,12 +83,10 @@ Rails.application.configure do
   config.action_mailer.asset_host = ENV['APP_HOST']
 
   config.action_mailer.smtp_settings = {
-    user_name: ENV['SENDGRID_USERNAME'],
-    password: ENV['SENDGRID_PASSWORD'],
-    domain: ENV['APP_HOST'],
-    address: 'smtp.sendgrid.net',
-    port: 587,
-    authentication: :plain,
-    enable_starttls_auto: true
+    address: 'smtp.resend.com',
+    port: 465,
+    user_name: 'resend',
+    password: ENV['RESEND_API_KEY'],
+    tls: true
   }
 end
