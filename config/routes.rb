@@ -1,16 +1,15 @@
 Rails.application.routes.draw do
   devise_for :admins
 
-  devise_for :users, controllers: {
-    registrations: 'registrations'
-  }
+  # devise_for :users, controllers: {
+  #   registrations: 'registrations'
+  # }
 
   root 'pages#home'
   get '/privacy', to: 'pages#privacy'
   get '/terms', to: 'pages#terms'
 
   get '/sliders/:short_code', to: 'sliders#show'
-  # post '/webhooks/stripe', to: 'webhooks#stripe'
 
   namespace :admin do
     resources :sliders, only: [:index, :show]
